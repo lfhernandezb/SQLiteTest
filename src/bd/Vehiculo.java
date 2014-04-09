@@ -16,19 +16,19 @@ import java.util.ArrayList;
  */
 public class Vehiculo {
     private Integer _anio;
-    private String _aire_acondicionado;
+    private Byte _aireAcondicionado;
     private String _alias;
-    private String _borrado;
-    private Integer _id_traccion;
+    private Byte _borrado;
+    private Integer _idTraccion;
     private Integer _km;
-    private String _alza_vidrios;
-    private String _fecha_modificacion;
-    private Integer _id_usuario;
-    private Integer _id_vehiculo;
+    private Byte _alzaVidrios;
+    private String _fechaModificacion;
+    private Long _idUsuario;
+    private Long _idVehiculo;
     private String _patente;
-    private Integer _id_modelo;
-    private Integer _id_combustible;
-    private Integer _id_tipo_transmision;
+    private Long _idModelo;
+    private Integer _idCombustible;
+    private Integer _idTipoTransmision;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -50,207 +50,207 @@ public class Vehiculo {
 
     public Vehiculo() {
         _anio = null;
-        _aire_acondicionado = null;
+        _aireAcondicionado = null;
         _alias = null;
         _borrado = null;
-        _id_traccion = null;
+        _idTraccion = null;
         _km = null;
-        _alza_vidrios = null;
-        _fecha_modificacion = null;
-        _id_usuario = null;
-        _id_vehiculo = null;
+        _alzaVidrios = null;
+        _fechaModificacion = null;
+        _idUsuario = null;
+        _idVehiculo = null;
         _patente = null;
-        _id_modelo = null;
-        _id_combustible = null;
-        _id_tipo_transmision = null;
+        _idModelo = null;
+        _idCombustible = null;
+        _idTipoTransmision = null;
 
     }
     /**
      * @return the _anio
      */
-    public Integer get_anio() {
+    public Integer getAnio() {
         return _anio;
     }
     /**
      * @return the _aire_acondicionado
      */
-    public String get_aire_acondicionado() {
-        return _aire_acondicionado;
+    public Byte getAireAcondicionado() {
+        return _aireAcondicionado;
     }
     /**
      * @return the _alias
      */
-    public String get_alias() {
+    public String getAlias() {
         return _alias;
     }
     /**
      * @return the _borrado
      */
-    public String get_borrado() {
+    public Byte getBorrado() {
         return _borrado;
     }
     /**
      * @return the _id_traccion
      */
-    public Integer get_id_traccion() {
-        return _id_traccion;
+    public Integer getIdTraccion() {
+        return _idTraccion;
     }
     /**
      * @return the _km
      */
-    public Integer get_km() {
+    public Integer getKm() {
         return _km;
     }
     /**
      * @return the _alza_vidrios
      */
-    public String get_alza_vidrios() {
-        return _alza_vidrios;
+    public Byte getAlzaVidrios() {
+        return _alzaVidrios;
     }
     /**
      * @return the _fecha_modificacion
      */
-    public String get_fecha_modificacion() {
-        return _fecha_modificacion;
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _patente
      */
-    public String get_patente() {
+    public String getPatente() {
         return _patente;
     }
     /**
      * @return the _id_modelo
      */
-    public Integer get_id_modelo() {
-        return _id_modelo;
+    public Long getIdModelo() {
+        return _idModelo;
     }
     /**
      * @return the _id_combustible
      */
-    public Integer get_id_combustible() {
-        return _id_combustible;
+    public Integer getIdCombustible() {
+        return _idCombustible;
     }
     /**
      * @return the _id_tipo_transmision
      */
-    public Integer get_id_tipo_transmision() {
-        return _id_tipo_transmision;
+    public Integer getIdTipoTransmision() {
+        return _idTipoTransmision;
     }
     /**
      * @param _anio the _anio to set
      */
-    public void set_anio(Integer _anio) {
+    public void setAnio(Integer _anio) {
         this._anio = _anio;
     }
     /**
-     * @param _aire_acondicionado the _aire_acondicionado to set
+     * @param _aireAcondicionado the _aireAcondicionado to set
      */
-    public void set_aire_acondicionado(String _aire_acondicionado) {
-        this._aire_acondicionado = _aire_acondicionado;
+    public void setAireAcondicionado(Byte _aireAcondicionado) {
+        this._aireAcondicionado = _aireAcondicionado;
     }
     /**
      * @param _alias the _alias to set
      */
-    public void set_alias(String _alias) {
+    public void setAlias(String _alias) {
         this._alias = _alias;
     }
     /**
      * @param _borrado the _borrado to set
      */
-    public void set_borrado(String _borrado) {
+    public void setBorrado(Byte _borrado) {
         this._borrado = _borrado;
     }
     /**
-     * @param _id_traccion the _id_traccion to set
+     * @param _idTraccion the _idTraccion to set
      */
-    public void set_id_traccion(Integer _id_traccion) {
-        this._id_traccion = _id_traccion;
+    public void setIdTraccion(Integer _idTraccion) {
+        this._idTraccion = _idTraccion;
     }
     /**
      * @param _km the _km to set
      */
-    public void set_km(Integer _km) {
+    public void setKm(Integer _km) {
         this._km = _km;
     }
     /**
-     * @param _alza_vidrios the _alza_vidrios to set
+     * @param _alzaVidrios the _alzaVidrios to set
      */
-    public void set_alza_vidrios(String _alza_vidrios) {
-        this._alza_vidrios = _alza_vidrios;
+    public void setAlzaVidrios(Byte _alzaVidrios) {
+        this._alzaVidrios = _alzaVidrios;
     }
     /**
-     * @param _fecha_modificacion the _fecha_modificacion to set
+     * @param _fechaModificacion the _fechaModificacion to set
      */
-    public void set_fecha_modificacion(String _fecha_modificacion) {
-        this._fecha_modificacion = _fecha_modificacion;
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
      * @param _patente the _patente to set
      */
-    public void set_patente(String _patente) {
+    public void setPatente(String _patente) {
         this._patente = _patente;
     }
     /**
-     * @param _id_modelo the _id_modelo to set
+     * @param _idModelo the _idModelo to set
      */
-    public void set_id_modelo(Integer _id_modelo) {
-        this._id_modelo = _id_modelo;
+    public void setIdModelo(Long _idModelo) {
+        this._idModelo = _idModelo;
     }
     /**
-     * @param _id_combustible the _id_combustible to set
+     * @param _idCombustible the _idCombustible to set
      */
-    public void set_id_combustible(Integer _id_combustible) {
-        this._id_combustible = _id_combustible;
+    public void setIdCombustible(Integer _idCombustible) {
+        this._idCombustible = _idCombustible;
     }
     /**
-     * @param _id_tipo_transmision the _id_tipo_transmision to set
+     * @param _idTipoTransmision the _idTipoTransmision to set
      */
-    public void set_id_tipo_transmision(Integer _id_tipo_transmision) {
-        this._id_tipo_transmision = _id_tipo_transmision;
+    public void setIdTipoTransmision(Integer _idTipoTransmision) {
+        this._idTipoTransmision = _idTipoTransmision;
     }
 
     public static Vehiculo fromRS(ResultSet p_rs) throws SQLException {
         Vehiculo ret = new Vehiculo();
 
-        ret.set_anio(p_rs.getInt("anio"));
-        ret.set_aire_acondicionado(p_rs.getString("aire_acondicionado"));
-        ret.set_alias(p_rs.getString("alias"));
-        ret.set_borrado(p_rs.getString("borrado"));
-        ret.set_id_traccion(p_rs.getInt("id_traccion"));
-        ret.set_km(p_rs.getInt("km"));
-        ret.set_alza_vidrios(p_rs.getString("alza_vidrios"));
-        ret.set_fecha_modificacion(p_rs.getString("fecha_modificacion"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_patente(p_rs.getString("patente"));
-        ret.set_id_modelo(p_rs.getInt("id_modelo"));
-        ret.set_id_combustible(p_rs.getInt("id_combustible"));
-        ret.set_id_tipo_transmision(p_rs.getInt("id_tipo_transmision"));
+        ret.setAnio(p_rs.getInt("anio"));
+        ret.setAireAcondicionado(p_rs.getByte("aire_acondicionado"));
+        ret.setAlias(p_rs.getString("alias"));
+        ret.setBorrado(p_rs.getByte("borrado"));
+        ret.setIdTraccion(p_rs.getInt("id_traccion"));
+        ret.setKm(p_rs.getInt("km"));
+        ret.setAlzaVidrios(p_rs.getByte("alza_vidrios"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setPatente(p_rs.getString("patente"));
+        ret.setIdModelo(p_rs.getLong("id_modelo"));
+        ret.setIdCombustible(p_rs.getInt("id_combustible"));
+        ret.setIdTipoTransmision(p_rs.getInt("id_tipo_transmision"));
 
         return ret;
     }
@@ -357,6 +357,12 @@ public class Vehiculo {
                 else if (p.getKey().equals("mas reciente")) {
                     array_clauses.add("ve.fecha_modificacion > '" + p.getValue() + "'");
                 }
+                else if (p.getKey().equals("no borrado")) {
+                    array_clauses.add("ve.borrado = 0");
+                }
+                else if (p.getKey().equals("borrado")) {
+                    array_clauses.add("ve.borrado = 1");
+                }
                 else {
                     throw new Exception("Parametro no soportado: " + p.getKey());
                 }
@@ -444,16 +450,16 @@ public class Vehiculo {
             "    UPDATE vehiculo" +
             "    SET" +
             "    anio = " + (_anio != null ? _anio : "null") + "," +
-            "    aire_acondicionado = " + (_aire_acondicionado != null ? "'" + _aire_acondicionado + "'" : "null") + "," +
+            "    aire_acondicionado = " + (_aireAcondicionado != null ? _aireAcondicionado : "null") + "," +
             "    alias = " + (_alias != null ? "'" + _alias + "'" : "null") + "," +
-            "    borrado = " + (_borrado != null ? "'" + _borrado + "'" : "null") + "," +
+            "    borrado = " + (_borrado != null ? _borrado : "null") + "," +
             "    km = " + (_km != null ? _km : "null") + "," +
-            "    alza_vidrios = " + (_alza_vidrios != null ? "'" + _alza_vidrios + "'" : "null") + "," +
-            "    fecha_modificacion = " + (_fecha_modificacion != null ? "'" + _fecha_modificacion + "'" : "null") + "," +
+            "    alza_vidrios = " + (_alzaVidrios != null ? _alzaVidrios : "null") + "," +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
             "    patente = " + (_patente != null ? "'" + _patente + "'" : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_vehiculo = " + Integer.toString(this._id_vehiculo);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_vehiculo = " + Long.toString(this._idVehiculo);
 
         try {
             stmt = p_conn.createStatement();
@@ -516,23 +522,25 @@ public class Vehiculo {
             "    VALUES" +
             "    (" +
             "    " + (_anio != null ? "'" + _anio + "'" : "null") + "," +
-            "    " + (_aire_acondicionado != null ? "'" + _aire_acondicionado + "'" : "null") + "," +
+            "    " + (_aireAcondicionado != null ? "'" + _aireAcondicionado + "'" : "null") + "," +
             "    " + (_alias != null ? "'" + _alias + "'" : "null") + "," +
-            "    " + (_id_traccion != null ? "'" + _id_traccion + "'" : "null") + "," +
+            "    " + (_idTraccion != null ? "'" + _idTraccion + "'" : "null") + "," +
             "    " + (_km != null ? "'" + _km + "'" : "null") + "," +
-            "    " + (_alza_vidrios != null ? "'" + _alza_vidrios + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
+            "    " + (_alzaVidrios != null ? "'" + _alzaVidrios + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
             "    " + (_patente != null ? "'" + _patente + "'" : "null") + "," +
-            "    " + (_id_modelo != null ? "'" + _id_modelo + "'" : "null") + "," +
-            "    " + (_id_combustible != null ? "'" + _id_combustible + "'" : "null") + "," +
-            "    " + (_id_tipo_transmision != null ? "'" + _id_tipo_transmision + "'" : "null") +
+            "    " + (_idModelo != null ? "'" + _idModelo + "'" : "null") + "," +
+            "    " + (_idCombustible != null ? "'" + _idCombustible + "'" : "null") + "," +
+            "    " + (_idTipoTransmision != null ? "'" + _idTipoTransmision + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -577,8 +585,8 @@ public class Vehiculo {
         String str_sql =
             "    DELETE FROM vehiculo" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_vehiculo = " + Integer.toString(this._id_vehiculo);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_vehiculo = " + Long.toString(this._idVehiculo);
 
         try {
             stmt = p_conn.createStatement();
@@ -610,4 +618,121 @@ public class Vehiculo {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Vehiculo obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_vehiculo = " + Long.toString(this._idVehiculo) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _anio = obj.getAnio();
+                _aireAcondicionado = obj.getAireAcondicionado();
+                _alias = obj.getAlias();
+                _borrado = obj.getBorrado();
+                _idTraccion = obj.getIdTraccion();
+                _km = obj.getKm();
+                _alzaVidrios = obj.getAlzaVidrios();
+                _fechaModificacion = obj.getFechaModificacion();
+                _patente = obj.getPatente();
+                _idModelo = obj.getIdModelo();
+                _idCombustible = obj.getIdCombustible();
+                _idTipoTransmision = obj.getIdTipoTransmision();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Vehiculo [" +
+	           "    _anio = " + (_anio != null ? _anio : "null") + "," +
+	           "    _aireAcondicionado = " + (_aireAcondicionado != null ? _aireAcondicionado : "null") + "," +
+	           "    _alias = " + (_alias != null ? "'" + _alias + "'" : "null") + "," +
+	           "    _borrado = " + (_borrado != null ? _borrado : "null") + "," +
+	           "    _idTraccion = " + (_idTraccion != null ? _idTraccion : "null") + "," +
+	           "    _km = " + (_km != null ? _km : "null") + "," +
+	           "    _alzaVidrios = " + (_alzaVidrios != null ? _alzaVidrios : "null") + "," +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _patente = " + (_patente != null ? "'" + _patente + "'" : "null") + "," +
+	           "    _idModelo = " + (_idModelo != null ? _idModelo : "null") + "," +
+	           "    _idCombustible = " + (_idCombustible != null ? _idCombustible : "null") + "," +
+	           "    _idTipoTransmision = " + (_idTipoTransmision != null ? _idTipoTransmision : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Vehiculo\" : {" +
+	           "    \"_anio\" : " + (_anio != null ? _anio : "null") + "," +
+	           "    \"_aireAcondicionado\" : " + (_aireAcondicionado != null ? _aireAcondicionado : "null") + "," +
+	           "    \"_alias\" : " + (_alias != null ? "\"" + _alias + "\"" : "null") + "," +
+	           "    \"_borrado\" : " + (_borrado != null ? _borrado : "null") + "," +
+	           "    \"_idTraccion\" : " + (_idTraccion != null ? _idTraccion : "null") + "," +
+	           "    \"_km\" : " + (_km != null ? _km : "null") + "," +
+	           "    \"_alzaVidrios\" : " + (_alzaVidrios != null ? _alzaVidrios : "null") + "," +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_patente\" : " + (_patente != null ? "\"" + _patente + "\"" : "null") + "," +
+	           "    \"_idModelo\" : " + (_idModelo != null ? _idModelo : "null") + "," +
+	           "    \"_idCombustible\" : " + (_idCombustible != null ? _idCombustible : "null") + "," +
+	           "    \"_idTipoTransmision\" : " + (_idTipoTransmision != null ? _idTipoTransmision : "null") +
+			   "}}";
+    }
+
 }

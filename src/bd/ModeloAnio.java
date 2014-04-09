@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 public class ModeloAnio {
     private Integer _anio;
-    private Integer _id;
-    private Integer _id_modelo;
+    private Long _id;
+    private Long _idModelo;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -29,52 +29,52 @@ public class ModeloAnio {
     public ModeloAnio() {
         _anio = null;
         _id = null;
-        _id_modelo = null;
+        _idModelo = null;
 
     }
     /**
      * @return the _anio
      */
-    public Integer get_anio() {
+    public Integer getAnio() {
         return _anio;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @return the _id_modelo
      */
-    public Integer get_id_modelo() {
-        return _id_modelo;
+    public Long getIdModelo() {
+        return _idModelo;
     }
     /**
      * @param _anio the _anio to set
      */
-    public void set_anio(Integer _anio) {
+    public void setAnio(Integer _anio) {
         this._anio = _anio;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
     /**
-     * @param _id_modelo the _id_modelo to set
+     * @param _idModelo the _idModelo to set
      */
-    public void set_id_modelo(Integer _id_modelo) {
-        this._id_modelo = _id_modelo;
+    public void setIdModelo(Long _idModelo) {
+        this._idModelo = _idModelo;
     }
 
     public static ModeloAnio fromRS(ResultSet p_rs) throws SQLException {
         ModeloAnio ret = new ModeloAnio();
 
-        ret.set_anio(p_rs.getInt("anio"));
-        ret.set_id(p_rs.getInt("id"));
-        ret.set_id_modelo(p_rs.getInt("id_modelo"));
+        ret.setAnio(p_rs.getInt("anio"));
+        ret.setId(p_rs.getLong("id"));
+        ret.setIdModelo(p_rs.getLong("id_modelo"));
 
         return ret;
     }
@@ -254,7 +254,7 @@ public class ModeloAnio {
             "    SET" +
             "    anio = " + (_anio != null ? _anio : "null") +
             "    WHERE" +
-            "    id_modelo_anio = " + Integer.toString(this._id);
+            "    id_modelo_anio = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -309,13 +309,15 @@ public class ModeloAnio {
             "    (" +
             "    " + (_anio != null ? "'" + _anio + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
-            "    " + (_id_modelo != null ? "'" + _id_modelo + "'" : "null") +
+            "    " + (_idModelo != null ? "'" + _idModelo + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -360,7 +362,7 @@ public class ModeloAnio {
         String str_sql =
             "    DELETE FROM modelo_anio" +
             "    WHERE" +
-            "    id_modelo_anio = " + Integer.toString(this._id);
+            "    id_modelo_anio = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -392,4 +394,88 @@ public class ModeloAnio {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        ModeloAnio obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_modelo_anio = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _anio = obj.getAnio();
+                _idModelo = obj.getIdModelo();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "ModeloAnio [" +
+	           "    _anio = " + (_anio != null ? _anio : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") + "," +
+	           "    _idModelo = " + (_idModelo != null ? _idModelo : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"ModeloAnio\" : {" +
+	           "    \"_anio\" : " + (_anio != null ? _anio : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
+	           "    \"_idModelo\" : " + (_idModelo != null ? _idModelo : "null") +
+			   "}}";
+    }
+
 }

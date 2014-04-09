@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  */
 public class Combustible {
-    private String _fecha_modificacion;
+    private String _fechaModificacion;
     private String _descripcion;
     private Integer _id;
 
@@ -27,7 +27,7 @@ public class Combustible {
         "    FROM combustible co";
 
     public Combustible() {
-        _fecha_modificacion = null;
+        _fechaModificacion = null;
         _descripcion = null;
         _id = null;
 
@@ -35,46 +35,46 @@ public class Combustible {
     /**
      * @return the _fecha_modificacion
      */
-    public String get_fecha_modificacion() {
-        return _fecha_modificacion;
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _descripcion
      */
-    public String get_descripcion() {
+    public String getDescripcion() {
         return _descripcion;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Integer getId() {
         return _id;
     }
     /**
-     * @param _fecha_modificacion the _fecha_modificacion to set
+     * @param _fechaModificacion the _fechaModificacion to set
      */
-    public void set_fecha_modificacion(String _fecha_modificacion) {
-        this._fecha_modificacion = _fecha_modificacion;
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
      * @param _descripcion the _descripcion to set
      */
-    public void set_descripcion(String _descripcion) {
+    public void setDescripcion(String _descripcion) {
         this._descripcion = _descripcion;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Integer _id) {
         this._id = _id;
     }
 
     public static Combustible fromRS(ResultSet p_rs) throws SQLException {
         Combustible ret = new Combustible();
 
-        ret.set_fecha_modificacion(p_rs.getString("fecha_modificacion"));
-        ret.set_descripcion(p_rs.getString("descripcion"));
-        ret.set_id(p_rs.getInt("id"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
+        ret.setDescripcion(p_rs.getString("descripcion"));
+        ret.setId(p_rs.getInt("id"));
 
         return ret;
     }
@@ -252,7 +252,7 @@ public class Combustible {
         String str_sql =
             "    UPDATE combustible" +
             "    SET" +
-            "    fecha_modificacion = " + (_fecha_modificacion != null ? "'" + _fecha_modificacion + "'" : "null") + "," +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") +
             "    WHERE" +
             "    id_combustible = " + Integer.toString(this._id);
@@ -315,6 +315,8 @@ public class Combustible {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -391,4 +393,88 @@ public class Combustible {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Combustible obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_combustible = " + Integer.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _fechaModificacion = obj.getFechaModificacion();
+                _descripcion = obj.getDescripcion();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Combustible [" +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Combustible\" : {" +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") +
+			   "}}";
+    }
+
 }

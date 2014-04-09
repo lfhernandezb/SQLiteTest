@@ -15,20 +15,20 @@ import java.util.ArrayList;
  *
  */
 public class MantencionUsuario {
-    private Integer _KmEntreMantenciones;
+    private Integer _kmentremantenciones;
     private String _descripcion;
-    private Integer _id_mantencion_usuario;
-    private String _mantencion_usuariocol;
-    private String _DependeKm;
-    private Integer _mantecion_base;
+    private Long _idMantencionUsuario;
+    private String _mantencionUsuariocol;
+    private Byte _dependekm;
+    private Integer _mantecionBase;
     private String _nombre;
-    private String _MantencionUsuariocol;
-    private String _fecha_modificacion;
-    private Integer _id_usuario;
-    private Integer _id_mantencion_base;
-    private Integer _id_vehiculo;
-    private Integer _DiasEntreMantenciones;
-    private String _URL;
+    private String _mantencionusuariocol;
+    private String _fechaModificacion;
+    private Long _idUsuario;
+    private Long _idMantencionBase;
+    private Long _idVehiculo;
+    private Integer _diasentremantenciones;
+    private String _url;
     private String _beneficios;
 
     private final static String _str_sql = 
@@ -51,222 +51,222 @@ public class MantencionUsuario {
         "    FROM mantencion_usuario ma";
 
     public MantencionUsuario() {
-        _KmEntreMantenciones = null;
+        _kmentremantenciones = null;
         _descripcion = null;
-        _id_mantencion_usuario = null;
-        _mantencion_usuariocol = null;
-        _DependeKm = null;
-        _mantecion_base = null;
+        _idMantencionUsuario = null;
+        _mantencionUsuariocol = null;
+        _dependekm = null;
+        _mantecionBase = null;
         _nombre = null;
-        _MantencionUsuariocol = null;
-        _fecha_modificacion = null;
-        _id_usuario = null;
-        _id_mantencion_base = null;
-        _id_vehiculo = null;
-        _DiasEntreMantenciones = null;
-        _URL = null;
+        _mantencionusuariocol = null;
+        _fechaModificacion = null;
+        _idUsuario = null;
+        _idMantencionBase = null;
+        _idVehiculo = null;
+        _diasentremantenciones = null;
+        _url = null;
         _beneficios = null;
 
     }
     /**
      * @return the _KmEntreMantenciones
      */
-    public Integer get_KmEntreMantenciones() {
-        return _KmEntreMantenciones;
+    public Integer getKmentremantenciones() {
+        return _kmentremantenciones;
     }
     /**
      * @return the _descripcion
      */
-    public String get_descripcion() {
+    public String getDescripcion() {
         return _descripcion;
     }
     /**
      * @return the _id_mantencion_usuario
      */
-    public Integer get_id_mantencion_usuario() {
-        return _id_mantencion_usuario;
+    public Long getIdMantencionUsuario() {
+        return _idMantencionUsuario;
     }
     /**
      * @return the _mantencion_usuariocol
      */
-    public String get_mantencion_usuariocol() {
-        return _mantencion_usuariocol;
+    public String getMantencionUsuariocol() {
+        return _mantencionUsuariocol;
     }
     /**
      * @return the _DependeKm
      */
-    public String get_DependeKm() {
-        return _DependeKm;
+    public Byte getDependekm() {
+        return _dependekm;
     }
     /**
      * @return the _mantecion_base
      */
-    public Integer get_mantecion_base() {
-        return _mantecion_base;
+    public Integer getMantecionBase() {
+        return _mantecionBase;
     }
     /**
      * @return the _nombre
      */
-    public String get_nombre() {
+    public String getNombre() {
         return _nombre;
     }
     /**
      * @return the _MantencionUsuariocol
      */
-    public String get_MantencionUsuariocol() {
-        return _MantencionUsuariocol;
+    public String getMantencionusuariocol() {
+        return _mantencionusuariocol;
     }
     /**
      * @return the _fecha_modificacion
      */
-    public String get_fecha_modificacion() {
-        return _fecha_modificacion;
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_mantencion_base
      */
-    public Integer get_id_mantencion_base() {
-        return _id_mantencion_base;
+    public Long getIdMantencionBase() {
+        return _idMantencionBase;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _DiasEntreMantenciones
      */
-    public Integer get_DiasEntreMantenciones() {
-        return _DiasEntreMantenciones;
+    public Integer getDiasentremantenciones() {
+        return _diasentremantenciones;
     }
     /**
      * @return the _URL
      */
-    public String get_URL() {
-        return _URL;
+    public String getUrl() {
+        return _url;
     }
     /**
      * @return the _beneficios
      */
-    public String get_beneficios() {
+    public String getBeneficios() {
         return _beneficios;
     }
     /**
-     * @param _KmEntreMantenciones the _KmEntreMantenciones to set
+     * @param _kmentremantenciones the _kmentremantenciones to set
      */
-    public void set_KmEntreMantenciones(Integer _KmEntreMantenciones) {
-        this._KmEntreMantenciones = _KmEntreMantenciones;
+    public void setKmentremantenciones(Integer _kmentremantenciones) {
+        this._kmentremantenciones = _kmentremantenciones;
     }
     /**
      * @param _descripcion the _descripcion to set
      */
-    public void set_descripcion(String _descripcion) {
+    public void setDescripcion(String _descripcion) {
         this._descripcion = _descripcion;
     }
     /**
-     * @param _id_mantencion_usuario the _id_mantencion_usuario to set
+     * @param _idMantencionUsuario the _idMantencionUsuario to set
      */
-    public void set_id_mantencion_usuario(Integer _id_mantencion_usuario) {
-        this._id_mantencion_usuario = _id_mantencion_usuario;
+    public void setIdMantencionUsuario(Long _idMantencionUsuario) {
+        this._idMantencionUsuario = _idMantencionUsuario;
     }
     /**
-     * @param _mantencion_usuariocol the _mantencion_usuariocol to set
+     * @param _mantencionUsuariocol the _mantencionUsuariocol to set
      */
-    public void set_mantencion_usuariocol(String _mantencion_usuariocol) {
-        this._mantencion_usuariocol = _mantencion_usuariocol;
+    public void setMantencionUsuariocol(String _mantencionUsuariocol) {
+        this._mantencionUsuariocol = _mantencionUsuariocol;
     }
     /**
-     * @param _DependeKm the _DependeKm to set
+     * @param _dependekm the _dependekm to set
      */
-    public void set_DependeKm(String _DependeKm) {
-        this._DependeKm = _DependeKm;
+    public void setDependekm(Byte _dependekm) {
+        this._dependekm = _dependekm;
     }
     /**
-     * @param _mantecion_base the _mantecion_base to set
+     * @param _mantecionBase the _mantecionBase to set
      */
-    public void set_mantecion_base(Integer _mantecion_base) {
-        this._mantecion_base = _mantecion_base;
+    public void setMantecionBase(Integer _mantecionBase) {
+        this._mantecionBase = _mantecionBase;
     }
     /**
      * @param _nombre the _nombre to set
      */
-    public void set_nombre(String _nombre) {
+    public void setNombre(String _nombre) {
         this._nombre = _nombre;
     }
     /**
-     * @param _MantencionUsuariocol the _MantencionUsuariocol to set
+     * @param _mantencionusuariocol the _mantencionusuariocol to set
      */
-    public void set_MantencionUsuariocol(String _MantencionUsuariocol) {
-        this._MantencionUsuariocol = _MantencionUsuariocol;
+    public void setMantencionusuariocol(String _mantencionusuariocol) {
+        this._mantencionusuariocol = _mantencionusuariocol;
     }
     /**
-     * @param _fecha_modificacion the _fecha_modificacion to set
+     * @param _fechaModificacion the _fechaModificacion to set
      */
-    public void set_fecha_modificacion(String _fecha_modificacion) {
-        this._fecha_modificacion = _fecha_modificacion;
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_mantencion_base the _id_mantencion_base to set
+     * @param _idMantencionBase the _idMantencionBase to set
      */
-    public void set_id_mantencion_base(Integer _id_mantencion_base) {
-        this._id_mantencion_base = _id_mantencion_base;
+    public void setIdMantencionBase(Long _idMantencionBase) {
+        this._idMantencionBase = _idMantencionBase;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
-     * @param _DiasEntreMantenciones the _DiasEntreMantenciones to set
+     * @param _diasentremantenciones the _diasentremantenciones to set
      */
-    public void set_DiasEntreMantenciones(Integer _DiasEntreMantenciones) {
-        this._DiasEntreMantenciones = _DiasEntreMantenciones;
+    public void setDiasentremantenciones(Integer _diasentremantenciones) {
+        this._diasentremantenciones = _diasentremantenciones;
     }
     /**
-     * @param _URL the _URL to set
+     * @param _url the _url to set
      */
-    public void set_URL(String _URL) {
-        this._URL = _URL;
+    public void setUrl(String _url) {
+        this._url = _url;
     }
     /**
      * @param _beneficios the _beneficios to set
      */
-    public void set_beneficios(String _beneficios) {
+    public void setBeneficios(String _beneficios) {
         this._beneficios = _beneficios;
     }
 
     public static MantencionUsuario fromRS(ResultSet p_rs) throws SQLException {
         MantencionUsuario ret = new MantencionUsuario();
 
-        ret.set_KmEntreMantenciones(p_rs.getInt("KmEntreMantenciones"));
-        ret.set_descripcion(p_rs.getString("descripcion"));
-        ret.set_id_mantencion_usuario(p_rs.getInt("id_mantencion_usuario"));
-        ret.set_mantencion_usuariocol(p_rs.getString("mantencion_usuariocol"));
-        ret.set_DependeKm(p_rs.getString("DependeKm"));
-        ret.set_mantecion_base(p_rs.getInt("mantecion_base"));
-        ret.set_nombre(p_rs.getString("nombre"));
-        ret.set_MantencionUsuariocol(p_rs.getString("MantencionUsuariocol"));
-        ret.set_fecha_modificacion(p_rs.getString("fecha_modificacion"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_mantencion_base(p_rs.getInt("id_mantencion_base"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_DiasEntreMantenciones(p_rs.getInt("DiasEntreMantenciones"));
-        ret.set_URL(p_rs.getString("URL"));
-        ret.set_beneficios(p_rs.getString("beneficios"));
+        ret.setKmentremantenciones(p_rs.getInt("KmEntreMantenciones"));
+        ret.setDescripcion(p_rs.getString("descripcion"));
+        ret.setIdMantencionUsuario(p_rs.getLong("id_mantencion_usuario"));
+        ret.setMantencionUsuariocol(p_rs.getString("mantencion_usuariocol"));
+        ret.setDependekm(p_rs.getByte("DependeKm"));
+        ret.setMantecionBase(p_rs.getInt("mantecion_base"));
+        ret.setNombre(p_rs.getString("nombre"));
+        ret.setMantencionusuariocol(p_rs.getString("MantencionUsuariocol"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdMantencionBase(p_rs.getLong("id_mantencion_base"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setDiasentremantenciones(p_rs.getInt("DiasEntreMantenciones"));
+        ret.setUrl(p_rs.getString("URL"));
+        ret.setBeneficios(p_rs.getString("beneficios"));
 
         return ret;
     }
@@ -450,21 +450,21 @@ public class MantencionUsuario {
         String str_sql =
             "    UPDATE mantencion_usuario" +
             "    SET" +
-            "    KmEntreMantenciones = " + (_KmEntreMantenciones != null ? _KmEntreMantenciones : "null") + "," +
+            "    KmEntreMantenciones = " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    mantencion_usuariocol = " + (_mantencion_usuariocol != null ? "'" + _mantencion_usuariocol + "'" : "null") + "," +
-            "    DependeKm = " + (_DependeKm != null ? "'" + _DependeKm + "'" : "null") + "," +
-            "    mantecion_base = " + (_mantecion_base != null ? _mantecion_base : "null") + "," +
+            "    mantencion_usuariocol = " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
+            "    DependeKm = " + (_dependekm != null ? _dependekm : "null") + "," +
+            "    mantecion_base = " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
             "    nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
-            "    MantencionUsuariocol = " + (_MantencionUsuariocol != null ? "'" + _MantencionUsuariocol + "'" : "null") + "," +
-            "    fecha_modificacion = " + (_fecha_modificacion != null ? "'" + _fecha_modificacion + "'" : "null") + "," +
-            "    id_mantencion_base = " + (_id_mantencion_base != null ? _id_mantencion_base : "null") + "," +
-            "    DiasEntreMantenciones = " + (_DiasEntreMantenciones != null ? _DiasEntreMantenciones : "null") + "," +
-            "    URL = " + (_URL != null ? "'" + _URL + "'" : "null") + "," +
+            "    MantencionUsuariocol = " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+            "    id_mantencion_base = " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
+            "    DiasEntreMantenciones = " + (_diasentremantenciones != null ? _diasentremantenciones : "null") + "," +
+            "    URL = " + (_url != null ? "'" + _url + "'" : "null") + "," +
             "    beneficios = " + (_beneficios != null ? "'" + _beneficios + "'" : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_mantencion_usuario = " + Integer.toString(this._id_mantencion_usuario);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_mantencion_usuario = " + Long.toString(this._idMantencionUsuario);
 
         try {
             stmt = p_conn.createStatement();
@@ -528,19 +528,19 @@ public class MantencionUsuario {
             "    beneficios)" +
             "    VALUES" +
             "    (" +
-            "    " + (_KmEntreMantenciones != null ? "'" + _KmEntreMantenciones + "'" : "null") + "," +
+            "    " + (_kmentremantenciones != null ? "'" + _kmentremantenciones + "'" : "null") + "," +
             "    " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    " + (_id_mantencion_usuario != null ? "'" + _id_mantencion_usuario + "'" : "null") + "," +
-            "    " + (_mantencion_usuariocol != null ? "'" + _mantencion_usuariocol + "'" : "null") + "," +
-            "    " + (_DependeKm != null ? "'" + _DependeKm + "'" : "null") + "," +
-            "    " + (_mantecion_base != null ? "'" + _mantecion_base + "'" : "null") + "," +
+            "    " + (_idMantencionUsuario != null ? "'" + _idMantencionUsuario + "'" : "null") + "," +
+            "    " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
+            "    " + (_dependekm != null ? "'" + _dependekm + "'" : "null") + "," +
+            "    " + (_mantecionBase != null ? "'" + _mantecionBase + "'" : "null") + "," +
             "    " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
-            "    " + (_MantencionUsuariocol != null ? "'" + _MantencionUsuariocol + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_mantencion_base != null ? "'" + _id_mantencion_base + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
-            "    " + (_DiasEntreMantenciones != null ? "'" + _DiasEntreMantenciones + "'" : "null") + "," +
-            "    " + (_URL != null ? "'" + _URL + "'" : "null") + "," +
+            "    " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idMantencionBase != null ? "'" + _idMantencionBase + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
+            "    " + (_diasentremantenciones != null ? "'" + _diasentremantenciones + "'" : "null") + "," +
+            "    " + (_url != null ? "'" + _url + "'" : "null") + "," +
             "    " + (_beneficios != null ? "'" + _beneficios + "'" : "null") +
             "    )";
         
@@ -548,6 +548,8 @@ public class MantencionUsuario {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -592,8 +594,8 @@ public class MantencionUsuario {
         String str_sql =
             "    DELETE FROM mantencion_usuario" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_mantencion_usuario = " + Integer.toString(this._id_mantencion_usuario);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_mantencion_usuario = " + Long.toString(this._idMantencionUsuario);
 
         try {
             stmt = p_conn.createStatement();
@@ -625,4 +627,124 @@ public class MantencionUsuario {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        MantencionUsuario obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_mantencion_usuario = " + Long.toString(this._idMantencionUsuario) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _kmentremantenciones = obj.getKmentremantenciones();
+                _descripcion = obj.getDescripcion();
+                _mantencionUsuariocol = obj.getMantencionUsuariocol();
+                _dependekm = obj.getDependekm();
+                _mantecionBase = obj.getMantecionBase();
+                _nombre = obj.getNombre();
+                _mantencionusuariocol = obj.getMantencionusuariocol();
+                _fechaModificacion = obj.getFechaModificacion();
+                _idMantencionBase = obj.getIdMantencionBase();
+                _idVehiculo = obj.getIdVehiculo();
+                _diasentremantenciones = obj.getDiasentremantenciones();
+                _url = obj.getUrl();
+                _beneficios = obj.getBeneficios();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "MantencionUsuario [" +
+	           "    _kmentremantenciones = " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
+	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
+	           "    _idMantencionUsuario = " + (_idMantencionUsuario != null ? _idMantencionUsuario : "null") + "," +
+	           "    _mantencionUsuariocol = " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
+	           "    _dependekm = " + (_dependekm != null ? _dependekm : "null") + "," +
+	           "    _mantecionBase = " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
+	           "    _nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
+	           "    _mantencionusuariocol = " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idMantencionBase = " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _diasentremantenciones = " + (_diasentremantenciones != null ? _diasentremantenciones : "null") + "," +
+	           "    _url = " + (_url != null ? "'" + _url + "'" : "null") + "," +
+	           "    _beneficios = " + (_beneficios != null ? "'" + _beneficios + "'" : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"MantencionUsuario\" : {" +
+	           "    \"_kmentremantenciones\" : " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
+	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
+	           "    \"_idMantencionUsuario\" : " + (_idMantencionUsuario != null ? _idMantencionUsuario : "null") + "," +
+	           "    \"_mantencion_usuariocol\" : " + (_mantencionUsuariocol != null ? "\"" + _mantencionUsuariocol + "\"" : "null") + "," +
+	           "    \"_dependekm\" : " + (_dependekm != null ? _dependekm : "null") + "," +
+	           "    \"_mantecionBase\" : " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
+	           "    \"_nombre\" : " + (_nombre != null ? "\"" + _nombre + "\"" : "null") + "," +
+	           "    \"_MantencionUsuariocol\" : " + (_mantencionusuariocol != null ? "\"" + _mantencionusuariocol + "\"" : "null") + "," +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idMantencionBase\" : " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_diasentremantenciones\" : " + (_diasentremantenciones != null ? _diasentremantenciones : "null") + "," +
+	           "    \"_URL\" : " + (_url != null ? "\"" + _url + "\"" : "null") + "," +
+	           "    \"_beneficios\" : " + (_beneficios != null ? "\"" + _beneficios + "\"" : "null") +
+			   "}}";
+    }
+
 }

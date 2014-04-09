@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -16,15 +15,15 @@ import java.util.ArrayList;
  *
  */
 public class Usuario {
-    private String _fecha_vencimiento_licencia;
-    private String _hombre;
-    private String _borrado;
+    private String _fechaVencimientoLicencia;
+    private Byte _hombre;
+    private Byte _borrado;
     private String _telefono;
-    private String _fecha_modifiacion;
-    private String _fecha_nacimiento;
+    private String _fechaModifiacion;
+    private String _fechaNacimiento;
     private String _nombre;
-    private Integer _id;
-    private Integer _id_comuna;
+    private Long _id;
+    private Long _idComuna;
     private String _correo;
 
     private final static String _str_sql = 
@@ -42,152 +41,152 @@ public class Usuario {
         "    FROM usuario us";
 
     public Usuario() {
-        _fecha_vencimiento_licencia = null;
+        _fechaVencimientoLicencia = null;
         _hombre = null;
         _borrado = null;
         _telefono = null;
-        _fecha_modifiacion = null;
-        _fecha_nacimiento = null;
+        _fechaModifiacion = null;
+        _fechaNacimiento = null;
         _nombre = null;
         _id = null;
-        _id_comuna = null;
+        _idComuna = null;
         _correo = null;
 
     }
     /**
      * @return the _fecha_vencimiento_licencia
      */
-    public String get_fecha_vencimiento_licencia() {
-        return _fecha_vencimiento_licencia;
+    public String getFechaVencimientoLicencia() {
+        return _fechaVencimientoLicencia;
     }
     /**
      * @return the _hombre
      */
-    public String get_hombre() {
+    public Byte getHombre() {
         return _hombre;
     }
     /**
      * @return the _borrado
      */
-    public String get_borrado() {
+    public Byte getBorrado() {
         return _borrado;
     }
     /**
      * @return the _telefono
      */
-    public String get_telefono() {
+    public String getTelefono() {
         return _telefono;
     }
     /**
      * @return the _fecha_modifiacion
      */
-    public String get_fecha_modifiacion() {
-        return _fecha_modifiacion;
+    public String getFechaModifiacion() {
+        return _fechaModifiacion;
     }
     /**
      * @return the _fecha_nacimiento
      */
-    public String get_fecha_nacimiento() {
-        return _fecha_nacimiento;
+    public String getFechaNacimiento() {
+        return _fechaNacimiento;
     }
     /**
      * @return the _nombre
      */
-    public String get_nombre() {
+    public String getNombre() {
         return _nombre;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @return the _id_comuna
      */
-    public Integer get_id_comuna() {
-        return _id_comuna;
+    public Long getIdComuna() {
+        return _idComuna;
     }
     /**
      * @return the _correo
      */
-    public String get_correo() {
+    public String getCorreo() {
         return _correo;
     }
     /**
-     * @param _fecha_vencimiento_licencia the _fecha_vencimiento_licencia to set
+     * @param _fechaVencimientoLicencia the _fechaVencimientoLicencia to set
      */
-    public void set_fecha_vencimiento_licencia(String _fecha_vencimiento_licencia) {
-        this._fecha_vencimiento_licencia = _fecha_vencimiento_licencia;
+    public void setFechaVencimientoLicencia(String _fechaVencimientoLicencia) {
+        this._fechaVencimientoLicencia = _fechaVencimientoLicencia;
     }
     /**
      * @param _hombre the _hombre to set
      */
-    public void set_hombre(String _hombre) {
+    public void setHombre(Byte _hombre) {
         this._hombre = _hombre;
     }
     /**
      * @param _borrado the _borrado to set
      */
-    public void set_borrado(String _borrado) {
+    public void setBorrado(Byte _borrado) {
         this._borrado = _borrado;
     }
     /**
      * @param _telefono the _telefono to set
      */
-    public void set_telefono(String _telefono) {
+    public void setTelefono(String _telefono) {
         this._telefono = _telefono;
     }
     /**
-     * @param _fecha_modifiacion the _fecha_modifiacion to set
+     * @param _fechaModifiacion the _fechaModifiacion to set
      */
-    public void set_fecha_modifiacion(String _fecha_modifiacion) {
-        this._fecha_modifiacion = _fecha_modifiacion;
+    public void setFechaModifiacion(String _fechaModifiacion) {
+        this._fechaModifiacion = _fechaModifiacion;
     }
     /**
-     * @param _fecha_nacimiento the _fecha_nacimiento to set
+     * @param _fechaNacimiento the _fechaNacimiento to set
      */
-    public void set_fecha_nacimiento(String _fecha_nacimiento) {
-        this._fecha_nacimiento = _fecha_nacimiento;
+    public void setFechaNacimiento(String _fechaNacimiento) {
+        this._fechaNacimiento = _fechaNacimiento;
     }
     /**
      * @param _nombre the _nombre to set
      */
-    public void set_nombre(String _nombre) {
+    public void setNombre(String _nombre) {
         this._nombre = _nombre;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
     /**
-     * @param _id_comuna the _id_comuna to set
+     * @param _idComuna the _idComuna to set
      */
-    public void set_id_comuna(Integer _id_comuna) {
-        this._id_comuna = _id_comuna;
+    public void setIdComuna(Long _idComuna) {
+        this._idComuna = _idComuna;
     }
     /**
      * @param _correo the _correo to set
      */
-    public void set_correo(String _correo) {
+    public void setCorreo(String _correo) {
         this._correo = _correo;
     }
 
     public static Usuario fromRS(ResultSet p_rs) throws SQLException {
         Usuario ret = new Usuario();
 
-        ret.set_fecha_vencimiento_licencia(p_rs.getString("fecha_vencimiento_licencia"));
-        ret.set_hombre(p_rs.getString("hombre"));
-        ret.set_borrado(p_rs.getString("borrado"));
-        ret.set_telefono(p_rs.getString("telefono"));
-        ret.set_fecha_modifiacion(p_rs.getString("fecha_modifiacion"));
-        ret.set_fecha_nacimiento(p_rs.getString("fecha_nacimiento"));
-        ret.set_nombre(p_rs.getString("nombre"));
-        ret.set_id(p_rs.getInt("id"));
-        ret.set_id_comuna(p_rs.getInt("id_comuna"));
-        ret.set_correo(p_rs.getString("correo"));
+        ret.setFechaVencimientoLicencia(p_rs.getString("fecha_vencimiento_licencia"));
+        ret.setHombre(p_rs.getByte("hombre"));
+        ret.setBorrado(p_rs.getByte("borrado"));
+        ret.setTelefono(p_rs.getString("telefono"));
+        ret.setFechaModifiacion(p_rs.getString("fecha_modifiacion"));
+        ret.setFechaNacimiento(p_rs.getString("fecha_nacimiento"));
+        ret.setNombre(p_rs.getString("nombre"));
+        ret.setId(p_rs.getLong("id"));
+        ret.setIdComuna(p_rs.getLong("id_comuna"));
+        ret.setCorreo(p_rs.getString("correo"));
 
         return ret;
     }
@@ -279,6 +278,12 @@ public class Usuario {
                 else if (p.getKey().equals("id_comuna")) {
                     array_clauses.add("us.id_comuna = " + p.getValue());
                 }
+                else if (p.getKey().equals("no borrado")) {
+                    array_clauses.add("us.borrado = 0");
+                }
+                else if (p.getKey().equals("borrado")) {
+                    array_clauses.add("us.borrado = 1");
+                }
                 else {
                     throw new Exception("Parametro no soportado: " + p.getKey());
                 }
@@ -365,16 +370,16 @@ public class Usuario {
         String str_sql =
             "    UPDATE usuario" +
             "    SET" +
-            "    fecha_vencimiento_licencia = " + (_fecha_vencimiento_licencia != null ? "'" + _fecha_vencimiento_licencia + "'" : "null") + "," +
-            "    hombre = " + (_hombre != null ? "'" + _hombre + "'" : "null") + "," +
-            "    borrado = " + (_borrado != null ? "'" + _borrado + "'" : "null") + "," +
+            "    fecha_vencimiento_licencia = " + (_fechaVencimientoLicencia != null ? "'" + _fechaVencimientoLicencia + "'" : "null") + "," +
+            "    hombre = " + (_hombre != null ? _hombre : "null") + "," +
+            "    borrado = " + (_borrado != null ? _borrado : "null") + "," +
             "    telefono = " + (_telefono != null ? "'" + _telefono + "'" : "null") + "," +
-            "    fecha_modifiacion = " + (_fecha_modifiacion != null ? "'" + _fecha_modifiacion + "'" : "null") + "," +
-            "    fecha_nacimiento = " + (_fecha_nacimiento != null ? "'" + _fecha_nacimiento + "'" : "null") + "," +
+            "    fecha_modifiacion = " + (_fechaModifiacion != null ? "'" + _fechaModifiacion + "'" : "null") + "," +
+            "    fecha_nacimiento = " + (_fechaNacimiento != null ? "'" + _fechaNacimiento + "'" : "null") + "," +
             "    nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
             "    correo = " + (_correo != null ? "'" + _correo + "'" : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id);
+            "    id_usuario = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -432,13 +437,13 @@ public class Usuario {
             "    correo)" +
             "    VALUES" +
             "    (" +
-            "    " + (_fecha_vencimiento_licencia != null ? "'" + _fecha_vencimiento_licencia + "'" : "null") + "," +
+            "    " + (_fechaVencimientoLicencia != null ? "'" + _fechaVencimientoLicencia + "'" : "null") + "," +
             "    " + (_hombre != null ? "'" + _hombre + "'" : "null") + "," +
             "    " + (_telefono != null ? "'" + _telefono + "'" : "null") + "," +
-            "    " + (_fecha_nacimiento != null ? "'" + _fecha_nacimiento + "'" : "null") + "," +
+            "    " + (_fechaNacimiento != null ? "'" + _fechaNacimiento + "'" : "null") + "," +
             "    " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
-            "    " + (_id_comuna != null ? "'" + _id_comuna + "'" : "null") + "," +
+            "    " + (_idComuna != null ? "'" + _idComuna + "'" : "null") + "," +
             "    " + (_correo != null ? "'" + _correo + "'" : "null") +
             "    )";
         
@@ -446,6 +451,8 @@ public class Usuario {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -490,7 +497,7 @@ public class Usuario {
         String str_sql =
             "    DELETE FROM usuario" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id);
+            "    id_usuario = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -522,4 +529,109 @@ public class Usuario {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Usuario obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _fechaVencimientoLicencia = obj.getFechaVencimientoLicencia();
+                _hombre = obj.getHombre();
+                _borrado = obj.getBorrado();
+                _telefono = obj.getTelefono();
+                _fechaModifiacion = obj.getFechaModifiacion();
+                _fechaNacimiento = obj.getFechaNacimiento();
+                _nombre = obj.getNombre();
+                _idComuna = obj.getIdComuna();
+                _correo = obj.getCorreo();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Usuario [" +
+	           "    _fechaVencimientoLicencia = " + (_fechaVencimientoLicencia != null ? "'" + _fechaVencimientoLicencia + "'" : "null") + "," +
+	           "    _hombre = " + (_hombre != null ? _hombre : "null") + "," +
+	           "    _borrado = " + (_borrado != null ? _borrado : "null") + "," +
+	           "    _telefono = " + (_telefono != null ? "'" + _telefono + "'" : "null") + "," +
+	           "    _fechaModifiacion = " + (_fechaModifiacion != null ? "'" + _fechaModifiacion + "'" : "null") + "," +
+	           "    _fechaNacimiento = " + (_fechaNacimiento != null ? "'" + _fechaNacimiento + "'" : "null") + "," +
+	           "    _nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") + "," +
+	           "    _idComuna = " + (_idComuna != null ? _idComuna : "null") + "," +
+	           "    _correo = " + (_correo != null ? "'" + _correo + "'" : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Usuario\" : {" +
+	           "    \"_fecha_vencimiento_licencia\" : " + (_fechaVencimientoLicencia != null ? "\"" + _fechaVencimientoLicencia + "\"" : "null") + "," +
+	           "    \"_hombre\" : " + (_hombre != null ? _hombre : "null") + "," +
+	           "    \"_borrado\" : " + (_borrado != null ? _borrado : "null") + "," +
+	           "    \"_telefono\" : " + (_telefono != null ? "\"" + _telefono + "\"" : "null") + "," +
+	           "    \"_fecha_modifiacion\" : " + (_fechaModifiacion != null ? "\"" + _fechaModifiacion + "\"" : "null") + "," +
+	           "    \"_fecha_nacimiento\" : " + (_fechaNacimiento != null ? "\"" + _fechaNacimiento + "\"" : "null") + "," +
+	           "    \"_nombre\" : " + (_nombre != null ? "\"" + _nombre + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
+	           "    \"_idComuna\" : " + (_idComuna != null ? _idComuna : "null") + "," +
+	           "    \"_correo\" : " + (_correo != null ? "\"" + _correo + "\"" : "null") +
+			   "}}";
+    }
+
 }

@@ -16,8 +16,8 @@ import java.util.ArrayList;
  */
 public class Region {
     private String _region;
-    private Integer _id;
-    private Integer _id_pais;
+    private Long _id;
+    private Long _idPais;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -29,52 +29,52 @@ public class Region {
     public Region() {
         _region = null;
         _id = null;
-        _id_pais = null;
+        _idPais = null;
 
     }
     /**
      * @return the _region
      */
-    public String get_region() {
+    public String getRegion() {
         return _region;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @return the _id_pais
      */
-    public Integer get_id_pais() {
-        return _id_pais;
+    public Long getIdPais() {
+        return _idPais;
     }
     /**
      * @param _region the _region to set
      */
-    public void set_region(String _region) {
+    public void setRegion(String _region) {
         this._region = _region;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
     /**
-     * @param _id_pais the _id_pais to set
+     * @param _idPais the _idPais to set
      */
-    public void set_id_pais(Integer _id_pais) {
-        this._id_pais = _id_pais;
+    public void setIdPais(Long _idPais) {
+        this._idPais = _idPais;
     }
 
     public static Region fromRS(ResultSet p_rs) throws SQLException {
         Region ret = new Region();
 
-        ret.set_region(p_rs.getString("region"));
-        ret.set_id(p_rs.getInt("id"));
-        ret.set_id_pais(p_rs.getInt("id_pais"));
+        ret.setRegion(p_rs.getString("region"));
+        ret.setId(p_rs.getLong("id"));
+        ret.setIdPais(p_rs.getLong("id_pais"));
 
         return ret;
     }
@@ -254,7 +254,7 @@ public class Region {
             "    SET" +
             "    region = " + (_region != null ? "'" + _region + "'" : "null") +
             "    WHERE" +
-            "    id_region = " + Integer.toString(this._id);
+            "    id_region = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -309,13 +309,15 @@ public class Region {
             "    (" +
             "    " + (_region != null ? "'" + _region + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
-            "    " + (_id_pais != null ? "'" + _id_pais + "'" : "null") +
+            "    " + (_idPais != null ? "'" + _idPais + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -360,7 +362,7 @@ public class Region {
         String str_sql =
             "    DELETE FROM region" +
             "    WHERE" +
-            "    id_region = " + Integer.toString(this._id);
+            "    id_region = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -392,4 +394,88 @@ public class Region {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Region obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_region = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _region = obj.getRegion();
+                _idPais = obj.getIdPais();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Region [" +
+	           "    _region = " + (_region != null ? "'" + _region + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") + "," +
+	           "    _idPais = " + (_idPais != null ? _idPais : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Region\" : {" +
+	           "    \"_region\" : " + (_region != null ? "\"" + _region + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
+	           "    \"_idPais\" : " + (_idPais != null ? _idPais : "null") +
+			   "}}";
+    }
+
 }

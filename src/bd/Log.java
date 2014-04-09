@@ -15,17 +15,17 @@ import java.util.ArrayList;
  *
  */
 public class Log {
-    private Integer _id_tipo_vehiculo;
+    private Long _idTipoVehiculo;
     private String _fecha;
-    private Integer _id_usuario;
-    private Integer _id_vehiculo;
+    private Long _idUsuario;
+    private Long _idVehiculo;
     private Float _latitud;
-    private Integer _id_log;
-    private Integer _id_modelo;
+    private Long _idLog;
+    private Long _idModelo;
     private Float _longitud;
     private String _accion;
     private Integer _km;
-    private Integer _id_marca;
+    private Long _idMarca;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -43,166 +43,166 @@ public class Log {
         "    FROM log lo";
 
     public Log() {
-        _id_tipo_vehiculo = null;
+        _idTipoVehiculo = null;
         _fecha = null;
-        _id_usuario = null;
-        _id_vehiculo = null;
+        _idUsuario = null;
+        _idVehiculo = null;
         _latitud = null;
-        _id_log = null;
-        _id_modelo = null;
+        _idLog = null;
+        _idModelo = null;
         _longitud = null;
         _accion = null;
         _km = null;
-        _id_marca = null;
+        _idMarca = null;
 
     }
     /**
      * @return the _id_tipo_vehiculo
      */
-    public Integer get_id_tipo_vehiculo() {
-        return _id_tipo_vehiculo;
+    public Long getIdTipoVehiculo() {
+        return _idTipoVehiculo;
     }
     /**
      * @return the _fecha
      */
-    public String get_fecha() {
+    public String getFecha() {
         return _fecha;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _latitud
      */
-    public Float get_latitud() {
+    public Float getLatitud() {
         return _latitud;
     }
     /**
      * @return the _id_log
      */
-    public Integer get_id_log() {
-        return _id_log;
+    public Long getIdLog() {
+        return _idLog;
     }
     /**
      * @return the _id_modelo
      */
-    public Integer get_id_modelo() {
-        return _id_modelo;
+    public Long getIdModelo() {
+        return _idModelo;
     }
     /**
      * @return the _longitud
      */
-    public Float get_longitud() {
+    public Float getLongitud() {
         return _longitud;
     }
     /**
      * @return the _accion
      */
-    public String get_accion() {
+    public String getAccion() {
         return _accion;
     }
     /**
      * @return the _km
      */
-    public Integer get_km() {
+    public Integer getKm() {
         return _km;
     }
     /**
      * @return the _id_marca
      */
-    public Integer get_id_marca() {
-        return _id_marca;
+    public Long getIdMarca() {
+        return _idMarca;
     }
     /**
-     * @param _id_tipo_vehiculo the _id_tipo_vehiculo to set
+     * @param _idTipoVehiculo the _idTipoVehiculo to set
      */
-    public void set_id_tipo_vehiculo(Integer _id_tipo_vehiculo) {
-        this._id_tipo_vehiculo = _id_tipo_vehiculo;
+    public void setIdTipoVehiculo(Long _idTipoVehiculo) {
+        this._idTipoVehiculo = _idTipoVehiculo;
     }
     /**
      * @param _fecha the _fecha to set
      */
-    public void set_fecha(String _fecha) {
+    public void setFecha(String _fecha) {
         this._fecha = _fecha;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
      * @param _latitud the _latitud to set
      */
-    public void set_latitud(Float _latitud) {
+    public void setLatitud(Float _latitud) {
         this._latitud = _latitud;
     }
     /**
-     * @param _id_log the _id_log to set
+     * @param _idLog the _idLog to set
      */
-    public void set_id_log(Integer _id_log) {
-        this._id_log = _id_log;
+    public void setIdLog(Long _idLog) {
+        this._idLog = _idLog;
     }
     /**
-     * @param _id_modelo the _id_modelo to set
+     * @param _idModelo the _idModelo to set
      */
-    public void set_id_modelo(Integer _id_modelo) {
-        this._id_modelo = _id_modelo;
+    public void setIdModelo(Long _idModelo) {
+        this._idModelo = _idModelo;
     }
     /**
      * @param _longitud the _longitud to set
      */
-    public void set_longitud(Float _longitud) {
+    public void setLongitud(Float _longitud) {
         this._longitud = _longitud;
     }
     /**
      * @param _accion the _accion to set
      */
-    public void set_accion(String _accion) {
+    public void setAccion(String _accion) {
         this._accion = _accion;
     }
     /**
      * @param _km the _km to set
      */
-    public void set_km(Integer _km) {
+    public void setKm(Integer _km) {
         this._km = _km;
     }
     /**
-     * @param _id_marca the _id_marca to set
+     * @param _idMarca the _idMarca to set
      */
-    public void set_id_marca(Integer _id_marca) {
-        this._id_marca = _id_marca;
+    public void setIdMarca(Long _idMarca) {
+        this._idMarca = _idMarca;
     }
 
     public static Log fromRS(ResultSet p_rs) throws SQLException {
         Log ret = new Log();
 
-        ret.set_id_tipo_vehiculo(p_rs.getInt("id_tipo_vehiculo"));
-        ret.set_fecha(p_rs.getString("fecha"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_latitud(p_rs.getFloat("latitud"));
-        ret.set_id_log(p_rs.getInt("id_log"));
-        ret.set_id_modelo(p_rs.getInt("id_modelo"));
-        ret.set_longitud(p_rs.getFloat("longitud"));
-        ret.set_accion(p_rs.getString("accion"));
-        ret.set_km(p_rs.getInt("km"));
-        ret.set_id_marca(p_rs.getInt("id_marca"));
+        ret.setIdTipoVehiculo(p_rs.getLong("id_tipo_vehiculo"));
+        ret.setFecha(p_rs.getString("fecha"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setLatitud(p_rs.getFloat("latitud"));
+        ret.setIdLog(p_rs.getLong("id_log"));
+        ret.setIdModelo(p_rs.getLong("id_modelo"));
+        ret.setLongitud(p_rs.getFloat("longitud"));
+        ret.setAccion(p_rs.getString("accion"));
+        ret.setKm(p_rs.getInt("km"));
+        ret.setIdMarca(p_rs.getLong("id_marca"));
 
         return ret;
     }
@@ -377,18 +377,18 @@ public class Log {
         String str_sql =
             "    UPDATE log" +
             "    SET" +
-            "    id_tipo_vehiculo = " + (_id_tipo_vehiculo != null ? _id_tipo_vehiculo : "null") + "," +
+            "    id_tipo_vehiculo = " + (_idTipoVehiculo != null ? _idTipoVehiculo : "null") + "," +
             "    fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
-            "    id_vehiculo = " + (_id_vehiculo != null ? _id_vehiculo : "null") + "," +
+            "    id_vehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
             "    latitud = " + (_latitud != null ? _latitud : "null") + "," +
-            "    id_modelo = " + (_id_modelo != null ? _id_modelo : "null") + "," +
+            "    id_modelo = " + (_idModelo != null ? _idModelo : "null") + "," +
             "    longitud = " + (_longitud != null ? _longitud : "null") + "," +
             "    accion = " + (_accion != null ? "'" + _accion + "'" : "null") + "," +
             "    km = " + (_km != null ? _km : "null") + "," +
-            "    id_marca = " + (_id_marca != null ? _id_marca : "null") +
+            "    id_marca = " + (_idMarca != null ? _idMarca : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_log = " + Integer.toString(this._id_log);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_log = " + Long.toString(this._idLog);
 
         try {
             stmt = p_conn.createStatement();
@@ -448,22 +448,24 @@ public class Log {
             "    id_marca)" +
             "    VALUES" +
             "    (" +
-            "    " + (_id_tipo_vehiculo != null ? "'" + _id_tipo_vehiculo + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
+            "    " + (_idTipoVehiculo != null ? "'" + _idTipoVehiculo + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
             "    " + (_latitud != null ? "'" + _latitud + "'" : "null") + "," +
-            "    " + (_id_log != null ? "'" + _id_log + "'" : "null") + "," +
-            "    " + (_id_modelo != null ? "'" + _id_modelo + "'" : "null") + "," +
+            "    " + (_idLog != null ? "'" + _idLog + "'" : "null") + "," +
+            "    " + (_idModelo != null ? "'" + _idModelo + "'" : "null") + "," +
             "    " + (_longitud != null ? "'" + _longitud + "'" : "null") + "," +
             "    " + (_accion != null ? "'" + _accion + "'" : "null") + "," +
             "    " + (_km != null ? "'" + _km + "'" : "null") + "," +
-            "    " + (_id_marca != null ? "'" + _id_marca + "'" : "null") +
+            "    " + (_idMarca != null ? "'" + _idMarca + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -508,8 +510,8 @@ public class Log {
         String str_sql =
             "    DELETE FROM log" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_log = " + Integer.toString(this._id_log);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_log = " + Long.toString(this._idLog);
 
         try {
             stmt = p_conn.createStatement();
@@ -541,4 +543,112 @@ public class Log {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Log obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_log = " + Long.toString(this._idLog) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _idTipoVehiculo = obj.getIdTipoVehiculo();
+                _fecha = obj.getFecha();
+                _idVehiculo = obj.getIdVehiculo();
+                _latitud = obj.getLatitud();
+                _idModelo = obj.getIdModelo();
+                _longitud = obj.getLongitud();
+                _accion = obj.getAccion();
+                _km = obj.getKm();
+                _idMarca = obj.getIdMarca();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Log [" +
+	           "    _idTipoVehiculo = " + (_idTipoVehiculo != null ? _idTipoVehiculo : "null") + "," +
+	           "    _fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _latitud = " + (_latitud != null ? _latitud : "null") + "," +
+	           "    _idLog = " + (_idLog != null ? _idLog : "null") + "," +
+	           "    _idModelo = " + (_idModelo != null ? _idModelo : "null") + "," +
+	           "    _longitud = " + (_longitud != null ? _longitud : "null") + "," +
+	           "    _accion = " + (_accion != null ? "'" + _accion + "'" : "null") + "," +
+	           "    _km = " + (_km != null ? _km : "null") + "," +
+	           "    _idMarca = " + (_idMarca != null ? _idMarca : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Log\" : {" +
+	           "    \"_idTipoVehiculo\" : " + (_idTipoVehiculo != null ? _idTipoVehiculo : "null") + "," +
+	           "    \"_fecha\" : " + (_fecha != null ? "\"" + _fecha + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_latitud\" : " + (_latitud != null ? _latitud : "null") + "," +
+	           "    \"_idLog\" : " + (_idLog != null ? _idLog : "null") + "," +
+	           "    \"_idModelo\" : " + (_idModelo != null ? _idModelo : "null") + "," +
+	           "    \"_longitud\" : " + (_longitud != null ? _longitud : "null") + "," +
+	           "    \"_accion\" : " + (_accion != null ? "\"" + _accion + "\"" : "null") + "," +
+	           "    \"_km\" : " + (_km != null ? _km : "null") + "," +
+	           "    \"_idMarca\" : " + (_idMarca != null ? _idMarca : "null") +
+			   "}}";
+    }
+
 }

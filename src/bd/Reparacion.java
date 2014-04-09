@@ -18,10 +18,10 @@ public class Reparacion {
     private String _descripcion;
     private Integer _costo;
     private String _titulo;
-    private String _fecha_modificacion;
-    private Integer _id_usuario;
-    private Integer _id_vehiculo;
-    private Integer _id_reparacion;
+    private String _fechaModificacion;
+    private Long _idUsuario;
+    private Long _idVehiculo;
+    private Long _idReparacion;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -38,107 +38,107 @@ public class Reparacion {
         _descripcion = null;
         _costo = null;
         _titulo = null;
-        _fecha_modificacion = null;
-        _id_usuario = null;
-        _id_vehiculo = null;
-        _id_reparacion = null;
+        _fechaModificacion = null;
+        _idUsuario = null;
+        _idVehiculo = null;
+        _idReparacion = null;
 
     }
     /**
      * @return the _descripcion
      */
-    public String get_descripcion() {
+    public String getDescripcion() {
         return _descripcion;
     }
     /**
      * @return the _costo
      */
-    public Integer get_costo() {
+    public Integer getCosto() {
         return _costo;
     }
     /**
      * @return the _titulo
      */
-    public String get_titulo() {
+    public String getTitulo() {
         return _titulo;
     }
     /**
      * @return the _fecha_modificacion
      */
-    public String get_fecha_modificacion() {
-        return _fecha_modificacion;
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _id_reparacion
      */
-    public Integer get_id_reparacion() {
-        return _id_reparacion;
+    public Long getIdReparacion() {
+        return _idReparacion;
     }
     /**
      * @param _descripcion the _descripcion to set
      */
-    public void set_descripcion(String _descripcion) {
+    public void setDescripcion(String _descripcion) {
         this._descripcion = _descripcion;
     }
     /**
      * @param _costo the _costo to set
      */
-    public void set_costo(Integer _costo) {
+    public void setCosto(Integer _costo) {
         this._costo = _costo;
     }
     /**
      * @param _titulo the _titulo to set
      */
-    public void set_titulo(String _titulo) {
+    public void setTitulo(String _titulo) {
         this._titulo = _titulo;
     }
     /**
-     * @param _fecha_modificacion the _fecha_modificacion to set
+     * @param _fechaModificacion the _fechaModificacion to set
      */
-    public void set_fecha_modificacion(String _fecha_modificacion) {
-        this._fecha_modificacion = _fecha_modificacion;
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
-     * @param _id_reparacion the _id_reparacion to set
+     * @param _idReparacion the _idReparacion to set
      */
-    public void set_id_reparacion(Integer _id_reparacion) {
-        this._id_reparacion = _id_reparacion;
+    public void setIdReparacion(Long _idReparacion) {
+        this._idReparacion = _idReparacion;
     }
 
     public static Reparacion fromRS(ResultSet p_rs) throws SQLException {
         Reparacion ret = new Reparacion();
 
-        ret.set_descripcion(p_rs.getString("descripcion"));
-        ret.set_costo(p_rs.getInt("costo"));
-        ret.set_titulo(p_rs.getString("titulo"));
-        ret.set_fecha_modificacion(p_rs.getString("fecha_modificacion"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_id_reparacion(p_rs.getInt("id_reparacion"));
+        ret.setDescripcion(p_rs.getString("descripcion"));
+        ret.setCosto(p_rs.getInt("costo"));
+        ret.setTitulo(p_rs.getString("titulo"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setIdReparacion(p_rs.getLong("id_reparacion"));
 
         return ret;
     }
@@ -325,10 +325,10 @@ public class Reparacion {
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
             "    costo = " + (_costo != null ? _costo : "null") + "," +
             "    titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
-            "    fecha_modificacion = " + (_fecha_modificacion != null ? "'" + _fecha_modificacion + "'" : "null") +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_reparacion = " + Integer.toString(this._id_reparacion);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_reparacion = " + Long.toString(this._idReparacion);
 
         try {
             stmt = p_conn.createStatement();
@@ -387,15 +387,17 @@ public class Reparacion {
             "    " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
             "    " + (_costo != null ? "'" + _costo + "'" : "null") + "," +
             "    " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
-            "    " + (_id_reparacion != null ? "'" + _id_reparacion + "'" : "null") +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
+            "    " + (_idReparacion != null ? "'" + _idReparacion + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -440,8 +442,8 @@ public class Reparacion {
         String str_sql =
             "    DELETE FROM reparacion" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_reparacion = " + Integer.toString(this._id_reparacion);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_reparacion = " + Long.toString(this._idReparacion);
 
         try {
             stmt = p_conn.createStatement();
@@ -473,4 +475,100 @@ public class Reparacion {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Reparacion obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_reparacion = " + Long.toString(this._idReparacion) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _descripcion = obj.getDescripcion();
+                _costo = obj.getCosto();
+                _titulo = obj.getTitulo();
+                _fechaModificacion = obj.getFechaModificacion();
+                _idVehiculo = obj.getIdVehiculo();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Reparacion [" +
+	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
+	           "    _costo = " + (_costo != null ? _costo : "null") + "," +
+	           "    _titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _idReparacion = " + (_idReparacion != null ? _idReparacion : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Reparacion\" : {" +
+	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
+	           "    \"_costo\" : " + (_costo != null ? _costo : "null") + "," +
+	           "    \"_titulo\" : " + (_titulo != null ? "\"" + _titulo + "\"" : "null") + "," +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_idReparacion\" : " + (_idReparacion != null ? _idReparacion : "null") +
+			   "}}";
+    }
+
 }

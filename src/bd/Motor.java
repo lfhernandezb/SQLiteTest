@@ -19,17 +19,17 @@ public class Motor {
     private Integer _valvulas;
     private Integer _torque;
     private Integer _cilindros;
-    private String _razon_compresion;
-    private String _codigo_fabricante;
+    private String _razonCompresion;
+    private String _codigoFabricante;
     private String _codigo;
     private Integer _desplazamiento;
-    private Integer _id_modelo_anio;
+    private Long _idModeloAnio;
     private String _tamanio;
     private String _tipo;
-    private Integer _id;
+    private Long _id;
     private Integer _potencia;
-    private String _tipo_compresor;
-    private String _tipo_combustible;
+    private String _tipoCompresor;
+    private String _tipoCombustible;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -55,218 +55,218 @@ public class Motor {
         _valvulas = null;
         _torque = null;
         _cilindros = null;
-        _razon_compresion = null;
-        _codigo_fabricante = null;
+        _razonCompresion = null;
+        _codigoFabricante = null;
         _codigo = null;
         _desplazamiento = null;
-        _id_modelo_anio = null;
+        _idModeloAnio = null;
         _tamanio = null;
         _tipo = null;
         _id = null;
         _potencia = null;
-        _tipo_compresor = null;
-        _tipo_combustible = null;
+        _tipoCompresor = null;
+        _tipoCombustible = null;
 
     }
     /**
      * @return the _configuracion
      */
-    public String get_configuracion() {
+    public String getConfiguracion() {
         return _configuracion;
     }
     /**
      * @return the _valvulas
      */
-    public Integer get_valvulas() {
+    public Integer getValvulas() {
         return _valvulas;
     }
     /**
      * @return the _torque
      */
-    public Integer get_torque() {
+    public Integer getTorque() {
         return _torque;
     }
     /**
      * @return the _cilindros
      */
-    public Integer get_cilindros() {
+    public Integer getCilindros() {
         return _cilindros;
     }
     /**
      * @return the _razon_compresion
      */
-    public String get_razon_compresion() {
-        return _razon_compresion;
+    public String getRazonCompresion() {
+        return _razonCompresion;
     }
     /**
      * @return the _codigo_fabricante
      */
-    public String get_codigo_fabricante() {
-        return _codigo_fabricante;
+    public String getCodigoFabricante() {
+        return _codigoFabricante;
     }
     /**
      * @return the _codigo
      */
-    public String get_codigo() {
+    public String getCodigo() {
         return _codigo;
     }
     /**
      * @return the _desplazamiento
      */
-    public Integer get_desplazamiento() {
+    public Integer getDesplazamiento() {
         return _desplazamiento;
     }
     /**
      * @return the _id_modelo_anio
      */
-    public Integer get_id_modelo_anio() {
-        return _id_modelo_anio;
+    public Long getIdModeloAnio() {
+        return _idModeloAnio;
     }
     /**
      * @return the _tamanio
      */
-    public String get_tamanio() {
+    public String getTamanio() {
         return _tamanio;
     }
     /**
      * @return the _tipo
      */
-    public String get_tipo() {
+    public String getTipo() {
         return _tipo;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @return the _potencia
      */
-    public Integer get_potencia() {
+    public Integer getPotencia() {
         return _potencia;
     }
     /**
      * @return the _tipo_compresor
      */
-    public String get_tipo_compresor() {
-        return _tipo_compresor;
+    public String getTipoCompresor() {
+        return _tipoCompresor;
     }
     /**
      * @return the _tipo_combustible
      */
-    public String get_tipo_combustible() {
-        return _tipo_combustible;
+    public String getTipoCombustible() {
+        return _tipoCombustible;
     }
     /**
      * @param _configuracion the _configuracion to set
      */
-    public void set_configuracion(String _configuracion) {
+    public void setConfiguracion(String _configuracion) {
         this._configuracion = _configuracion;
     }
     /**
      * @param _valvulas the _valvulas to set
      */
-    public void set_valvulas(Integer _valvulas) {
+    public void setValvulas(Integer _valvulas) {
         this._valvulas = _valvulas;
     }
     /**
      * @param _torque the _torque to set
      */
-    public void set_torque(Integer _torque) {
+    public void setTorque(Integer _torque) {
         this._torque = _torque;
     }
     /**
      * @param _cilindros the _cilindros to set
      */
-    public void set_cilindros(Integer _cilindros) {
+    public void setCilindros(Integer _cilindros) {
         this._cilindros = _cilindros;
     }
     /**
-     * @param _razon_compresion the _razon_compresion to set
+     * @param _razonCompresion the _razonCompresion to set
      */
-    public void set_razon_compresion(String _razon_compresion) {
-        this._razon_compresion = _razon_compresion;
+    public void setRazonCompresion(String _razonCompresion) {
+        this._razonCompresion = _razonCompresion;
     }
     /**
-     * @param _codigo_fabricante the _codigo_fabricante to set
+     * @param _codigoFabricante the _codigoFabricante to set
      */
-    public void set_codigo_fabricante(String _codigo_fabricante) {
-        this._codigo_fabricante = _codigo_fabricante;
+    public void setCodigoFabricante(String _codigoFabricante) {
+        this._codigoFabricante = _codigoFabricante;
     }
     /**
      * @param _codigo the _codigo to set
      */
-    public void set_codigo(String _codigo) {
+    public void setCodigo(String _codigo) {
         this._codigo = _codigo;
     }
     /**
      * @param _desplazamiento the _desplazamiento to set
      */
-    public void set_desplazamiento(Integer _desplazamiento) {
+    public void setDesplazamiento(Integer _desplazamiento) {
         this._desplazamiento = _desplazamiento;
     }
     /**
-     * @param _id_modelo_anio the _id_modelo_anio to set
+     * @param _idModeloAnio the _idModeloAnio to set
      */
-    public void set_id_modelo_anio(Integer _id_modelo_anio) {
-        this._id_modelo_anio = _id_modelo_anio;
+    public void setIdModeloAnio(Long _idModeloAnio) {
+        this._idModeloAnio = _idModeloAnio;
     }
     /**
      * @param _tamanio the _tamanio to set
      */
-    public void set_tamanio(String _tamanio) {
+    public void setTamanio(String _tamanio) {
         this._tamanio = _tamanio;
     }
     /**
      * @param _tipo the _tipo to set
      */
-    public void set_tipo(String _tipo) {
+    public void setTipo(String _tipo) {
         this._tipo = _tipo;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
     /**
      * @param _potencia the _potencia to set
      */
-    public void set_potencia(Integer _potencia) {
+    public void setPotencia(Integer _potencia) {
         this._potencia = _potencia;
     }
     /**
-     * @param _tipo_compresor the _tipo_compresor to set
+     * @param _tipoCompresor the _tipoCompresor to set
      */
-    public void set_tipo_compresor(String _tipo_compresor) {
-        this._tipo_compresor = _tipo_compresor;
+    public void setTipoCompresor(String _tipoCompresor) {
+        this._tipoCompresor = _tipoCompresor;
     }
     /**
-     * @param _tipo_combustible the _tipo_combustible to set
+     * @param _tipoCombustible the _tipoCombustible to set
      */
-    public void set_tipo_combustible(String _tipo_combustible) {
-        this._tipo_combustible = _tipo_combustible;
+    public void setTipoCombustible(String _tipoCombustible) {
+        this._tipoCombustible = _tipoCombustible;
     }
 
     public static Motor fromRS(ResultSet p_rs) throws SQLException {
         Motor ret = new Motor();
 
-        ret.set_configuracion(p_rs.getString("configuracion"));
-        ret.set_valvulas(p_rs.getInt("valvulas"));
-        ret.set_torque(p_rs.getInt("torque"));
-        ret.set_cilindros(p_rs.getInt("cilindros"));
-        ret.set_razon_compresion(p_rs.getString("razon_compresion"));
-        ret.set_codigo_fabricante(p_rs.getString("codigo_fabricante"));
-        ret.set_codigo(p_rs.getString("codigo"));
-        ret.set_desplazamiento(p_rs.getInt("desplazamiento"));
-        ret.set_id_modelo_anio(p_rs.getInt("id_modelo_anio"));
-        ret.set_tamanio(p_rs.getString("tamanio"));
-        ret.set_tipo(p_rs.getString("tipo"));
-        ret.set_id(p_rs.getInt("id"));
-        ret.set_potencia(p_rs.getInt("potencia"));
-        ret.set_tipo_compresor(p_rs.getString("tipo_compresor"));
-        ret.set_tipo_combustible(p_rs.getString("tipo_combustible"));
+        ret.setConfiguracion(p_rs.getString("configuracion"));
+        ret.setValvulas(p_rs.getInt("valvulas"));
+        ret.setTorque(p_rs.getInt("torque"));
+        ret.setCilindros(p_rs.getInt("cilindros"));
+        ret.setRazonCompresion(p_rs.getString("razon_compresion"));
+        ret.setCodigoFabricante(p_rs.getString("codigo_fabricante"));
+        ret.setCodigo(p_rs.getString("codigo"));
+        ret.setDesplazamiento(p_rs.getInt("desplazamiento"));
+        ret.setIdModeloAnio(p_rs.getLong("id_modelo_anio"));
+        ret.setTamanio(p_rs.getString("tamanio"));
+        ret.setTipo(p_rs.getString("tipo"));
+        ret.setId(p_rs.getLong("id"));
+        ret.setPotencia(p_rs.getInt("potencia"));
+        ret.setTipoCompresor(p_rs.getString("tipo_compresor"));
+        ret.setTipoCombustible(p_rs.getString("tipo_combustible"));
 
         return ret;
     }
@@ -448,17 +448,17 @@ public class Motor {
             "    valvulas = " + (_valvulas != null ? _valvulas : "null") + "," +
             "    torque = " + (_torque != null ? _torque : "null") + "," +
             "    cilindros = " + (_cilindros != null ? _cilindros : "null") + "," +
-            "    razon_compresion = " + (_razon_compresion != null ? "'" + _razon_compresion + "'" : "null") + "," +
-            "    codigo_fabricante = " + (_codigo_fabricante != null ? "'" + _codigo_fabricante + "'" : "null") + "," +
+            "    razon_compresion = " + (_razonCompresion != null ? "'" + _razonCompresion + "'" : "null") + "," +
+            "    codigo_fabricante = " + (_codigoFabricante != null ? "'" + _codigoFabricante + "'" : "null") + "," +
             "    codigo = " + (_codigo != null ? "'" + _codigo + "'" : "null") + "," +
             "    desplazamiento = " + (_desplazamiento != null ? _desplazamiento : "null") + "," +
             "    tamanio = " + (_tamanio != null ? "'" + _tamanio + "'" : "null") + "," +
             "    tipo = " + (_tipo != null ? "'" + _tipo + "'" : "null") + "," +
             "    potencia = " + (_potencia != null ? _potencia : "null") + "," +
-            "    tipo_compresor = " + (_tipo_compresor != null ? "'" + _tipo_compresor + "'" : "null") + "," +
-            "    tipo_combustible = " + (_tipo_combustible != null ? "'" + _tipo_combustible + "'" : "null") +
+            "    tipo_compresor = " + (_tipoCompresor != null ? "'" + _tipoCompresor + "'" : "null") + "," +
+            "    tipo_combustible = " + (_tipoCombustible != null ? "'" + _tipoCombustible + "'" : "null") +
             "    WHERE" +
-            "    id_motor = " + Integer.toString(this._id);
+            "    id_motor = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -527,23 +527,25 @@ public class Motor {
             "    " + (_valvulas != null ? "'" + _valvulas + "'" : "null") + "," +
             "    " + (_torque != null ? "'" + _torque + "'" : "null") + "," +
             "    " + (_cilindros != null ? "'" + _cilindros + "'" : "null") + "," +
-            "    " + (_razon_compresion != null ? "'" + _razon_compresion + "'" : "null") + "," +
-            "    " + (_codigo_fabricante != null ? "'" + _codigo_fabricante + "'" : "null") + "," +
+            "    " + (_razonCompresion != null ? "'" + _razonCompresion + "'" : "null") + "," +
+            "    " + (_codigoFabricante != null ? "'" + _codigoFabricante + "'" : "null") + "," +
             "    " + (_codigo != null ? "'" + _codigo + "'" : "null") + "," +
             "    " + (_desplazamiento != null ? "'" + _desplazamiento + "'" : "null") + "," +
-            "    " + (_id_modelo_anio != null ? "'" + _id_modelo_anio + "'" : "null") + "," +
+            "    " + (_idModeloAnio != null ? "'" + _idModeloAnio + "'" : "null") + "," +
             "    " + (_tamanio != null ? "'" + _tamanio + "'" : "null") + "," +
             "    " + (_tipo != null ? "'" + _tipo + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
             "    " + (_potencia != null ? "'" + _potencia + "'" : "null") + "," +
-            "    " + (_tipo_compresor != null ? "'" + _tipo_compresor + "'" : "null") + "," +
-            "    " + (_tipo_combustible != null ? "'" + _tipo_combustible + "'" : "null") +
+            "    " + (_tipoCompresor != null ? "'" + _tipoCompresor + "'" : "null") + "," +
+            "    " + (_tipoCombustible != null ? "'" + _tipoCombustible + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -588,7 +590,7 @@ public class Motor {
         String str_sql =
             "    DELETE FROM motor" +
             "    WHERE" +
-            "    id_motor = " + Integer.toString(this._id);
+            "    id_motor = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -620,4 +622,124 @@ public class Motor {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Motor obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_motor = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _configuracion = obj.getConfiguracion();
+                _valvulas = obj.getValvulas();
+                _torque = obj.getTorque();
+                _cilindros = obj.getCilindros();
+                _razonCompresion = obj.getRazonCompresion();
+                _codigoFabricante = obj.getCodigoFabricante();
+                _codigo = obj.getCodigo();
+                _desplazamiento = obj.getDesplazamiento();
+                _idModeloAnio = obj.getIdModeloAnio();
+                _tamanio = obj.getTamanio();
+                _tipo = obj.getTipo();
+                _potencia = obj.getPotencia();
+                _tipoCompresor = obj.getTipoCompresor();
+                _tipoCombustible = obj.getTipoCombustible();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Motor [" +
+	           "    _configuracion = " + (_configuracion != null ? "'" + _configuracion + "'" : "null") + "," +
+	           "    _valvulas = " + (_valvulas != null ? _valvulas : "null") + "," +
+	           "    _torque = " + (_torque != null ? _torque : "null") + "," +
+	           "    _cilindros = " + (_cilindros != null ? _cilindros : "null") + "," +
+	           "    _razonCompresion = " + (_razonCompresion != null ? "'" + _razonCompresion + "'" : "null") + "," +
+	           "    _codigoFabricante = " + (_codigoFabricante != null ? "'" + _codigoFabricante + "'" : "null") + "," +
+	           "    _codigo = " + (_codigo != null ? "'" + _codigo + "'" : "null") + "," +
+	           "    _desplazamiento = " + (_desplazamiento != null ? _desplazamiento : "null") + "," +
+	           "    _idModeloAnio = " + (_idModeloAnio != null ? _idModeloAnio : "null") + "," +
+	           "    _tamanio = " + (_tamanio != null ? "'" + _tamanio + "'" : "null") + "," +
+	           "    _tipo = " + (_tipo != null ? "'" + _tipo + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") + "," +
+	           "    _potencia = " + (_potencia != null ? _potencia : "null") + "," +
+	           "    _tipoCompresor = " + (_tipoCompresor != null ? "'" + _tipoCompresor + "'" : "null") + "," +
+	           "    _tipoCombustible = " + (_tipoCombustible != null ? "'" + _tipoCombustible + "'" : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Motor\" : {" +
+	           "    \"_configuracion\" : " + (_configuracion != null ? "\"" + _configuracion + "\"" : "null") + "," +
+	           "    \"_valvulas\" : " + (_valvulas != null ? _valvulas : "null") + "," +
+	           "    \"_torque\" : " + (_torque != null ? _torque : "null") + "," +
+	           "    \"_cilindros\" : " + (_cilindros != null ? _cilindros : "null") + "," +
+	           "    \"_razon_compresion\" : " + (_razonCompresion != null ? "\"" + _razonCompresion + "\"" : "null") + "," +
+	           "    \"_codigo_fabricante\" : " + (_codigoFabricante != null ? "\"" + _codigoFabricante + "\"" : "null") + "," +
+	           "    \"_codigo\" : " + (_codigo != null ? "\"" + _codigo + "\"" : "null") + "," +
+	           "    \"_desplazamiento\" : " + (_desplazamiento != null ? _desplazamiento : "null") + "," +
+	           "    \"_idModeloAnio\" : " + (_idModeloAnio != null ? _idModeloAnio : "null") + "," +
+	           "    \"_tamanio\" : " + (_tamanio != null ? "\"" + _tamanio + "\"" : "null") + "," +
+	           "    \"_tipo\" : " + (_tipo != null ? "\"" + _tipo + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
+	           "    \"_potencia\" : " + (_potencia != null ? _potencia : "null") + "," +
+	           "    \"_tipo_compresor\" : " + (_tipoCompresor != null ? "\"" + _tipoCompresor + "\"" : "null") + "," +
+	           "    \"_tipo_combustible\" : " + (_tipoCombustible != null ? "\"" + _tipoCombustible + "\"" : "null") +
+			   "}}";
+    }
+
 }

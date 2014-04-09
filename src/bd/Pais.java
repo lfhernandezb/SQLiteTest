@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class Pais {
     private String _pais;
-    private Integer _id;
+    private Long _id;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -32,33 +32,33 @@ public class Pais {
     /**
      * @return the _pais
      */
-    public String get_pais() {
+    public String getPais() {
         return _pais;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @param _pais the _pais to set
      */
-    public void set_pais(String _pais) {
+    public void setPais(String _pais) {
         this._pais = _pais;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
 
     public static Pais fromRS(ResultSet p_rs) throws SQLException {
         Pais ret = new Pais();
 
-        ret.set_pais(p_rs.getString("pais"));
-        ret.set_id(p_rs.getInt("id"));
+        ret.setPais(p_rs.getString("pais"));
+        ret.setId(p_rs.getLong("id"));
 
         return ret;
     }
@@ -235,7 +235,7 @@ public class Pais {
             "    SET" +
             "    pais = " + (_pais != null ? "'" + _pais + "'" : "null") +
             "    WHERE" +
-            "    id_pais = " + Integer.toString(this._id);
+            "    id_pais = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -296,6 +296,8 @@ public class Pais {
             
             ret = stmt.executeUpdate(str_sql);
 
+            load(p_conn);
+
         }
         catch (SQLException ex){
             // handle any errors
@@ -339,7 +341,7 @@ public class Pais {
         String str_sql =
             "    DELETE FROM pais" +
             "    WHERE" +
-            "    id_pais = " + Integer.toString(this._id);
+            "    id_pais = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -371,4 +373,85 @@ public class Pais {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Pais obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_pais = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _pais = obj.getPais();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Pais [" +
+	           "    _pais = " + (_pais != null ? "'" + _pais + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Pais\" : {" +
+	           "    \"_pais\" : " + (_pais != null ? "\"" + _pais + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") +
+			   "}}";
+    }
+
 }

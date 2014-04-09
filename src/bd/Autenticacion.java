@@ -16,10 +16,10 @@ import java.util.ArrayList;
  */
 public class Autenticacion {
     private String _fecha;
-    private Integer _id_red_social;
+    private Long _idRedSocial;
     private String _token;
-    private Integer _id_usuario;
-    private Integer _id;
+    private Long _idUsuario;
+    private Long _id;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -32,81 +32,81 @@ public class Autenticacion {
 
     public Autenticacion() {
         _fecha = null;
-        _id_red_social = null;
+        _idRedSocial = null;
         _token = null;
-        _id_usuario = null;
+        _idUsuario = null;
         _id = null;
 
     }
     /**
      * @return the _fecha
      */
-    public String get_fecha() {
+    public String getFecha() {
         return _fecha;
     }
     /**
      * @return the _id_red_social
      */
-    public Integer get_id_red_social() {
-        return _id_red_social;
+    public Long getIdRedSocial() {
+        return _idRedSocial;
     }
     /**
      * @return the _token
      */
-    public String get_token() {
+    public String getToken() {
         return _token;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @param _fecha the _fecha to set
      */
-    public void set_fecha(String _fecha) {
+    public void setFecha(String _fecha) {
         this._fecha = _fecha;
     }
     /**
-     * @param _id_red_social the _id_red_social to set
+     * @param _idRedSocial the _idRedSocial to set
      */
-    public void set_id_red_social(Integer _id_red_social) {
-        this._id_red_social = _id_red_social;
+    public void setIdRedSocial(Long _idRedSocial) {
+        this._idRedSocial = _idRedSocial;
     }
     /**
      * @param _token the _token to set
      */
-    public void set_token(String _token) {
+    public void setToken(String _token) {
         this._token = _token;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
 
     public static Autenticacion fromRS(ResultSet p_rs) throws SQLException {
         Autenticacion ret = new Autenticacion();
 
-        ret.set_fecha(p_rs.getString("fecha"));
-        ret.set_id_red_social(p_rs.getInt("id_red_social"));
-        ret.set_token(p_rs.getString("token"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id(p_rs.getInt("id"));
+        ret.setFecha(p_rs.getString("fecha"));
+        ret.setIdRedSocial(p_rs.getLong("id_red_social"));
+        ret.setToken(p_rs.getString("token"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setId(p_rs.getLong("id"));
 
         return ret;
     }
@@ -290,7 +290,7 @@ public class Autenticacion {
             "    fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
             "    token = " + (_token != null ? "'" + _token + "'" : "null") +
             "    WHERE" +
-            "    id_autenticacion = " + Integer.toString(this._id);
+            "    id_autenticacion = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -346,9 +346,9 @@ public class Autenticacion {
             "    VALUES" +
             "    (" +
             "    " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
-            "    " + (_id_red_social != null ? "'" + _id_red_social + "'" : "null") + "," +
+            "    " + (_idRedSocial != null ? "'" + _idRedSocial + "'" : "null") + "," +
             "    " + (_token != null ? "'" + _token + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") +
             "    )";
         
@@ -356,6 +356,8 @@ public class Autenticacion {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -400,7 +402,7 @@ public class Autenticacion {
         String str_sql =
             "    DELETE FROM autenticacion" +
             "    WHERE" +
-            "    id_autenticacion = " + Integer.toString(this._id);
+            "    id_autenticacion = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -432,4 +434,94 @@ public class Autenticacion {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Autenticacion obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_autenticacion = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _fecha = obj.getFecha();
+                _idRedSocial = obj.getIdRedSocial();
+                _token = obj.getToken();
+                _idUsuario = obj.getIdUsuario();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Autenticacion [" +
+	           "    _fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+	           "    _idRedSocial = " + (_idRedSocial != null ? _idRedSocial : "null") + "," +
+	           "    _token = " + (_token != null ? "'" + _token + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Autenticacion\" : {" +
+	           "    \"_fecha\" : " + (_fecha != null ? "\"" + _fecha + "\"" : "null") + "," +
+	           "    \"_idRedSocial\" : " + (_idRedSocial != null ? _idRedSocial : "null") + "," +
+	           "    \"_token\" : " + (_token != null ? "\"" + _token + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") +
+			   "}}";
+    }
+
 }

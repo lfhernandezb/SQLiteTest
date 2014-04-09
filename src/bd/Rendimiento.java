@@ -16,13 +16,13 @@ import java.util.ArrayList;
  */
 public class Rendimiento {
     private String _fecha;
-    private String _estanque_lleno;
-    private Integer _id_rendimiento;
+    private Byte _estanqueLleno;
+    private Long _idRendimiento;
     private Integer _costo;
     private Integer _km;
     private Integer _litros;
-    private Integer _id_usuario;
-    private Integer _id_vehiculo;
+    private Long _idUsuario;
+    private Long _idVehiculo;
     private Integer _latitud;
     private Integer _longitud;
 
@@ -42,13 +42,13 @@ public class Rendimiento {
 
     public Rendimiento() {
         _fecha = null;
-        _estanque_lleno = null;
-        _id_rendimiento = null;
+        _estanqueLleno = null;
+        _idRendimiento = null;
         _costo = null;
         _km = null;
         _litros = null;
-        _id_usuario = null;
-        _id_vehiculo = null;
+        _idUsuario = null;
+        _idVehiculo = null;
         _latitud = null;
         _longitud = null;
 
@@ -56,137 +56,137 @@ public class Rendimiento {
     /**
      * @return the _fecha
      */
-    public String get_fecha() {
+    public String getFecha() {
         return _fecha;
     }
     /**
      * @return the _estanque_lleno
      */
-    public String get_estanque_lleno() {
-        return _estanque_lleno;
+    public Byte getEstanqueLleno() {
+        return _estanqueLleno;
     }
     /**
      * @return the _id_rendimiento
      */
-    public Integer get_id_rendimiento() {
-        return _id_rendimiento;
+    public Long getIdRendimiento() {
+        return _idRendimiento;
     }
     /**
      * @return the _costo
      */
-    public Integer get_costo() {
+    public Integer getCosto() {
         return _costo;
     }
     /**
      * @return the _km
      */
-    public Integer get_km() {
+    public Integer getKm() {
         return _km;
     }
     /**
      * @return the _litros
      */
-    public Integer get_litros() {
+    public Integer getLitros() {
         return _litros;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _latitud
      */
-    public Integer get_latitud() {
+    public Integer getLatitud() {
         return _latitud;
     }
     /**
      * @return the _longitud
      */
-    public Integer get_longitud() {
+    public Integer getLongitud() {
         return _longitud;
     }
     /**
      * @param _fecha the _fecha to set
      */
-    public void set_fecha(String _fecha) {
+    public void setFecha(String _fecha) {
         this._fecha = _fecha;
     }
     /**
-     * @param _estanque_lleno the _estanque_lleno to set
+     * @param _estanqueLleno the _estanqueLleno to set
      */
-    public void set_estanque_lleno(String _estanque_lleno) {
-        this._estanque_lleno = _estanque_lleno;
+    public void setEstanqueLleno(Byte _estanqueLleno) {
+        this._estanqueLleno = _estanqueLleno;
     }
     /**
-     * @param _id_rendimiento the _id_rendimiento to set
+     * @param _idRendimiento the _idRendimiento to set
      */
-    public void set_id_rendimiento(Integer _id_rendimiento) {
-        this._id_rendimiento = _id_rendimiento;
+    public void setIdRendimiento(Long _idRendimiento) {
+        this._idRendimiento = _idRendimiento;
     }
     /**
      * @param _costo the _costo to set
      */
-    public void set_costo(Integer _costo) {
+    public void setCosto(Integer _costo) {
         this._costo = _costo;
     }
     /**
      * @param _km the _km to set
      */
-    public void set_km(Integer _km) {
+    public void setKm(Integer _km) {
         this._km = _km;
     }
     /**
      * @param _litros the _litros to set
      */
-    public void set_litros(Integer _litros) {
+    public void setLitros(Integer _litros) {
         this._litros = _litros;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
      * @param _latitud the _latitud to set
      */
-    public void set_latitud(Integer _latitud) {
+    public void setLatitud(Integer _latitud) {
         this._latitud = _latitud;
     }
     /**
      * @param _longitud the _longitud to set
      */
-    public void set_longitud(Integer _longitud) {
+    public void setLongitud(Integer _longitud) {
         this._longitud = _longitud;
     }
 
     public static Rendimiento fromRS(ResultSet p_rs) throws SQLException {
         Rendimiento ret = new Rendimiento();
 
-        ret.set_fecha(p_rs.getString("fecha"));
-        ret.set_estanque_lleno(p_rs.getString("estanque_lleno"));
-        ret.set_id_rendimiento(p_rs.getInt("id_rendimiento"));
-        ret.set_costo(p_rs.getInt("costo"));
-        ret.set_km(p_rs.getInt("km"));
-        ret.set_litros(p_rs.getInt("litros"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_latitud(p_rs.getInt("latitud"));
-        ret.set_longitud(p_rs.getInt("longitud"));
+        ret.setFecha(p_rs.getString("fecha"));
+        ret.setEstanqueLleno(p_rs.getByte("estanque_lleno"));
+        ret.setIdRendimiento(p_rs.getLong("id_rendimiento"));
+        ret.setCosto(p_rs.getInt("costo"));
+        ret.setKm(p_rs.getInt("km"));
+        ret.setLitros(p_rs.getInt("litros"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setLatitud(p_rs.getInt("latitud"));
+        ret.setLongitud(p_rs.getInt("longitud"));
 
         return ret;
     }
@@ -368,15 +368,15 @@ public class Rendimiento {
             "    UPDATE rendimiento" +
             "    SET" +
             "    fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
-            "    estanque_lleno = " + (_estanque_lleno != null ? "'" + _estanque_lleno + "'" : "null") + "," +
+            "    estanque_lleno = " + (_estanqueLleno != null ? _estanqueLleno : "null") + "," +
             "    costo = " + (_costo != null ? _costo : "null") + "," +
             "    km = " + (_km != null ? _km : "null") + "," +
             "    litros = " + (_litros != null ? _litros : "null") + "," +
             "    latitud = " + (_latitud != null ? _latitud : "null") + "," +
             "    longitud = " + (_longitud != null ? _longitud : "null") +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_rendimiento = " + Integer.toString(this._id_rendimiento);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_rendimiento = " + Long.toString(this._idRendimiento);
 
         try {
             stmt = p_conn.createStatement();
@@ -437,13 +437,13 @@ public class Rendimiento {
             "    VALUES" +
             "    (" +
             "    " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
-            "    " + (_estanque_lleno != null ? "'" + _estanque_lleno + "'" : "null") + "," +
-            "    " + (_id_rendimiento != null ? "'" + _id_rendimiento + "'" : "null") + "," +
+            "    " + (_estanqueLleno != null ? "'" + _estanqueLleno + "'" : "null") + "," +
+            "    " + (_idRendimiento != null ? "'" + _idRendimiento + "'" : "null") + "," +
             "    " + (_costo != null ? "'" + _costo + "'" : "null") + "," +
             "    " + (_km != null ? "'" + _km + "'" : "null") + "," +
             "    " + (_litros != null ? "'" + _litros + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
             "    " + (_latitud != null ? "'" + _latitud + "'" : "null") + "," +
             "    " + (_longitud != null ? "'" + _longitud + "'" : "null") +
             "    )";
@@ -452,6 +452,8 @@ public class Rendimiento {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -496,8 +498,8 @@ public class Rendimiento {
         String str_sql =
             "    DELETE FROM rendimiento" +
             "    WHERE" +
-            "    id_usuario = " + Integer.toString(this._id_usuario) + " AND" +
-            "    id_rendimiento = " + Integer.toString(this._id_rendimiento);
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_rendimiento = " + Long.toString(this._idRendimiento);
 
         try {
             stmt = p_conn.createStatement();
@@ -529,4 +531,109 @@ public class Rendimiento {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Rendimiento obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_usuario = " + Long.toString(this._idUsuario) + " AND" +
+            "    id_rendimiento = " + Long.toString(this._idRendimiento) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _fecha = obj.getFecha();
+                _estanqueLleno = obj.getEstanqueLleno();
+                _costo = obj.getCosto();
+                _km = obj.getKm();
+                _litros = obj.getLitros();
+                _idVehiculo = obj.getIdVehiculo();
+                _latitud = obj.getLatitud();
+                _longitud = obj.getLongitud();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Rendimiento [" +
+	           "    _fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+	           "    _estanqueLleno = " + (_estanqueLleno != null ? _estanqueLleno : "null") + "," +
+	           "    _idRendimiento = " + (_idRendimiento != null ? _idRendimiento : "null") + "," +
+	           "    _costo = " + (_costo != null ? _costo : "null") + "," +
+	           "    _km = " + (_km != null ? _km : "null") + "," +
+	           "    _litros = " + (_litros != null ? _litros : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _latitud = " + (_latitud != null ? _latitud : "null") + "," +
+	           "    _longitud = " + (_longitud != null ? _longitud : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Rendimiento\" : {" +
+	           "    \"_fecha\" : " + (_fecha != null ? "\"" + _fecha + "\"" : "null") + "," +
+	           "    \"_estanqueLleno\" : " + (_estanqueLleno != null ? _estanqueLleno : "null") + "," +
+	           "    \"_idRendimiento\" : " + (_idRendimiento != null ? _idRendimiento : "null") + "," +
+	           "    \"_costo\" : " + (_costo != null ? _costo : "null") + "," +
+	           "    \"_km\" : " + (_km != null ? _km : "null") + "," +
+	           "    \"_litros\" : " + (_litros != null ? _litros : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_latitud\" : " + (_latitud != null ? _latitud : "null") + "," +
+	           "    \"_longitud\" : " + (_longitud != null ? _longitud : "null") +
+			   "}}";
+    }
+
 }

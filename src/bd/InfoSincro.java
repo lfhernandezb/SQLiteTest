@@ -14,108 +14,156 @@ import java.util.ArrayList;
  * @author petete-ntbk
  *
  */
-public class Modelo {
-    private String _descripcion;
-    private Integer _idTipoVehiculo;
-    private String _fechaModificacion;
-    private Long _id;
-    private Integer _idMarca;
+public class InfoSincro {
+    private Integer _id;
+    private String _fecha;
+    private String _fechaFinProcesamiento;
+    private Integer _sentido;
+    private String _fechaLectura;
+    private String _archivoNombre;
+    private String _archivoMd5;
+    private Long _archivoTamano;
 
     private final static String _str_sql = 
         "    SELECT" +
-        "    mo.descripcion AS descripcion," +
-        "    mo.id_tipo_vehiculo AS id_tipo_vehiculo," +
-        "    mo.fecha_modificacion AS fecha_modificacion," +
-        "    mo.id_modelo AS id," +
-        "    mo.id_marca AS id_marca" +
-        "    FROM modelo mo";
+        "    in.id_info_sincro AS id," +
+        "    in.fecha AS fecha," +
+        "    in.fecha_fin_procesamiento AS fecha_fin_procesamiento," +
+        "    in.sentido AS sentido," +
+        "    in.fecha_lectura AS fecha_lectura," +
+        "    in.archivo_nombre AS archivo_nombre," +
+        "    in.archivo_md5 AS archivo_md5," +
+        "    in.archivo_tamano AS archivo_tamano" +
+        "    FROM info_sincro in";
 
-    public Modelo() {
-        _descripcion = null;
-        _idTipoVehiculo = null;
-        _fechaModificacion = null;
+    public InfoSincro() {
         _id = null;
-        _idMarca = null;
+        _fecha = null;
+        _fechaFinProcesamiento = null;
+        _sentido = null;
+        _fechaLectura = null;
+        _archivoNombre = null;
+        _archivoMd5 = null;
+        _archivoTamano = null;
 
-    }
-    /**
-     * @return the _descripcion
-     */
-    public String getDescripcion() {
-        return _descripcion;
-    }
-    /**
-     * @return the _id_tipo_vehiculo
-     */
-    public Integer getIdTipoVehiculo() {
-        return _idTipoVehiculo;
-    }
-    /**
-     * @return the _fecha_modificacion
-     */
-    public String getFechaModificacion() {
-        return _fechaModificacion;
     }
     /**
      * @return the _id
      */
-    public Long getId() {
+    public Integer getId() {
         return _id;
     }
     /**
-     * @return the _id_marca
+     * @return the _fecha
      */
-    public Integer getIdMarca() {
-        return _idMarca;
+    public String getFecha() {
+        return _fecha;
     }
     /**
-     * @param _descripcion the _descripcion to set
+     * @return the _fecha_fin_procesamiento
      */
-    public void setDescripcion(String _descripcion) {
-        this._descripcion = _descripcion;
+    public String getFechaFinProcesamiento() {
+        return _fechaFinProcesamiento;
     }
     /**
-     * @param _idTipoVehiculo the _idTipoVehiculo to set
+     * @return the _sentido
      */
-    public void setIdTipoVehiculo(Integer _idTipoVehiculo) {
-        this._idTipoVehiculo = _idTipoVehiculo;
+    public Integer getSentido() {
+        return _sentido;
     }
     /**
-     * @param _fechaModificacion the _fechaModificacion to set
+     * @return the _fecha_lectura
      */
-    public void setFechaModificacion(String _fechaModificacion) {
-        this._fechaModificacion = _fechaModificacion;
+    public String getFechaLectura() {
+        return _fechaLectura;
+    }
+    /**
+     * @return the _archivo_nombre
+     */
+    public String getArchivoNombre() {
+        return _archivoNombre;
+    }
+    /**
+     * @return the _archivo_md5
+     */
+    public String getArchivoMd5() {
+        return _archivoMd5;
+    }
+    /**
+     * @return the _archivo_tamano
+     */
+    public Long getArchivoTamano() {
+        return _archivoTamano;
     }
     /**
      * @param _id the _id to set
      */
-    public void setId(Long _id) {
+    public void setId(Integer _id) {
         this._id = _id;
     }
     /**
-     * @param _idMarca the _idMarca to set
+     * @param _fecha the _fecha to set
      */
-    public void setIdMarca(Integer _idMarca) {
-        this._idMarca = _idMarca;
+    public void setFecha(String _fecha) {
+        this._fecha = _fecha;
+    }
+    /**
+     * @param _fechaFinProcesamiento the _fechaFinProcesamiento to set
+     */
+    public void setFechaFinProcesamiento(String _fechaFinProcesamiento) {
+        this._fechaFinProcesamiento = _fechaFinProcesamiento;
+    }
+    /**
+     * @param _sentido the _sentido to set
+     */
+    public void setSentido(Integer _sentido) {
+        this._sentido = _sentido;
+    }
+    /**
+     * @param _fechaLectura the _fechaLectura to set
+     */
+    public void setFechaLectura(String _fechaLectura) {
+        this._fechaLectura = _fechaLectura;
+    }
+    /**
+     * @param _archivoNombre the _archivoNombre to set
+     */
+    public void setArchivoNombre(String _archivoNombre) {
+        this._archivoNombre = _archivoNombre;
+    }
+    /**
+     * @param _archivoMd5 the _archivoMd5 to set
+     */
+    public void setArchivoMd5(String _archivoMd5) {
+        this._archivoMd5 = _archivoMd5;
+    }
+    /**
+     * @param _archivoTamano the _archivoTamano to set
+     */
+    public void setArchivoTamano(Long _archivoTamano) {
+        this._archivoTamano = _archivoTamano;
     }
 
-    public static Modelo fromRS(ResultSet p_rs) throws SQLException {
-        Modelo ret = new Modelo();
+    public static InfoSincro fromRS(ResultSet p_rs) throws SQLException {
+        InfoSincro ret = new InfoSincro();
 
-        ret.setDescripcion(p_rs.getString("descripcion"));
-        ret.setIdTipoVehiculo(p_rs.getInt("id_tipo_vehiculo"));
-        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
-        ret.setId(p_rs.getLong("id"));
-        ret.setIdMarca(p_rs.getInt("id_marca"));
+        ret.setId(p_rs.getInt("id"));
+        ret.setFecha(p_rs.getString("fecha"));
+        ret.setFechaFinProcesamiento(p_rs.getString("fecha_fin_procesamiento"));
+        ret.setSentido(p_rs.getInt("sentido"));
+        ret.setFechaLectura(p_rs.getString("fecha_lectura"));
+        ret.setArchivoNombre(p_rs.getString("archivo_nombre"));
+        ret.setArchivoMd5(p_rs.getString("archivo_md5"));
+        ret.setArchivoTamano(p_rs.getLong("archivo_tamano"));
 
         return ret;
     }
 
-    public static Modelo getByParameter(Connection p_conn, String p_key, String p_value) throws SQLException {
-        Modelo ret = null;
+    public static InfoSincro getByParameter(Connection p_conn, String p_key, String p_value) throws SQLException {
+        InfoSincro ret = null;
         
         String str_sql = _str_sql +
-            "  WHERE mo." + p_key + " = " + p_value +
+            "  WHERE in." + p_key + " = " + p_value +
             "  LIMIT 0, 1";
         
         //System.out.println(str_sql);
@@ -172,37 +220,28 @@ public class Modelo {
         return ret;        
     }
 
-    public static Modelo getById(Connection p_conn, String p_id) throws Exception {
-        return getByParameter(p_conn, "id_modelo", p_id);
+    public static InfoSincro getById(Connection p_conn, String p_id) throws Exception {
+        return getByParameter(p_conn, "id_info_sincro", p_id);
     }
     
-    public static ArrayList<Modelo> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<InfoSincro> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
-        ArrayList<Modelo> ret;
+        ArrayList<InfoSincro> ret;
         
         str_sql = "";
         
         try {
             ArrayList<String> array_clauses = new ArrayList<String>();
             
-            ret = new ArrayList<Modelo>();
+            ret = new ArrayList<InfoSincro>();
             
             str_sql = _str_sql;
             
             for (AbstractMap.SimpleEntry<String, String> p : p_parameters) {
-                if (p.getKey().equals("id_modelo")) {
-                    array_clauses.add("mo.id_modelo = " + p.getValue());
-                }
-                else if (p.getKey().equals("id_tipo_vehiculo")) {
-                    array_clauses.add("mo.id_tipo_vehiculo = " + p.getValue());
-                }
-                else if (p.getKey().equals("id_marca")) {
-                    array_clauses.add("mo.id_marca = " + p.getValue());
-                }
-                else if (p.getKey().equals("mas reciente")) {
-                    array_clauses.add("mo.fecha_modificacion > '" + p.getValue() + "'");
+                if (p.getKey().equals("id_info_sincro")) {
+                    array_clauses.add("in.id_info_sincro = " + p.getValue());
                 }
                 else {
                     throw new Exception("Parametro no soportado: " + p.getKey());
@@ -288,12 +327,17 @@ public class Modelo {
         Statement stmt = null;
 
         String str_sql =
-            "    UPDATE modelo" +
+            "    UPDATE info_sincro" +
             "    SET" +
-            "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") +
+            "    fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+            "    fecha_fin_procesamiento = " + (_fechaFinProcesamiento != null ? "'" + _fechaFinProcesamiento + "'" : "null") + "," +
+            "    sentido = " + (_sentido != null ? _sentido : "null") + "," +
+            "    fecha_lectura = " + (_fechaLectura != null ? "'" + _fechaLectura + "'" : "null") + "," +
+            "    archivo_nombre = " + (_archivoNombre != null ? "'" + _archivoNombre + "'" : "null") + "," +
+            "    archivo_md5 = " + (_archivoMd5 != null ? "'" + _archivoMd5 + "'" : "null") + "," +
+            "    archivo_tamano = " + (_archivoTamano != null ? _archivoTamano : "null") +
             "    WHERE" +
-            "    id_modelo = " + Long.toString(this._id);
+            "    id_info_sincro = " + Integer.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -339,18 +383,26 @@ public class Modelo {
         ResultSet rs = null;
 
         String str_sql =
-            "    INSERT INTO modelo" +
+            "    INSERT INTO info_sincro" +
             "    (" +
-            "    descripcion, " +
-            "    id_tipo_vehiculo, " +
-            "    id_modelo, " +
-            "    id_marca)" +
+            "    id_info_sincro, " +
+            "    fecha, " +
+            "    fecha_fin_procesamiento, " +
+            "    sentido, " +
+            "    fecha_lectura, " +
+            "    archivo_nombre, " +
+            "    archivo_md5, " +
+            "    archivo_tamano)" +
             "    VALUES" +
             "    (" +
-            "    " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    " + (_idTipoVehiculo != null ? "'" + _idTipoVehiculo + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
-            "    " + (_idMarca != null ? "'" + _idMarca + "'" : "null") +
+            "    " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+            "    " + (_fechaFinProcesamiento != null ? "'" + _fechaFinProcesamiento + "'" : "null") + "," +
+            "    " + (_sentido != null ? "'" + _sentido + "'" : "null") + "," +
+            "    " + (_fechaLectura != null ? "'" + _fechaLectura + "'" : "null") + "," +
+            "    " + (_archivoNombre != null ? "'" + _archivoNombre + "'" : "null") + "," +
+            "    " + (_archivoMd5 != null ? "'" + _archivoMd5 + "'" : "null") + "," +
+            "    " + (_archivoTamano != null ? "'" + _archivoTamano + "'" : "null") +
             "    )";
         
         try {
@@ -401,9 +453,9 @@ public class Modelo {
         Statement stmt = null;
 
         String str_sql =
-            "    DELETE FROM modelo" +
+            "    DELETE FROM info_sincro" +
             "    WHERE" +
-            "    id_modelo = " + Long.toString(this._id);
+            "    id_info_sincro = " + Integer.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -437,11 +489,11 @@ public class Modelo {
     }
 
     public void load(Connection p_conn) throws SQLException {
-        Modelo obj = null;
+        InfoSincro obj = null;
         
         String str_sql = _str_sql +
             "    WHERE" +
-            "    id_modelo = " + Long.toString(this._id) +
+            "    id_info_sincro = " + Integer.toString(this._id) +
             "    LIMIT 0, 1";
         
         //System.out.println(str_sql);
@@ -463,10 +515,13 @@ public class Modelo {
                 obj = fromRS(rs);
                 //System.out.println("fromRS(rs) ok");
 
-                _descripcion = obj.getDescripcion();
-                _idTipoVehiculo = obj.getIdTipoVehiculo();
-                _fechaModificacion = obj.getFechaModificacion();
-                _idMarca = obj.getIdMarca();
+                _fecha = obj.getFecha();
+                _fechaFinProcesamiento = obj.getFechaFinProcesamiento();
+                _sentido = obj.getSentido();
+                _fechaLectura = obj.getFechaLectura();
+                _archivoNombre = obj.getArchivoNombre();
+                _archivoMd5 = obj.getArchivoMd5();
+                _archivoTamano = obj.getArchivoTamano();
             }
         }
         catch (SQLException ex){
@@ -505,23 +560,29 @@ public class Modelo {
 
 @Override
     public String toString() {
-        return "Modelo [" +
-	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-	           "    _idTipoVehiculo = " + (_idTipoVehiculo != null ? _idTipoVehiculo : "null") + "," +
-	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+        return "InfoSincro [" +
 	           "    _id = " + (_id != null ? _id : "null") + "," +
-	           "    _idMarca = " + (_idMarca != null ? _idMarca : "null") +
+	           "    _fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+	           "    _fechaFinProcesamiento = " + (_fechaFinProcesamiento != null ? "'" + _fechaFinProcesamiento + "'" : "null") + "," +
+	           "    _sentido = " + (_sentido != null ? _sentido : "null") + "," +
+	           "    _fechaLectura = " + (_fechaLectura != null ? "'" + _fechaLectura + "'" : "null") + "," +
+	           "    _archivoNombre = " + (_archivoNombre != null ? "'" + _archivoNombre + "'" : "null") + "," +
+	           "    _archivoMd5 = " + (_archivoMd5 != null ? "'" + _archivoMd5 + "'" : "null") + "," +
+	           "    _archivoTamano = " + (_archivoTamano != null ? _archivoTamano : "null") +
 			   "]";
     }
 
 
     public String toJSON() {
-        return "{\"Modelo\" : {" +
-	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
-	           "    \"_idTipoVehiculo\" : " + (_idTipoVehiculo != null ? _idTipoVehiculo : "null") + "," +
-	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+        return "{\"InfoSincro\" : {" +
 	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
-	           "    \"_idMarca\" : " + (_idMarca != null ? _idMarca : "null") +
+	           "    \"_fecha\" : " + (_fecha != null ? "\"" + _fecha + "\"" : "null") + "," +
+	           "    \"_fecha_fin_procesamiento\" : " + (_fechaFinProcesamiento != null ? "\"" + _fechaFinProcesamiento + "\"" : "null") + "," +
+	           "    \"_sentido\" : " + (_sentido != null ? _sentido : "null") + "," +
+	           "    \"_fecha_lectura\" : " + (_fechaLectura != null ? "\"" + _fechaLectura + "\"" : "null") + "," +
+	           "    \"_archivo_nombre\" : " + (_archivoNombre != null ? "\"" + _archivoNombre + "\"" : "null") + "," +
+	           "    \"_archivo_md5\" : " + (_archivoMd5 != null ? "\"" + _archivoMd5 + "\"" : "null") + "," +
+	           "    \"_archivoTamano\" : " + (_archivoTamano != null ? _archivoTamano : "null") +
 			   "}}";
     }
 

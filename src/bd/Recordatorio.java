@@ -17,15 +17,15 @@ import java.util.ArrayList;
 public class Recordatorio {
     private String _fecha;
     private String _descripcion;
-    private String _recordar_km;
+    private Byte _recordarKm;
     private Integer _km;
-    private String _recordar_fecha;
-    private String _descartado;
-    private Integer _id_recordatorio;
+    private Byte _recordarFecha;
+    private Byte _descartado;
+    private Long _idRecordatorio;
     private String _titulo;
-    private String _fecha_modificacion;
-    private Integer _id_usuario;
-    private Integer _id_vehiculo;
+    private String _fechaModificacion;
+    private Long _idUsuario;
+    private Long _idVehiculo;
     private String _recordatoriocol;
 
     private final static String _str_sql = 
@@ -47,178 +47,178 @@ public class Recordatorio {
     public Recordatorio() {
         _fecha = null;
         _descripcion = null;
-        _recordar_km = null;
+        _recordarKm = null;
         _km = null;
-        _recordar_fecha = null;
+        _recordarFecha = null;
         _descartado = null;
-        _id_recordatorio = null;
+        _idRecordatorio = null;
         _titulo = null;
-        _fecha_modificacion = null;
-        _id_usuario = null;
-        _id_vehiculo = null;
+        _fechaModificacion = null;
+        _idUsuario = null;
+        _idVehiculo = null;
         _recordatoriocol = null;
 
     }
     /**
      * @return the _fecha
      */
-    public String get_fecha() {
+    public String getFecha() {
         return _fecha;
     }
     /**
      * @return the _descripcion
      */
-    public String get_descripcion() {
+    public String getDescripcion() {
         return _descripcion;
     }
     /**
      * @return the _recordar_km
      */
-    public String get_recordar_km() {
-        return _recordar_km;
+    public Byte getRecordarKm() {
+        return _recordarKm;
     }
     /**
      * @return the _km
      */
-    public Integer get_km() {
+    public Integer getKm() {
         return _km;
     }
     /**
      * @return the _recordar_fecha
      */
-    public String get_recordar_fecha() {
-        return _recordar_fecha;
+    public Byte getRecordarFecha() {
+        return _recordarFecha;
     }
     /**
      * @return the _descartado
      */
-    public String get_descartado() {
+    public Byte getDescartado() {
         return _descartado;
     }
     /**
      * @return the _id_recordatorio
      */
-    public Integer get_id_recordatorio() {
-        return _id_recordatorio;
+    public Long getIdRecordatorio() {
+        return _idRecordatorio;
     }
     /**
      * @return the _titulo
      */
-    public String get_titulo() {
+    public String getTitulo() {
         return _titulo;
     }
     /**
      * @return the _fecha_modificacion
      */
-    public String get_fecha_modificacion() {
-        return _fecha_modificacion;
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _id_usuario
      */
-    public Integer get_id_usuario() {
-        return _id_usuario;
+    public Long getIdUsuario() {
+        return _idUsuario;
     }
     /**
      * @return the _id_vehiculo
      */
-    public Integer get_id_vehiculo() {
-        return _id_vehiculo;
+    public Long getIdVehiculo() {
+        return _idVehiculo;
     }
     /**
      * @return the _recordatoriocol
      */
-    public String get_recordatoriocol() {
+    public String getRecordatoriocol() {
         return _recordatoriocol;
     }
     /**
      * @param _fecha the _fecha to set
      */
-    public void set_fecha(String _fecha) {
+    public void setFecha(String _fecha) {
         this._fecha = _fecha;
     }
     /**
      * @param _descripcion the _descripcion to set
      */
-    public void set_descripcion(String _descripcion) {
+    public void setDescripcion(String _descripcion) {
         this._descripcion = _descripcion;
     }
     /**
-     * @param _recordar_km the _recordar_km to set
+     * @param _recordarKm the _recordarKm to set
      */
-    public void set_recordar_km(String _recordar_km) {
-        this._recordar_km = _recordar_km;
+    public void setRecordarKm(Byte _recordarKm) {
+        this._recordarKm = _recordarKm;
     }
     /**
      * @param _km the _km to set
      */
-    public void set_km(Integer _km) {
+    public void setKm(Integer _km) {
         this._km = _km;
     }
     /**
-     * @param _recordar_fecha the _recordar_fecha to set
+     * @param _recordarFecha the _recordarFecha to set
      */
-    public void set_recordar_fecha(String _recordar_fecha) {
-        this._recordar_fecha = _recordar_fecha;
+    public void setRecordarFecha(Byte _recordarFecha) {
+        this._recordarFecha = _recordarFecha;
     }
     /**
      * @param _descartado the _descartado to set
      */
-    public void set_descartado(String _descartado) {
+    public void setDescartado(Byte _descartado) {
         this._descartado = _descartado;
     }
     /**
-     * @param _id_recordatorio the _id_recordatorio to set
+     * @param _idRecordatorio the _idRecordatorio to set
      */
-    public void set_id_recordatorio(Integer _id_recordatorio) {
-        this._id_recordatorio = _id_recordatorio;
+    public void setIdRecordatorio(Long _idRecordatorio) {
+        this._idRecordatorio = _idRecordatorio;
     }
     /**
      * @param _titulo the _titulo to set
      */
-    public void set_titulo(String _titulo) {
+    public void setTitulo(String _titulo) {
         this._titulo = _titulo;
     }
     /**
-     * @param _fecha_modificacion the _fecha_modificacion to set
+     * @param _fechaModificacion the _fechaModificacion to set
      */
-    public void set_fecha_modificacion(String _fecha_modificacion) {
-        this._fecha_modificacion = _fecha_modificacion;
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
-     * @param _id_usuario the _id_usuario to set
+     * @param _idUsuario the _idUsuario to set
      */
-    public void set_id_usuario(Integer _id_usuario) {
-        this._id_usuario = _id_usuario;
+    public void setIdUsuario(Long _idUsuario) {
+        this._idUsuario = _idUsuario;
     }
     /**
-     * @param _id_vehiculo the _id_vehiculo to set
+     * @param _idVehiculo the _idVehiculo to set
      */
-    public void set_id_vehiculo(Integer _id_vehiculo) {
-        this._id_vehiculo = _id_vehiculo;
+    public void setIdVehiculo(Long _idVehiculo) {
+        this._idVehiculo = _idVehiculo;
     }
     /**
      * @param _recordatoriocol the _recordatoriocol to set
      */
-    public void set_recordatoriocol(String _recordatoriocol) {
+    public void setRecordatoriocol(String _recordatoriocol) {
         this._recordatoriocol = _recordatoriocol;
     }
 
     public static Recordatorio fromRS(ResultSet p_rs) throws SQLException {
         Recordatorio ret = new Recordatorio();
 
-        ret.set_fecha(p_rs.getString("fecha"));
-        ret.set_descripcion(p_rs.getString("descripcion"));
-        ret.set_recordar_km(p_rs.getString("recordar_km"));
-        ret.set_km(p_rs.getInt("km"));
-        ret.set_recordar_fecha(p_rs.getString("recordar_fecha"));
-        ret.set_descartado(p_rs.getString("descartado"));
-        ret.set_id_recordatorio(p_rs.getInt("id_recordatorio"));
-        ret.set_titulo(p_rs.getString("titulo"));
-        ret.set_fecha_modificacion(p_rs.getString("fecha_modificacion"));
-        ret.set_id_usuario(p_rs.getInt("id_usuario"));
-        ret.set_id_vehiculo(p_rs.getInt("id_vehiculo"));
-        ret.set_recordatoriocol(p_rs.getString("recordatoriocol"));
+        ret.setFecha(p_rs.getString("fecha"));
+        ret.setDescripcion(p_rs.getString("descripcion"));
+        ret.setRecordarKm(p_rs.getByte("recordar_km"));
+        ret.setKm(p_rs.getInt("km"));
+        ret.setRecordarFecha(p_rs.getByte("recordar_fecha"));
+        ret.setDescartado(p_rs.getByte("descartado"));
+        ret.setIdRecordatorio(p_rs.getLong("id_recordatorio"));
+        ret.setTitulo(p_rs.getString("titulo"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
+        ret.setIdUsuario(p_rs.getLong("id_usuario"));
+        ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
+        ret.setRecordatoriocol(p_rs.getString("recordatoriocol"));
 
         return ret;
     }
@@ -404,16 +404,16 @@ public class Recordatorio {
             "    SET" +
             "    fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    recordar_km = " + (_recordar_km != null ? "'" + _recordar_km + "'" : "null") + "," +
+            "    recordar_km = " + (_recordarKm != null ? _recordarKm : "null") + "," +
             "    km = " + (_km != null ? _km : "null") + "," +
-            "    recordar_fecha = " + (_recordar_fecha != null ? "'" + _recordar_fecha + "'" : "null") + "," +
-            "    descartado = " + (_descartado != null ? "'" + _descartado + "'" : "null") + "," +
+            "    recordar_fecha = " + (_recordarFecha != null ? _recordarFecha : "null") + "," +
+            "    descartado = " + (_descartado != null ? _descartado : "null") + "," +
             "    titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
-            "    fecha_modificacion = " + (_fecha_modificacion != null ? "'" + _fecha_modificacion + "'" : "null") + "," +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
             "    recordatoriocol = " + (_recordatoriocol != null ? "'" + _recordatoriocol + "'" : "null") +
             "    WHERE" +
-            "    id_recordatorio = " + Integer.toString(this._id_recordatorio) + " AND" +
-            "    id_usuario = " + Integer.toString(this._id_usuario);
+            "    id_recordatorio = " + Long.toString(this._idRecordatorio) + " AND" +
+            "    id_usuario = " + Long.toString(this._idUsuario);
 
         try {
             stmt = p_conn.createStatement();
@@ -475,13 +475,13 @@ public class Recordatorio {
             "    (" +
             "    " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
             "    " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    " + (_recordar_km != null ? "'" + _recordar_km + "'" : "null") + "," +
+            "    " + (_recordarKm != null ? "'" + _recordarKm + "'" : "null") + "," +
             "    " + (_km != null ? "'" + _km + "'" : "null") + "," +
-            "    " + (_recordar_fecha != null ? "'" + _recordar_fecha + "'" : "null") + "," +
-            "    " + (_id_recordatorio != null ? "'" + _id_recordatorio + "'" : "null") + "," +
+            "    " + (_recordarFecha != null ? "'" + _recordarFecha + "'" : "null") + "," +
+            "    " + (_idRecordatorio != null ? "'" + _idRecordatorio + "'" : "null") + "," +
             "    " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
-            "    " + (_id_usuario != null ? "'" + _id_usuario + "'" : "null") + "," +
-            "    " + (_id_vehiculo != null ? "'" + _id_vehiculo + "'" : "null") + "," +
+            "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
+            "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
             "    " + (_recordatoriocol != null ? "'" + _recordatoriocol + "'" : "null") +
             "    )";
         
@@ -489,6 +489,8 @@ public class Recordatorio {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -533,8 +535,8 @@ public class Recordatorio {
         String str_sql =
             "    DELETE FROM recordatorio" +
             "    WHERE" +
-            "    id_recordatorio = " + Integer.toString(this._id_recordatorio) + " AND" +
-            "    id_usuario = " + Integer.toString(this._id_usuario);
+            "    id_recordatorio = " + Long.toString(this._idRecordatorio) + " AND" +
+            "    id_usuario = " + Long.toString(this._idUsuario);
 
         try {
             stmt = p_conn.createStatement();
@@ -566,4 +568,115 @@ public class Recordatorio {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Recordatorio obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_recordatorio = " + Long.toString(this._idRecordatorio) + " AND" +
+            "    id_usuario = " + Long.toString(this._idUsuario) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _fecha = obj.getFecha();
+                _descripcion = obj.getDescripcion();
+                _recordarKm = obj.getRecordarKm();
+                _km = obj.getKm();
+                _recordarFecha = obj.getRecordarFecha();
+                _descartado = obj.getDescartado();
+                _titulo = obj.getTitulo();
+                _fechaModificacion = obj.getFechaModificacion();
+                _idVehiculo = obj.getIdVehiculo();
+                _recordatoriocol = obj.getRecordatoriocol();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Recordatorio [" +
+	           "    _fecha = " + (_fecha != null ? "'" + _fecha + "'" : "null") + "," +
+	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
+	           "    _recordarKm = " + (_recordarKm != null ? _recordarKm : "null") + "," +
+	           "    _km = " + (_km != null ? _km : "null") + "," +
+	           "    _recordarFecha = " + (_recordarFecha != null ? _recordarFecha : "null") + "," +
+	           "    _descartado = " + (_descartado != null ? _descartado : "null") + "," +
+	           "    _idRecordatorio = " + (_idRecordatorio != null ? _idRecordatorio : "null") + "," +
+	           "    _titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
+	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    _idVehiculo = " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    _recordatoriocol = " + (_recordatoriocol != null ? "'" + _recordatoriocol + "'" : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Recordatorio\" : {" +
+	           "    \"_fecha\" : " + (_fecha != null ? "\"" + _fecha + "\"" : "null") + "," +
+	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
+	           "    \"_recordarKm\" : " + (_recordarKm != null ? _recordarKm : "null") + "," +
+	           "    \"_km\" : " + (_km != null ? _km : "null") + "," +
+	           "    \"_recordarFecha\" : " + (_recordarFecha != null ? _recordarFecha : "null") + "," +
+	           "    \"_descartado\" : " + (_descartado != null ? _descartado : "null") + "," +
+	           "    \"_idRecordatorio\" : " + (_idRecordatorio != null ? _idRecordatorio : "null") + "," +
+	           "    \"_titulo\" : " + (_titulo != null ? "\"" + _titulo + "\"" : "null") + "," +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
+	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
+	           "    \"_idVehiculo\" : " + (_idVehiculo != null ? _idVehiculo : "null") + "," +
+	           "    \"_recordatoriocol\" : " + (_recordatoriocol != null ? "\"" + _recordatoriocol + "\"" : "null") +
+			   "}}";
+    }
+
 }

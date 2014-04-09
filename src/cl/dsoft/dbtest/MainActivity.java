@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 			
 		    
 		    try {
+		    	
 		    	//marca = Marca.getById(conn, "1");
 		    	
 		    	//Log.e("CLAC", "Nombre=" + marca.get_descripcion());
@@ -67,20 +68,28 @@ public class MainActivity extends Activity {
 		    	*/
 		    	Vehiculo v = new Vehiculo();
 		    	
-		    	v.set_id_vehiculo(1);
-		    	v.set_id_usuario(1);
-		    	v.set_id_modelo(1);
-		    	v.set_id_tipo_transmision(2);
-		    	v.set_id_combustible(2);
-		    	v.set_id_traccion(3);
-		    	v.set_alias("Toco");
+		    	v.setIdVehiculo(8L);
+		    	v.setIdUsuario(1L);
+		    	v.setIdModelo(1L);
+		    	v.setIdTipoTransmision(2);
+		    	v.setIdCombustible(2);
+		    	v.setIdTraccion(3);
+		    	v.setAlias("Toco");
 		    	
 		    	v.insert(conn);
 		    	
-		    	v.set_anio(2004);
+		    	System.out.println(v.toString());
+		    	
+		    	System.out.println(v.toJSON());
+		    	
+		    	v.setAnio(2004);
 		    	
 		    	v.update(conn);
+
+		    	System.out.println(v.toString());
 		    	
+		    	System.out.println(v.toJSON());
+
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

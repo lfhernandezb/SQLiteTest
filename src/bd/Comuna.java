@@ -15,9 +15,9 @@ import java.util.ArrayList;
  *
  */
 public class Comuna {
-    private Integer _id_region;
+    private Long _idRegion;
     private String _comuna;
-    private Integer _id;
+    private Long _id;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -27,7 +27,7 @@ public class Comuna {
         "    FROM comuna co";
 
     public Comuna() {
-        _id_region = null;
+        _idRegion = null;
         _comuna = null;
         _id = null;
 
@@ -35,46 +35,46 @@ public class Comuna {
     /**
      * @return the _id_region
      */
-    public Integer get_id_region() {
-        return _id_region;
+    public Long getIdRegion() {
+        return _idRegion;
     }
     /**
      * @return the _comuna
      */
-    public String get_comuna() {
+    public String getComuna() {
         return _comuna;
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
-     * @param _id_region the _id_region to set
+     * @param _idRegion the _idRegion to set
      */
-    public void set_id_region(Integer _id_region) {
-        this._id_region = _id_region;
+    public void setIdRegion(Long _idRegion) {
+        this._idRegion = _idRegion;
     }
     /**
      * @param _comuna the _comuna to set
      */
-    public void set_comuna(String _comuna) {
+    public void setComuna(String _comuna) {
         this._comuna = _comuna;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
 
     public static Comuna fromRS(ResultSet p_rs) throws SQLException {
         Comuna ret = new Comuna();
 
-        ret.set_id_region(p_rs.getInt("id_region"));
-        ret.set_comuna(p_rs.getString("comuna"));
-        ret.set_id(p_rs.getInt("id"));
+        ret.setIdRegion(p_rs.getLong("id_region"));
+        ret.setComuna(p_rs.getString("comuna"));
+        ret.setId(p_rs.getLong("id"));
 
         return ret;
     }
@@ -254,7 +254,7 @@ public class Comuna {
             "    SET" +
             "    comuna = " + (_comuna != null ? "'" + _comuna + "'" : "null") +
             "    WHERE" +
-            "    id_comuna = " + Integer.toString(this._id);
+            "    id_comuna = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -307,7 +307,7 @@ public class Comuna {
             "    id_comuna)" +
             "    VALUES" +
             "    (" +
-            "    " + (_id_region != null ? "'" + _id_region + "'" : "null") + "," +
+            "    " + (_idRegion != null ? "'" + _idRegion + "'" : "null") + "," +
             "    " + (_comuna != null ? "'" + _comuna + "'" : "null") + "," +
             "    " + (_id != null ? "'" + _id + "'" : "null") +
             "    )";
@@ -316,6 +316,8 @@ public class Comuna {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -360,7 +362,7 @@ public class Comuna {
         String str_sql =
             "    DELETE FROM comuna" +
             "    WHERE" +
-            "    id_comuna = " + Integer.toString(this._id);
+            "    id_comuna = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -392,4 +394,88 @@ public class Comuna {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        Comuna obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_comuna = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _idRegion = obj.getIdRegion();
+                _comuna = obj.getComuna();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "Comuna [" +
+	           "    _idRegion = " + (_idRegion != null ? _idRegion : "null") + "," +
+	           "    _comuna = " + (_comuna != null ? "'" + _comuna + "'" : "null") + "," +
+	           "    _id = " + (_id != null ? _id : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"Comuna\" : {" +
+	           "    \"_idRegion\" : " + (_idRegion != null ? _idRegion : "null") + "," +
+	           "    \"_comuna\" : " + (_comuna != null ? "\"" + _comuna + "\"" : "null") + "," +
+	           "    \"_id\" : " + (_id != null ? _id : "null") +
+			   "}}";
+    }
+
 }

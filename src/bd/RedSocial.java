@@ -15,8 +15,8 @@ import java.util.ArrayList;
  *
  */
 public class RedSocial {
-    private Integer _id;
-    private String _red_social;
+    private Long _id;
+    private String _redSocial;
 
     private final static String _str_sql = 
         "    SELECT" +
@@ -26,39 +26,39 @@ public class RedSocial {
 
     public RedSocial() {
         _id = null;
-        _red_social = null;
+        _redSocial = null;
 
     }
     /**
      * @return the _id
      */
-    public Integer get_id() {
+    public Long getId() {
         return _id;
     }
     /**
      * @return the _red_social
      */
-    public String get_red_social() {
-        return _red_social;
+    public String getRedSocial() {
+        return _redSocial;
     }
     /**
      * @param _id the _id to set
      */
-    public void set_id(Integer _id) {
+    public void setId(Long _id) {
         this._id = _id;
     }
     /**
-     * @param _red_social the _red_social to set
+     * @param _redSocial the _redSocial to set
      */
-    public void set_red_social(String _red_social) {
-        this._red_social = _red_social;
+    public void setRedSocial(String _redSocial) {
+        this._redSocial = _redSocial;
     }
 
     public static RedSocial fromRS(ResultSet p_rs) throws SQLException {
         RedSocial ret = new RedSocial();
 
-        ret.set_id(p_rs.getInt("id"));
-        ret.set_red_social(p_rs.getString("red_social"));
+        ret.setId(p_rs.getLong("id"));
+        ret.setRedSocial(p_rs.getString("red_social"));
 
         return ret;
     }
@@ -233,9 +233,9 @@ public class RedSocial {
         String str_sql =
             "    UPDATE red_social" +
             "    SET" +
-            "    red_social = " + (_red_social != null ? "'" + _red_social + "'" : "null") +
+            "    red_social = " + (_redSocial != null ? "'" + _redSocial + "'" : "null") +
             "    WHERE" +
-            "    id_red_social = " + Integer.toString(this._id);
+            "    id_red_social = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -288,13 +288,15 @@ public class RedSocial {
             "    VALUES" +
             "    (" +
             "    " + (_id != null ? "'" + _id + "'" : "null") + "," +
-            "    " + (_red_social != null ? "'" + _red_social + "'" : "null") +
+            "    " + (_redSocial != null ? "'" + _redSocial + "'" : "null") +
             "    )";
         
         try {
             stmt = p_conn.createStatement();
             
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
 
         }
         catch (SQLException ex){
@@ -339,7 +341,7 @@ public class RedSocial {
         String str_sql =
             "    DELETE FROM red_social" +
             "    WHERE" +
-            "    id_red_social = " + Integer.toString(this._id);
+            "    id_red_social = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
@@ -371,4 +373,85 @@ public class RedSocial {
         
         return ret;
     }
+
+    public void load(Connection p_conn) throws SQLException {
+        RedSocial obj = null;
+        
+        String str_sql = _str_sql +
+            "    WHERE" +
+            "    id_red_social = " + Long.toString(this._id) +
+            "    LIMIT 0, 1";
+        
+        //System.out.println(str_sql);
+        
+        // assume that conn is an already created JDBC connection (see previous examples)
+        Statement stmt = null;
+        ResultSet rs = null;
+        
+        try {
+            stmt = p_conn.createStatement();
+            //System.out.println("stmt = p_conn.createStatement() ok");
+            rs = stmt.executeQuery(str_sql);
+            //System.out.println("rs = stmt.executeQuery(str_sql) ok");
+
+            // Now do something with the ResultSet ....
+            
+            if (rs.next()) {
+                //System.out.println("rs.next() ok");
+                obj = fromRS(rs);
+                //System.out.println("fromRS(rs) ok");
+
+                _redSocial = obj.getRedSocial();
+            }
+        }
+        catch (SQLException ex){
+            // handle any errors
+            System.out.println("SQLException: " + ex.getMessage() + " sentencia: " + str_sql);
+            System.out.println("SQLState: " + ex.getSQLState());
+            System.out.println("VendorError: " + ex.getErrorCode());
+            
+            throw ex;
+        }
+        finally {
+            // it is a good idea to release
+            // resources in a finally{} block
+            // in reverse-order of their creation
+            // if they are no-longer needed
+            if (rs != null) {
+                try {
+                    rs.close();
+                } catch (SQLException sqlEx) { 
+                    
+                } // ignore
+                rs = null;
+            }
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException sqlEx) {
+                    
+                } // ignore
+                stmt = null;
+            }
+        }        
+        
+    }
+
+
+@Override
+    public String toString() {
+        return "RedSocial [" +
+	           "    _id = " + (_id != null ? _id : "null") + "," +
+	           "    _redSocial = " + (_redSocial != null ? "'" + _redSocial + "'" : "null") +
+			   "]";
+    }
+
+
+    public String toJSON() {
+        return "{\"RedSocial\" : {" +
+	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
+	           "    \"_red_social\" : " + (_redSocial != null ? "\"" + _redSocial + "\"" : "null") +
+			   "}}";
+    }
+
 }
