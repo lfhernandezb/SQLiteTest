@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -239,8 +241,11 @@ public class RedSocial {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -454,4 +459,23 @@ public class RedSocial {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<RedSocial>" +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <redSocial" + (_redSocial != null ? ">" + _redSocial + "</redSocial>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</RedSocial>";
+    }
+
+
+    public static RedSocial fromXMLNode(Node xmlNode) {
+        RedSocial ret = new RedSocial();
+
+        Element element = (Element) xmlNode;
+
+        ret.setId(Long.decode(element.getElementsByTagName("id_red_social").item(0).getTextContent()));
+        ret.setRedSocial(element.getElementsByTagName("red_social").item(0).getTextContent());
+
+        return ret;
+    }
 }

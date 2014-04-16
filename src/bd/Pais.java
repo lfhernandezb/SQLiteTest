@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -239,8 +241,11 @@ public class Pais {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -454,4 +459,23 @@ public class Pais {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Pais>" +
+	           "    <pais" + (_pais != null ? ">" + _pais + "</pais>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Pais>";
+    }
+
+
+    public static Pais fromXMLNode(Node xmlNode) {
+        Pais ret = new Pais();
+
+        Element element = (Element) xmlNode;
+
+        ret.setPais(element.getElementsByTagName("pais").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_pais").item(0).getTextContent()));
+
+        return ret;
+    }
 }

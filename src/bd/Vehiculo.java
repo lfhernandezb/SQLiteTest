@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -463,8 +465,11 @@ public class Vehiculo {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -735,4 +740,47 @@ public class Vehiculo {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Vehiculo>" +
+	           "    <anio" + (_anio != null ? ">" + _anio + "</anio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <aireAcondicionado" + (_aireAcondicionado != null ? ">" + _aireAcondicionado + "</aireAcondicionado>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <alias" + (_alias != null ? ">" + _alias + "</alias>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <borrado" + (_borrado != null ? ">" + _borrado + "</borrado>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idTraccion" + (_idTraccion != null ? ">" + _idTraccion + "</idTraccion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <km" + (_km != null ? ">" + _km + "</km>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <alzaVidrios" + (_alzaVidrios != null ? ">" + _alzaVidrios + "</alzaVidrios>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idUsuario" + (_idUsuario != null ? ">" + _idUsuario + "</idUsuario>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idVehiculo" + (_idVehiculo != null ? ">" + _idVehiculo + "</idVehiculo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <patente" + (_patente != null ? ">" + _patente + "</patente>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idModelo" + (_idModelo != null ? ">" + _idModelo + "</idModelo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idCombustible" + (_idCombustible != null ? ">" + _idCombustible + "</idCombustible>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idTipoTransmision" + (_idTipoTransmision != null ? ">" + _idTipoTransmision + "</idTipoTransmision>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Vehiculo>";
+    }
+
+
+    public static Vehiculo fromXMLNode(Node xmlNode) {
+        Vehiculo ret = new Vehiculo();
+
+        Element element = (Element) xmlNode;
+
+        ret.setAnio(Integer.decode(element.getElementsByTagName("anio").item(0).getTextContent()));
+        ret.setAireAcondicionado(Byte.decode(element.getElementsByTagName("aire_acondicionado").item(0).getTextContent()));
+        ret.setAlias(element.getElementsByTagName("alias").item(0).getTextContent());
+        ret.setBorrado(Byte.decode(element.getElementsByTagName("borrado").item(0).getTextContent()));
+        ret.setIdTraccion(Integer.decode(element.getElementsByTagName("id_traccion").item(0).getTextContent()));
+        ret.setKm(Integer.decode(element.getElementsByTagName("km").item(0).getTextContent()));
+        ret.setAlzaVidrios(Byte.decode(element.getElementsByTagName("alza_vidrios").item(0).getTextContent()));
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setIdUsuario(Long.decode(element.getElementsByTagName("id_usuario").item(0).getTextContent()));
+        ret.setIdVehiculo(Long.decode(element.getElementsByTagName("id_vehiculo").item(0).getTextContent()));
+        ret.setPatente(element.getElementsByTagName("patente").item(0).getTextContent());
+        ret.setIdModelo(Long.decode(element.getElementsByTagName("id_modelo").item(0).getTextContent()));
+        ret.setIdCombustible(Integer.decode(element.getElementsByTagName("id_combustible").item(0).getTextContent()));
+        ret.setIdTipoTransmision(Integer.decode(element.getElementsByTagName("id_tipo_transmision").item(0).getTextContent()));
+
+        return ret;
+    }
 }

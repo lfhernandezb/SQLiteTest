@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -258,8 +260,11 @@ public class Region {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -478,4 +483,25 @@ public class Region {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Region>" +
+	           "    <region" + (_region != null ? ">" + _region + "</region>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idPais" + (_idPais != null ? ">" + _idPais + "</idPais>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Region>";
+    }
+
+
+    public static Region fromXMLNode(Node xmlNode) {
+        Region ret = new Region();
+
+        Element element = (Element) xmlNode;
+
+        ret.setRegion(element.getElementsByTagName("region").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_region").item(0).getTextContent()));
+        ret.setIdPais(Long.decode(element.getElementsByTagName("id_pais").item(0).getTextContent()));
+
+        return ret;
+    }
 }

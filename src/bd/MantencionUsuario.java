@@ -9,20 +9,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
  *
  */
 public class MantencionUsuario {
+    private Byte _borrado;
     private Integer _kmentremantenciones;
     private String _descripcion;
     private Long _idMantencionUsuario;
-    private String _mantencionUsuariocol;
     private Byte _dependekm;
     private Integer _mantecionBase;
     private String _nombre;
-    private String _mantencionusuariocol;
     private String _fechaModificacion;
     private Long _idUsuario;
     private Long _idMantencionBase;
@@ -33,14 +34,13 @@ public class MantencionUsuario {
 
     private final static String _str_sql = 
         "    SELECT" +
+        "    ma.borrado AS borrado," +
         "    ma.KmEntreMantenciones AS KmEntreMantenciones," +
         "    ma.descripcion AS descripcion," +
         "    ma.id_mantencion_usuario AS id_mantencion_usuario," +
-        "    ma.mantencion_usuariocol AS mantencion_usuariocol," +
         "    ma.DependeKm AS DependeKm," +
         "    ma.mantecion_base AS mantecion_base," +
         "    ma.nombre AS nombre," +
-        "    ma.MantencionUsuariocol AS MantencionUsuariocol," +
         "    ma.fecha_modificacion AS fecha_modificacion," +
         "    ma.id_usuario AS id_usuario," +
         "    ma.id_mantencion_base AS id_mantencion_base," +
@@ -51,14 +51,13 @@ public class MantencionUsuario {
         "    FROM mantencion_usuario ma";
 
     public MantencionUsuario() {
+        _borrado = null;
         _kmentremantenciones = null;
         _descripcion = null;
         _idMantencionUsuario = null;
-        _mantencionUsuariocol = null;
         _dependekm = null;
         _mantecionBase = null;
         _nombre = null;
-        _mantencionusuariocol = null;
         _fechaModificacion = null;
         _idUsuario = null;
         _idMantencionBase = null;
@@ -67,6 +66,12 @@ public class MantencionUsuario {
         _url = null;
         _beneficios = null;
 
+    }
+    /**
+     * @return the _borrado
+     */
+    public Byte getBorrado() {
+        return _borrado;
     }
     /**
      * @return the _KmEntreMantenciones
@@ -87,12 +92,6 @@ public class MantencionUsuario {
         return _idMantencionUsuario;
     }
     /**
-     * @return the _mantencion_usuariocol
-     */
-    public String getMantencionUsuariocol() {
-        return _mantencionUsuariocol;
-    }
-    /**
      * @return the _DependeKm
      */
     public Byte getDependekm() {
@@ -109,12 +108,6 @@ public class MantencionUsuario {
      */
     public String getNombre() {
         return _nombre;
-    }
-    /**
-     * @return the _MantencionUsuariocol
-     */
-    public String getMantencionusuariocol() {
-        return _mantencionusuariocol;
     }
     /**
      * @return the _fecha_modificacion
@@ -159,6 +152,12 @@ public class MantencionUsuario {
         return _beneficios;
     }
     /**
+     * @param _borrado the _borrado to set
+     */
+    public void setBorrado(Byte _borrado) {
+        this._borrado = _borrado;
+    }
+    /**
      * @param _kmentremantenciones the _kmentremantenciones to set
      */
     public void setKmentremantenciones(Integer _kmentremantenciones) {
@@ -177,12 +176,6 @@ public class MantencionUsuario {
         this._idMantencionUsuario = _idMantencionUsuario;
     }
     /**
-     * @param _mantencionUsuariocol the _mantencionUsuariocol to set
-     */
-    public void setMantencionUsuariocol(String _mantencionUsuariocol) {
-        this._mantencionUsuariocol = _mantencionUsuariocol;
-    }
-    /**
      * @param _dependekm the _dependekm to set
      */
     public void setDependekm(Byte _dependekm) {
@@ -199,12 +192,6 @@ public class MantencionUsuario {
      */
     public void setNombre(String _nombre) {
         this._nombre = _nombre;
-    }
-    /**
-     * @param _mantencionusuariocol the _mantencionusuariocol to set
-     */
-    public void setMantencionusuariocol(String _mantencionusuariocol) {
-        this._mantencionusuariocol = _mantencionusuariocol;
     }
     /**
      * @param _fechaModificacion the _fechaModificacion to set
@@ -252,14 +239,13 @@ public class MantencionUsuario {
     public static MantencionUsuario fromRS(ResultSet p_rs) throws SQLException {
         MantencionUsuario ret = new MantencionUsuario();
 
+        ret.setBorrado(p_rs.getByte("borrado"));
         ret.setKmentremantenciones(p_rs.getInt("KmEntreMantenciones"));
         ret.setDescripcion(p_rs.getString("descripcion"));
         ret.setIdMantencionUsuario(p_rs.getLong("id_mantencion_usuario"));
-        ret.setMantencionUsuariocol(p_rs.getString("mantencion_usuariocol"));
         ret.setDependekm(p_rs.getByte("DependeKm"));
         ret.setMantecionBase(p_rs.getInt("mantecion_base"));
         ret.setNombre(p_rs.getString("nombre"));
-        ret.setMantencionusuariocol(p_rs.getString("MantencionUsuariocol"));
         ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
         ret.setIdUsuario(p_rs.getLong("id_usuario"));
         ret.setIdMantencionBase(p_rs.getLong("id_mantencion_base"));
@@ -364,6 +350,12 @@ public class MantencionUsuario {
                 else if (p.getKey().equals("mas reciente")) {
                     array_clauses.add("ma.fecha_modificacion > '" + p.getValue() + "'");
                 }
+                else if (p.getKey().equals("no borrado")) {
+                    array_clauses.add("ma.borrado = 0");
+                }
+                else if (p.getKey().equals("borrado")) {
+                    array_clauses.add("ma.borrado = 1");
+                }
                 else {
                     throw new Exception("Parametro no soportado: " + p.getKey());
                 }
@@ -450,13 +442,12 @@ public class MantencionUsuario {
         String str_sql =
             "    UPDATE mantencion_usuario" +
             "    SET" +
+            "    borrado = " + (_borrado != null ? _borrado : "null") + "," +
             "    KmEntreMantenciones = " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
-            "    mantencion_usuariocol = " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
             "    DependeKm = " + (_dependekm != null ? _dependekm : "null") + "," +
             "    mantecion_base = " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
             "    nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
-            "    MantencionUsuariocol = " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
             "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
             "    id_mantencion_base = " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
             "    DiasEntreMantenciones = " + (_diasentremantenciones != null ? _diasentremantenciones : "null") + "," +
@@ -468,8 +459,11 @@ public class MantencionUsuario {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -515,11 +509,9 @@ public class MantencionUsuario {
             "    KmEntreMantenciones, " +
             "    descripcion, " +
             "    id_mantencion_usuario, " +
-            "    mantencion_usuariocol, " +
             "    DependeKm, " +
             "    mantecion_base, " +
             "    nombre, " +
-            "    MantencionUsuariocol, " +
             "    id_usuario, " +
             "    id_mantencion_base, " +
             "    id_vehiculo, " +
@@ -531,11 +523,9 @@ public class MantencionUsuario {
             "    " + (_kmentremantenciones != null ? "'" + _kmentremantenciones + "'" : "null") + "," +
             "    " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
             "    " + (_idMantencionUsuario != null ? "'" + _idMantencionUsuario + "'" : "null") + "," +
-            "    " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
             "    " + (_dependekm != null ? "'" + _dependekm + "'" : "null") + "," +
             "    " + (_mantecionBase != null ? "'" + _mantecionBase + "'" : "null") + "," +
             "    " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
-            "    " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
             "    " + (_idUsuario != null ? "'" + _idUsuario + "'" : "null") + "," +
             "    " + (_idMantencionBase != null ? "'" + _idMantencionBase + "'" : "null") + "," +
             "    " + (_idVehiculo != null ? "'" + _idVehiculo + "'" : "null") + "," +
@@ -656,13 +646,12 @@ public class MantencionUsuario {
                 obj = fromRS(rs);
                 //System.out.println("fromRS(rs) ok");
 
+                _borrado = obj.getBorrado();
                 _kmentremantenciones = obj.getKmentremantenciones();
                 _descripcion = obj.getDescripcion();
-                _mantencionUsuariocol = obj.getMantencionUsuariocol();
                 _dependekm = obj.getDependekm();
                 _mantecionBase = obj.getMantecionBase();
                 _nombre = obj.getNombre();
-                _mantencionusuariocol = obj.getMantencionusuariocol();
                 _fechaModificacion = obj.getFechaModificacion();
                 _idMantencionBase = obj.getIdMantencionBase();
                 _idVehiculo = obj.getIdVehiculo();
@@ -708,14 +697,13 @@ public class MantencionUsuario {
 @Override
     public String toString() {
         return "MantencionUsuario [" +
+	           "    _borrado = " + (_borrado != null ? _borrado : "null") + "," +
 	           "    _kmentremantenciones = " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
 	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
 	           "    _idMantencionUsuario = " + (_idMantencionUsuario != null ? _idMantencionUsuario : "null") + "," +
-	           "    _mantencionUsuariocol = " + (_mantencionUsuariocol != null ? "'" + _mantencionUsuariocol + "'" : "null") + "," +
 	           "    _dependekm = " + (_dependekm != null ? _dependekm : "null") + "," +
 	           "    _mantecionBase = " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
 	           "    _nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
-	           "    _mantencionusuariocol = " + (_mantencionusuariocol != null ? "'" + _mantencionusuariocol + "'" : "null") + "," +
 	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
 	           "    _idUsuario = " + (_idUsuario != null ? _idUsuario : "null") + "," +
 	           "    _idMantencionBase = " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
@@ -729,14 +717,13 @@ public class MantencionUsuario {
 
     public String toJSON() {
         return "{\"MantencionUsuario\" : {" +
+	           "    \"_borrado\" : " + (_borrado != null ? _borrado : "null") + "," +
 	           "    \"_kmentremantenciones\" : " + (_kmentremantenciones != null ? _kmentremantenciones : "null") + "," +
 	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
 	           "    \"_idMantencionUsuario\" : " + (_idMantencionUsuario != null ? _idMantencionUsuario : "null") + "," +
-	           "    \"_mantencion_usuariocol\" : " + (_mantencionUsuariocol != null ? "\"" + _mantencionUsuariocol + "\"" : "null") + "," +
 	           "    \"_dependekm\" : " + (_dependekm != null ? _dependekm : "null") + "," +
 	           "    \"_mantecionBase\" : " + (_mantecionBase != null ? _mantecionBase : "null") + "," +
 	           "    \"_nombre\" : " + (_nombre != null ? "\"" + _nombre + "\"" : "null") + "," +
-	           "    \"_MantencionUsuariocol\" : " + (_mantencionusuariocol != null ? "\"" + _mantencionusuariocol + "\"" : "null") + "," +
 	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
 	           "    \"_idUsuario\" : " + (_idUsuario != null ? _idUsuario : "null") + "," +
 	           "    \"_idMantencionBase\" : " + (_idMantencionBase != null ? _idMantencionBase : "null") + "," +
@@ -747,4 +734,47 @@ public class MantencionUsuario {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<MantencionUsuario>" +
+	           "    <borrado" + (_borrado != null ? ">" + _borrado + "</borrado>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <kmentremantenciones" + (_kmentremantenciones != null ? ">" + _kmentremantenciones + "</kmentremantenciones>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <descripcion" + (_descripcion != null ? ">" + _descripcion + "</descripcion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idMantencionUsuario" + (_idMantencionUsuario != null ? ">" + _idMantencionUsuario + "</idMantencionUsuario>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <dependekm" + (_dependekm != null ? ">" + _dependekm + "</dependekm>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <mantecionBase" + (_mantecionBase != null ? ">" + _mantecionBase + "</mantecionBase>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <nombre" + (_nombre != null ? ">" + _nombre + "</nombre>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idUsuario" + (_idUsuario != null ? ">" + _idUsuario + "</idUsuario>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idMantencionBase" + (_idMantencionBase != null ? ">" + _idMantencionBase + "</idMantencionBase>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idVehiculo" + (_idVehiculo != null ? ">" + _idVehiculo + "</idVehiculo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <diasentremantenciones" + (_diasentremantenciones != null ? ">" + _diasentremantenciones + "</diasentremantenciones>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <url" + (_url != null ? ">" + _url + "</url>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <beneficios" + (_beneficios != null ? ">" + _beneficios + "</beneficios>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</MantencionUsuario>";
+    }
+
+
+    public static MantencionUsuario fromXMLNode(Node xmlNode) {
+        MantencionUsuario ret = new MantencionUsuario();
+
+        Element element = (Element) xmlNode;
+
+        ret.setBorrado(Byte.decode(element.getElementsByTagName("borrado").item(0).getTextContent()));
+        ret.setKmentremantenciones(Integer.decode(element.getElementsByTagName("KmEntreMantenciones").item(0).getTextContent()));
+        ret.setDescripcion(element.getElementsByTagName("descripcion").item(0).getTextContent());
+        ret.setIdMantencionUsuario(Long.decode(element.getElementsByTagName("id_mantencion_usuario").item(0).getTextContent()));
+        ret.setDependekm(Byte.decode(element.getElementsByTagName("DependeKm").item(0).getTextContent()));
+        ret.setMantecionBase(Integer.decode(element.getElementsByTagName("mantecion_base").item(0).getTextContent()));
+        ret.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setIdUsuario(Long.decode(element.getElementsByTagName("id_usuario").item(0).getTextContent()));
+        ret.setIdMantencionBase(Long.decode(element.getElementsByTagName("id_mantencion_base").item(0).getTextContent()));
+        ret.setIdVehiculo(Long.decode(element.getElementsByTagName("id_vehiculo").item(0).getTextContent()));
+        ret.setDiasentremantenciones(Integer.decode(element.getElementsByTagName("DiasEntreMantenciones").item(0).getTextContent()));
+        ret.setUrl(element.getElementsByTagName("URL").item(0).getTextContent());
+        ret.setBeneficios(element.getElementsByTagName("beneficios").item(0).getTextContent());
+
+        return ret;
+    }
 }

@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -297,8 +299,11 @@ public class Modelo {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -525,4 +530,29 @@ public class Modelo {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Modelo>" +
+	           "    <descripcion" + (_descripcion != null ? ">" + _descripcion + "</descripcion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idTipoVehiculo" + (_idTipoVehiculo != null ? ">" + _idTipoVehiculo + "</idTipoVehiculo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idMarca" + (_idMarca != null ? ">" + _idMarca + "</idMarca>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Modelo>";
+    }
+
+
+    public static Modelo fromXMLNode(Node xmlNode) {
+        Modelo ret = new Modelo();
+
+        Element element = (Element) xmlNode;
+
+        ret.setDescripcion(element.getElementsByTagName("descripcion").item(0).getTextContent());
+        ret.setIdTipoVehiculo(Integer.decode(element.getElementsByTagName("id_tipo_vehiculo").item(0).getTextContent()));
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_modelo").item(0).getTextContent()));
+        ret.setIdMarca(Integer.decode(element.getElementsByTagName("id_marca").item(0).getTextContent()));
+
+        return ret;
+    }
 }

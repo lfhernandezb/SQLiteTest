@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -462,8 +464,11 @@ public class Motor {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -742,4 +747,49 @@ public class Motor {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Motor>" +
+	           "    <configuracion" + (_configuracion != null ? ">" + _configuracion + "</configuracion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <valvulas" + (_valvulas != null ? ">" + _valvulas + "</valvulas>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <torque" + (_torque != null ? ">" + _torque + "</torque>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <cilindros" + (_cilindros != null ? ">" + _cilindros + "</cilindros>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <razonCompresion" + (_razonCompresion != null ? ">" + _razonCompresion + "</razonCompresion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <codigoFabricante" + (_codigoFabricante != null ? ">" + _codigoFabricante + "</codigoFabricante>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <codigo" + (_codigo != null ? ">" + _codigo + "</codigo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <desplazamiento" + (_desplazamiento != null ? ">" + _desplazamiento + "</desplazamiento>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idModeloAnio" + (_idModeloAnio != null ? ">" + _idModeloAnio + "</idModeloAnio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tamanio" + (_tamanio != null ? ">" + _tamanio + "</tamanio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tipo" + (_tipo != null ? ">" + _tipo + "</tipo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <potencia" + (_potencia != null ? ">" + _potencia + "</potencia>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tipoCompresor" + (_tipoCompresor != null ? ">" + _tipoCompresor + "</tipoCompresor>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tipoCombustible" + (_tipoCombustible != null ? ">" + _tipoCombustible + "</tipoCombustible>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Motor>";
+    }
+
+
+    public static Motor fromXMLNode(Node xmlNode) {
+        Motor ret = new Motor();
+
+        Element element = (Element) xmlNode;
+
+        ret.setConfiguracion(element.getElementsByTagName("configuracion").item(0).getTextContent());
+        ret.setValvulas(Integer.decode(element.getElementsByTagName("valvulas").item(0).getTextContent()));
+        ret.setTorque(Integer.decode(element.getElementsByTagName("torque").item(0).getTextContent()));
+        ret.setCilindros(Integer.decode(element.getElementsByTagName("cilindros").item(0).getTextContent()));
+        ret.setRazonCompresion(element.getElementsByTagName("razon_compresion").item(0).getTextContent());
+        ret.setCodigoFabricante(element.getElementsByTagName("codigo_fabricante").item(0).getTextContent());
+        ret.setCodigo(element.getElementsByTagName("codigo").item(0).getTextContent());
+        ret.setDesplazamiento(Integer.decode(element.getElementsByTagName("desplazamiento").item(0).getTextContent()));
+        ret.setIdModeloAnio(Long.decode(element.getElementsByTagName("id_modelo_anio").item(0).getTextContent()));
+        ret.setTamanio(element.getElementsByTagName("tamanio").item(0).getTextContent());
+        ret.setTipo(element.getElementsByTagName("tipo").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_motor").item(0).getTextContent()));
+        ret.setPotencia(Integer.decode(element.getElementsByTagName("potencia").item(0).getTextContent()));
+        ret.setTipoCompresor(element.getElementsByTagName("tipo_compresor").item(0).getTextContent());
+        ret.setTipoCombustible(element.getElementsByTagName("tipo_combustible").item(0).getTextContent());
+
+        return ret;
+    }
 }

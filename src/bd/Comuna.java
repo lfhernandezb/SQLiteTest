@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -258,8 +260,11 @@ public class Comuna {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -478,4 +483,25 @@ public class Comuna {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Comuna>" +
+	           "    <idRegion" + (_idRegion != null ? ">" + _idRegion + "</idRegion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <comuna" + (_comuna != null ? ">" + _comuna + "</comuna>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Comuna>";
+    }
+
+
+    public static Comuna fromXMLNode(Node xmlNode) {
+        Comuna ret = new Comuna();
+
+        Element element = (Element) xmlNode;
+
+        ret.setIdRegion(Long.decode(element.getElementsByTagName("id_region").item(0).getTextContent()));
+        ret.setComuna(element.getElementsByTagName("comuna").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_comuna").item(0).getTextContent()));
+
+        return ret;
+    }
 }

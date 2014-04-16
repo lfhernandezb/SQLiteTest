@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -258,8 +260,11 @@ public class ModeloAnio {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -478,4 +483,25 @@ public class ModeloAnio {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<ModeloAnio>" +
+	           "    <anio" + (_anio != null ? ">" + _anio + "</anio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idModelo" + (_idModelo != null ? ">" + _idModelo + "</idModelo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</ModeloAnio>";
+    }
+
+
+    public static ModeloAnio fromXMLNode(Node xmlNode) {
+        ModeloAnio ret = new ModeloAnio();
+
+        Element element = (Element) xmlNode;
+
+        ret.setAnio(Integer.decode(element.getElementsByTagName("anio").item(0).getTextContent()));
+        ret.setId(Long.decode(element.getElementsByTagName("id_modelo_anio").item(0).getTextContent()));
+        ret.setIdModelo(Long.decode(element.getElementsByTagName("id_modelo").item(0).getTextContent()));
+
+        return ret;
+    }
 }

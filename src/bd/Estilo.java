@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -326,8 +328,11 @@ public class Estilo {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -566,4 +571,33 @@ public class Estilo {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Estilo>" +
+	           "    <nombre" + (_nombre != null ? ">" + _nombre + "</nombre>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <puertas" + (_puertas != null ? ">" + _puertas + "</puertas>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <traccion" + (_traccion != null ? ">" + _traccion + "</traccion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idModeloAnio" + (_idModeloAnio != null ? ">" + _idModeloAnio + "</idModeloAnio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <rendimientoCarretera" + (_rendimientoCarretera != null ? ">" + _rendimientoCarretera + "</rendimientoCarretera>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <rendimientoCiudad" + (_rendimientoCiudad != null ? ">" + _rendimientoCiudad + "</rendimientoCiudad>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Estilo>";
+    }
+
+
+    public static Estilo fromXMLNode(Node xmlNode) {
+        Estilo ret = new Estilo();
+
+        Element element = (Element) xmlNode;
+
+        ret.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
+        ret.setPuertas(Integer.decode(element.getElementsByTagName("puertas").item(0).getTextContent()));
+        ret.setTraccion(element.getElementsByTagName("traccion").item(0).getTextContent());
+        ret.setIdModeloAnio(Long.decode(element.getElementsByTagName("id_modelo_anio").item(0).getTextContent()));
+        ret.setRendimientoCarretera(Integer.decode(element.getElementsByTagName("rendimiento_carretera").item(0).getTextContent()));
+        ret.setRendimientoCiudad(Integer.decode(element.getElementsByTagName("rendimiento_ciudad").item(0).getTextContent()));
+        ret.setId(Long.decode(element.getElementsByTagName("id_estilo").item(0).getTextContent()));
+
+        return ret;
+    }
 }

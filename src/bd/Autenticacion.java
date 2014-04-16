@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -294,8 +296,11 @@ public class Autenticacion {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -524,4 +529,29 @@ public class Autenticacion {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Autenticacion>" +
+	           "    <fecha" + (_fecha != null ? ">" + _fecha + "</fecha>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idRedSocial" + (_idRedSocial != null ? ">" + _idRedSocial + "</idRedSocial>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <token" + (_token != null ? ">" + _token + "</token>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idUsuario" + (_idUsuario != null ? ">" + _idUsuario + "</idUsuario>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Autenticacion>";
+    }
+
+
+    public static Autenticacion fromXMLNode(Node xmlNode) {
+        Autenticacion ret = new Autenticacion();
+
+        Element element = (Element) xmlNode;
+
+        ret.setFecha(element.getElementsByTagName("fecha").item(0).getTextContent());
+        ret.setIdRedSocial(Long.decode(element.getElementsByTagName("id_red_social").item(0).getTextContent()));
+        ret.setToken(element.getElementsByTagName("token").item(0).getTextContent());
+        ret.setIdUsuario(Long.decode(element.getElementsByTagName("id_usuario").item(0).getTextContent()));
+        ret.setId(Long.decode(element.getElementsByTagName("id_autenticacion").item(0).getTextContent()));
+
+        return ret;
+    }
 }

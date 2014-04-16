@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -341,8 +343,11 @@ public class InfoSincro {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -586,4 +591,35 @@ public class InfoSincro {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<InfoSincro>" +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fecha" + (_fecha != null ? ">" + _fecha + "</fecha>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaFinProcesamiento" + (_fechaFinProcesamiento != null ? ">" + _fechaFinProcesamiento + "</fechaFinProcesamiento>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <sentido" + (_sentido != null ? ">" + _sentido + "</sentido>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaLectura" + (_fechaLectura != null ? ">" + _fechaLectura + "</fechaLectura>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <archivoNombre" + (_archivoNombre != null ? ">" + _archivoNombre + "</archivoNombre>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <archivoMd5" + (_archivoMd5 != null ? ">" + _archivoMd5 + "</archivoMd5>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <archivoTamano" + (_archivoTamano != null ? ">" + _archivoTamano + "</archivoTamano>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</InfoSincro>";
+    }
+
+
+    public static InfoSincro fromXMLNode(Node xmlNode) {
+        InfoSincro ret = new InfoSincro();
+
+        Element element = (Element) xmlNode;
+
+        ret.setId(Integer.decode(element.getElementsByTagName("id_info_sincro").item(0).getTextContent()));
+        ret.setFecha(element.getElementsByTagName("fecha").item(0).getTextContent());
+        ret.setFechaFinProcesamiento(element.getElementsByTagName("fecha_fin_procesamiento").item(0).getTextContent());
+        ret.setSentido(Integer.decode(element.getElementsByTagName("sentido").item(0).getTextContent()));
+        ret.setFechaLectura(element.getElementsByTagName("fecha_lectura").item(0).getTextContent());
+        ret.setArchivoNombre(element.getElementsByTagName("archivo_nombre").item(0).getTextContent());
+        ret.setArchivoMd5(element.getElementsByTagName("archivo_md5").item(0).getTextContent());
+        ret.setArchivoTamano(Long.decode(element.getElementsByTagName("archivo_tamano").item(0).getTextContent()));
+
+        return ret;
+    }
 }

@@ -9,12 +9,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
  *
  */
 public class Reparacion {
+    private Byte _borrado;
     private String _descripcion;
     private Integer _costo;
     private String _titulo;
@@ -25,6 +28,7 @@ public class Reparacion {
 
     private final static String _str_sql = 
         "    SELECT" +
+        "    re.borrado AS borrado," +
         "    re.descripcion AS descripcion," +
         "    re.costo AS costo," +
         "    re.titulo AS titulo," +
@@ -35,6 +39,7 @@ public class Reparacion {
         "    FROM reparacion re";
 
     public Reparacion() {
+        _borrado = null;
         _descripcion = null;
         _costo = null;
         _titulo = null;
@@ -43,6 +48,12 @@ public class Reparacion {
         _idVehiculo = null;
         _idReparacion = null;
 
+    }
+    /**
+     * @return the _borrado
+     */
+    public Byte getBorrado() {
+        return _borrado;
     }
     /**
      * @return the _descripcion
@@ -85,6 +96,12 @@ public class Reparacion {
      */
     public Long getIdReparacion() {
         return _idReparacion;
+    }
+    /**
+     * @param _borrado the _borrado to set
+     */
+    public void setBorrado(Byte _borrado) {
+        this._borrado = _borrado;
     }
     /**
      * @param _descripcion the _descripcion to set
@@ -132,6 +149,7 @@ public class Reparacion {
     public static Reparacion fromRS(ResultSet p_rs) throws SQLException {
         Reparacion ret = new Reparacion();
 
+        ret.setBorrado(p_rs.getByte("borrado"));
         ret.setDescripcion(p_rs.getString("descripcion"));
         ret.setCosto(p_rs.getInt("costo"));
         ret.setTitulo(p_rs.getString("titulo"));
@@ -236,6 +254,12 @@ public class Reparacion {
                 else if (p.getKey().equals("mas reciente")) {
                     array_clauses.add("re.fecha_modificacion > '" + p.getValue() + "'");
                 }
+                else if (p.getKey().equals("no borrado")) {
+                    array_clauses.add("re.borrado = 0");
+                }
+                else if (p.getKey().equals("borrado")) {
+                    array_clauses.add("re.borrado = 1");
+                }
                 else {
                     throw new Exception("Parametro no soportado: " + p.getKey());
                 }
@@ -322,6 +346,7 @@ public class Reparacion {
         String str_sql =
             "    UPDATE reparacion" +
             "    SET" +
+            "    borrado = " + (_borrado != null ? _borrado : "null") + "," +
             "    descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
             "    costo = " + (_costo != null ? _costo : "null") + "," +
             "    titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
@@ -332,8 +357,11 @@ public class Reparacion {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -504,6 +532,7 @@ public class Reparacion {
                 obj = fromRS(rs);
                 //System.out.println("fromRS(rs) ok");
 
+                _borrado = obj.getBorrado();
                 _descripcion = obj.getDescripcion();
                 _costo = obj.getCosto();
                 _titulo = obj.getTitulo();
@@ -548,6 +577,7 @@ public class Reparacion {
 @Override
     public String toString() {
         return "Reparacion [" +
+	           "    _borrado = " + (_borrado != null ? _borrado : "null") + "," +
 	           "    _descripcion = " + (_descripcion != null ? "'" + _descripcion + "'" : "null") + "," +
 	           "    _costo = " + (_costo != null ? _costo : "null") + "," +
 	           "    _titulo = " + (_titulo != null ? "'" + _titulo + "'" : "null") + "," +
@@ -561,6 +591,7 @@ public class Reparacion {
 
     public String toJSON() {
         return "{\"Reparacion\" : {" +
+	           "    \"_borrado\" : " + (_borrado != null ? _borrado : "null") + "," +
 	           "    \"_descripcion\" : " + (_descripcion != null ? "\"" + _descripcion + "\"" : "null") + "," +
 	           "    \"_costo\" : " + (_costo != null ? _costo : "null") + "," +
 	           "    \"_titulo\" : " + (_titulo != null ? "\"" + _titulo + "\"" : "null") + "," +
@@ -571,4 +602,35 @@ public class Reparacion {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Reparacion>" +
+	           "    <borrado" + (_borrado != null ? ">" + _borrado + "</borrado>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <descripcion" + (_descripcion != null ? ">" + _descripcion + "</descripcion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <costo" + (_costo != null ? ">" + _costo + "</costo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <titulo" + (_titulo != null ? ">" + _titulo + "</titulo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idUsuario" + (_idUsuario != null ? ">" + _idUsuario + "</idUsuario>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idVehiculo" + (_idVehiculo != null ? ">" + _idVehiculo + "</idVehiculo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idReparacion" + (_idReparacion != null ? ">" + _idReparacion + "</idReparacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Reparacion>";
+    }
+
+
+    public static Reparacion fromXMLNode(Node xmlNode) {
+        Reparacion ret = new Reparacion();
+
+        Element element = (Element) xmlNode;
+
+        ret.setBorrado(Byte.decode(element.getElementsByTagName("borrado").item(0).getTextContent()));
+        ret.setDescripcion(element.getElementsByTagName("descripcion").item(0).getTextContent());
+        ret.setCosto(Integer.decode(element.getElementsByTagName("costo").item(0).getTextContent()));
+        ret.setTitulo(element.getElementsByTagName("titulo").item(0).getTextContent());
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setIdUsuario(Long.decode(element.getElementsByTagName("id_usuario").item(0).getTextContent()));
+        ret.setIdVehiculo(Long.decode(element.getElementsByTagName("id_vehiculo").item(0).getTextContent()));
+        ret.setIdReparacion(Long.decode(element.getElementsByTagName("id_reparacion").item(0).getTextContent()));
+
+        return ret;
+    }
 }

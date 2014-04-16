@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -448,8 +450,11 @@ public class MantencionBase {
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -721,4 +726,47 @@ public class MantencionBase {
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<MantencionBase>" +
+	           "    <diasEntreMantenciones" + (_diasEntreMantenciones != null ? ">" + _diasEntreMantenciones + "</diasEntreMantenciones>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tipoTransmision" + (_tipoTransmision != null ? ">" + _tipoTransmision + "</tipoTransmision>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <codigoMotor" + (_codigoMotor != null ? ">" + _codigoMotor + "</codigoMotor>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <kmEntreMantenciones" + (_kmEntreMantenciones != null ? ">" + _kmEntreMantenciones + "</kmEntreMantenciones>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <dependeKm" + (_dependeKm != null ? ">" + _dependeKm + "</dependeKm>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <accion" + (_accion != null ? ">" + _accion + "</accion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <url" + (_url != null ? ">" + _url + "</url>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <descripcionItem" + (_descripcionItem != null ? ">" + _descripcionItem + "</descripcionItem>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idModeloAnio" + (_idModeloAnio != null ? ">" + _idModeloAnio + "</idModeloAnio>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <item" + (_item != null ? ">" + _item + "</item>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <tipoTraccion" + (_tipoTraccion != null ? ">" + _tipoTraccion + "</tipoTraccion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <beneficios" + (_beneficios != null ? ">" + _beneficios + "</beneficios>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</MantencionBase>";
+    }
+
+
+    public static MantencionBase fromXMLNode(Node xmlNode) {
+        MantencionBase ret = new MantencionBase();
+
+        Element element = (Element) xmlNode;
+
+        ret.setDiasEntreMantenciones(Integer.decode(element.getElementsByTagName("dias_entre_mantenciones").item(0).getTextContent()));
+        ret.setTipoTransmision(element.getElementsByTagName("tipo_transmision").item(0).getTextContent());
+        ret.setCodigoMotor(element.getElementsByTagName("codigo_motor").item(0).getTextContent());
+        ret.setKmEntreMantenciones(Integer.decode(element.getElementsByTagName("km_entre_mantenciones").item(0).getTextContent()));
+        ret.setDependeKm(Byte.decode(element.getElementsByTagName("depende_km").item(0).getTextContent()));
+        ret.setAccion(element.getElementsByTagName("accion").item(0).getTextContent());
+        ret.setUrl(element.getElementsByTagName("url").item(0).getTextContent());
+        ret.setDescripcionItem(element.getElementsByTagName("descripcion_item").item(0).getTextContent());
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setIdModeloAnio(Long.decode(element.getElementsByTagName("id_modelo_anio").item(0).getTextContent()));
+        ret.setId(Long.decode(element.getElementsByTagName("id_mantencion_base").item(0).getTextContent()));
+        ret.setItem(element.getElementsByTagName("item").item(0).getTextContent());
+        ret.setTipoTraccion(element.getElementsByTagName("tipo_traccion").item(0).getTextContent());
+        ret.setBeneficios(element.getElementsByTagName("beneficios").item(0).getTextContent());
+
+        return ret;
+    }
 }

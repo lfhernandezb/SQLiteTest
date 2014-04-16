@@ -9,6 +9,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 
 /**
  * @author petete-ntbk
@@ -19,9 +21,9 @@ public class Usuario {
     private Byte _hombre;
     private Byte _borrado;
     private String _telefono;
-    private String _fechaModifiacion;
     private String _fechaNacimiento;
     private String _nombre;
+    private String _fechaModificacion;
     private Long _id;
     private Long _idComuna;
     private String _correo;
@@ -32,9 +34,9 @@ public class Usuario {
         "    us.hombre AS hombre," +
         "    us.borrado AS borrado," +
         "    us.telefono AS telefono," +
-        "    us.fecha_modifiacion AS fecha_modifiacion," +
         "    us.fecha_nacimiento AS fecha_nacimiento," +
         "    us.nombre AS nombre," +
+        "    us.fecha_modificacion AS fecha_modificacion," +
         "    us.id_usuario AS id," +
         "    us.id_comuna AS id_comuna," +
         "    us.correo AS correo" +
@@ -45,9 +47,9 @@ public class Usuario {
         _hombre = null;
         _borrado = null;
         _telefono = null;
-        _fechaModifiacion = null;
         _fechaNacimiento = null;
         _nombre = null;
+        _fechaModificacion = null;
         _id = null;
         _idComuna = null;
         _correo = null;
@@ -78,12 +80,6 @@ public class Usuario {
         return _telefono;
     }
     /**
-     * @return the _fecha_modifiacion
-     */
-    public String getFechaModifiacion() {
-        return _fechaModifiacion;
-    }
-    /**
      * @return the _fecha_nacimiento
      */
     public String getFechaNacimiento() {
@@ -94,6 +90,12 @@ public class Usuario {
      */
     public String getNombre() {
         return _nombre;
+    }
+    /**
+     * @return the _fecha_modificacion
+     */
+    public String getFechaModificacion() {
+        return _fechaModificacion;
     }
     /**
      * @return the _id
@@ -138,12 +140,6 @@ public class Usuario {
         this._telefono = _telefono;
     }
     /**
-     * @param _fechaModifiacion the _fechaModifiacion to set
-     */
-    public void setFechaModifiacion(String _fechaModifiacion) {
-        this._fechaModifiacion = _fechaModifiacion;
-    }
-    /**
      * @param _fechaNacimiento the _fechaNacimiento to set
      */
     public void setFechaNacimiento(String _fechaNacimiento) {
@@ -154,6 +150,12 @@ public class Usuario {
      */
     public void setNombre(String _nombre) {
         this._nombre = _nombre;
+    }
+    /**
+     * @param _fechaModificacion the _fechaModificacion to set
+     */
+    public void setFechaModificacion(String _fechaModificacion) {
+        this._fechaModificacion = _fechaModificacion;
     }
     /**
      * @param _id the _id to set
@@ -181,9 +183,9 @@ public class Usuario {
         ret.setHombre(p_rs.getByte("hombre"));
         ret.setBorrado(p_rs.getByte("borrado"));
         ret.setTelefono(p_rs.getString("telefono"));
-        ret.setFechaModifiacion(p_rs.getString("fecha_modifiacion"));
         ret.setFechaNacimiento(p_rs.getString("fecha_nacimiento"));
         ret.setNombre(p_rs.getString("nombre"));
+        ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
         ret.setId(p_rs.getLong("id"));
         ret.setIdComuna(p_rs.getLong("id_comuna"));
         ret.setCorreo(p_rs.getString("correo"));
@@ -277,6 +279,9 @@ public class Usuario {
                 }
                 else if (p.getKey().equals("id_comuna")) {
                     array_clauses.add("us.id_comuna = " + p.getValue());
+                }
+                else if (p.getKey().equals("mas reciente")) {
+                    array_clauses.add("us.fecha_modificacion > '" + p.getValue() + "'");
                 }
                 else if (p.getKey().equals("no borrado")) {
                     array_clauses.add("us.borrado = 0");
@@ -374,17 +379,20 @@ public class Usuario {
             "    hombre = " + (_hombre != null ? _hombre : "null") + "," +
             "    borrado = " + (_borrado != null ? _borrado : "null") + "," +
             "    telefono = " + (_telefono != null ? "'" + _telefono + "'" : "null") + "," +
-            "    fecha_modifiacion = " + (_fechaModifiacion != null ? "'" + _fechaModifiacion + "'" : "null") + "," +
             "    fecha_nacimiento = " + (_fechaNacimiento != null ? "'" + _fechaNacimiento + "'" : "null") + "," +
             "    nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
+            "    fecha_modificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
             "    correo = " + (_correo != null ? "'" + _correo + "'" : "null") +
             "    WHERE" +
             "    id_usuario = " + Long.toString(this._id);
 
         try {
             stmt = p_conn.createStatement();
-            
+
             ret = stmt.executeUpdate(str_sql);
+
+            load(p_conn);
+
             /*
             if (stmt.executeUpdate(str_sql) < 1) {
                 throw new Exception("No hubo filas afectadas");
@@ -561,9 +569,9 @@ public class Usuario {
                 _hombre = obj.getHombre();
                 _borrado = obj.getBorrado();
                 _telefono = obj.getTelefono();
-                _fechaModifiacion = obj.getFechaModifiacion();
                 _fechaNacimiento = obj.getFechaNacimiento();
                 _nombre = obj.getNombre();
+                _fechaModificacion = obj.getFechaModificacion();
                 _idComuna = obj.getIdComuna();
                 _correo = obj.getCorreo();
             }
@@ -609,9 +617,9 @@ public class Usuario {
 	           "    _hombre = " + (_hombre != null ? _hombre : "null") + "," +
 	           "    _borrado = " + (_borrado != null ? _borrado : "null") + "," +
 	           "    _telefono = " + (_telefono != null ? "'" + _telefono + "'" : "null") + "," +
-	           "    _fechaModifiacion = " + (_fechaModifiacion != null ? "'" + _fechaModifiacion + "'" : "null") + "," +
 	           "    _fechaNacimiento = " + (_fechaNacimiento != null ? "'" + _fechaNacimiento + "'" : "null") + "," +
 	           "    _nombre = " + (_nombre != null ? "'" + _nombre + "'" : "null") + "," +
+	           "    _fechaModificacion = " + (_fechaModificacion != null ? "'" + _fechaModificacion + "'" : "null") + "," +
 	           "    _id = " + (_id != null ? _id : "null") + "," +
 	           "    _idComuna = " + (_idComuna != null ? _idComuna : "null") + "," +
 	           "    _correo = " + (_correo != null ? "'" + _correo + "'" : "null") +
@@ -625,13 +633,48 @@ public class Usuario {
 	           "    \"_hombre\" : " + (_hombre != null ? _hombre : "null") + "," +
 	           "    \"_borrado\" : " + (_borrado != null ? _borrado : "null") + "," +
 	           "    \"_telefono\" : " + (_telefono != null ? "\"" + _telefono + "\"" : "null") + "," +
-	           "    \"_fecha_modifiacion\" : " + (_fechaModifiacion != null ? "\"" + _fechaModifiacion + "\"" : "null") + "," +
 	           "    \"_fecha_nacimiento\" : " + (_fechaNacimiento != null ? "\"" + _fechaNacimiento + "\"" : "null") + "," +
 	           "    \"_nombre\" : " + (_nombre != null ? "\"" + _nombre + "\"" : "null") + "," +
+	           "    \"_fecha_modificacion\" : " + (_fechaModificacion != null ? "\"" + _fechaModificacion + "\"" : "null") + "," +
 	           "    \"_id\" : " + (_id != null ? _id : "null") + "," +
 	           "    \"_idComuna\" : " + (_idComuna != null ? _idComuna : "null") + "," +
 	           "    \"_correo\" : " + (_correo != null ? "\"" + _correo + "\"" : "null") +
 			   "}}";
     }
 
+
+    public String toXML() {
+        return "<Usuario>" +
+	           "    <fechaVencimientoLicencia" + (_fechaVencimientoLicencia != null ? ">" + _fechaVencimientoLicencia + "</fechaVencimientoLicencia>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <hombre" + (_hombre != null ? ">" + _hombre + "</hombre>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <borrado" + (_borrado != null ? ">" + _borrado + "</borrado>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <telefono" + (_telefono != null ? ">" + _telefono + "</telefono>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaNacimiento" + (_fechaNacimiento != null ? ">" + _fechaNacimiento + "</fechaNacimiento>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <nombre" + (_nombre != null ? ">" + _nombre + "</nombre>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <fechaModificacion" + (_fechaModificacion != null ? ">" + _fechaModificacion + "</fechaModificacion>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <id" + (_id != null ? ">" + _id + "</id>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <idComuna" + (_idComuna != null ? ">" + _idComuna + "</idComuna>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+	           "    <correo" + (_correo != null ? ">" + _correo + "</correo>" : " xsi:nil=\"true\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"/>") +
+			   "</Usuario>";
+    }
+
+
+    public static Usuario fromXMLNode(Node xmlNode) {
+        Usuario ret = new Usuario();
+
+        Element element = (Element) xmlNode;
+
+        ret.setFechaVencimientoLicencia(element.getElementsByTagName("fecha_vencimiento_licencia").item(0).getTextContent());
+        ret.setHombre(Byte.decode(element.getElementsByTagName("hombre").item(0).getTextContent()));
+        ret.setBorrado(Byte.decode(element.getElementsByTagName("borrado").item(0).getTextContent()));
+        ret.setTelefono(element.getElementsByTagName("telefono").item(0).getTextContent());
+        ret.setFechaNacimiento(element.getElementsByTagName("fecha_nacimiento").item(0).getTextContent());
+        ret.setNombre(element.getElementsByTagName("nombre").item(0).getTextContent());
+        ret.setFechaModificacion(element.getElementsByTagName("fecha_modificacion").item(0).getTextContent());
+        ret.setId(Long.decode(element.getElementsByTagName("id_usuario").item(0).getTextContent()));
+        ret.setIdComuna(Long.decode(element.getElementsByTagName("id_comuna").item(0).getTextContent()));
+        ret.setCorreo(element.getElementsByTagName("correo").item(0).getTextContent());
+
+        return ret;
+    }
 }
