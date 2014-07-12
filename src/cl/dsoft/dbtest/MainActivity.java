@@ -8,21 +8,33 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-import bd.Combustible;
-import bd.MantencionUsuario;
-import bd.MantencionUsuarioHecha;
-import bd.Marca;
-import bd.Recordatorio;
-import bd.Rendimiento;
-import bd.Reparacion;
-import bd.Usuario;
-import bd.Vehiculo;
+import cl.dsoft.mobile.db.CargaCombustible;
+import cl.dsoft.mobile.db.MantencionBaseHecha;
+import cl.dsoft.mobile.db.MantencionUsuario;
+import cl.dsoft.mobile.db.MantencionUsuarioHecha;
+import cl.dsoft.mobile.db.Recordatorio;
+import cl.dsoft.mobile.db.Reparacion;
+import cl.dsoft.mobile.db.Usuario;
+import cl.dsoft.mobile.db.Vehiculo;
+
+//import bd.Combustible;
+//import bd.MantencionUsuario;
+//import bd.MantencionUsuarioHecha;
+//import bd.Marca;
+//import bd.Recordatorio;
+//import bd.Rendimiento;
+//import bd.Reparacion;
+//import bd.Usuario;
+//import bd.Vehiculo;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 	
@@ -31,11 +43,34 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		//Marca marca;
-		Combustible c;
+		//Combustible c;
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		Button buttonByIdUsuario = (Button) findViewById(R.id.button1);
+		
+		Button buttonByIdRedSocial = (Button) findViewById(R.id.button2);
+		
+		buttonByIdUsuario.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+			  
+			}
+		});
+		
+		buttonByIdRedSocial.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
 		try {
+			ArrayList<MantencionBaseHecha> list_mbh;
 			
 			copiarBaseDatos();
 			
@@ -45,143 +80,113 @@ public class MainActivity extends Activity {
 			
 			conn = new org.sqldroid.SQLDroidDriver().connect(url , new Properties());
 			
-		    
-		    try {
-		    	
-		    	conn.setAutoCommit(false);
-		    	
-		    	//marca = Marca.getById(conn, "1");
-		    	
-		    	//Log.e("CLAC", "Nombre=" + marca.get_descripcion());
-		    	/*
-		    	c = new Combustible();
-		    	
-		    	c.set_id((byte) 101);
-		    	c.set_descripcion("gas");
-		    	
-		    	c.insert(conn);
-		    	*/
-		    	
-		    	Usuario u = new Usuario();
-		    	
-		    	u.setId(1L);
-		    	u.setIdComuna(1L);
-		    	
-		    	u.insert(conn);
-		    	
-		    	u.setNombre("Violetta");
+	    	conn.setAutoCommit(false);
+	    	
+	    	//marca = Marca.getById(conn, "1");
+	    	
+	    	//Log.e("CLAC", "Nombre=" + marca.get_descripcion());
+	    	
+	    	//c = new Combustible();
+	    	
+	    	//c.set_id((byte) 101);
+	    	//c.set_descripcion("gas");
+	    	
+	    	//c.insert(conn);
+	    	
+	    	
+	    	Usuario u = new Usuario();
+	    	
+	    	u.setIdComuna(1L);
+	    	
+	    	u.insert(conn);
+	    	
+	    	u.setNombre("Violetta");
 
-		    	u.update(conn);
-		    	
-		    	Vehiculo v = new Vehiculo();
-		    	
-		    	v.setIdVehiculo(1L);
-		    	v.setIdUsuario(u.getId());
-		    	v.setIdModelo(1L);
-		    	v.setIdTipoTransmision(2);
-		    	v.setIdCombustible(2);
-		    	v.setIdTraccion(3);
-		    	v.setAlias("Toco");
-		    	
-		    	v.insert(conn);
-		    	
-		    	System.out.println(v.toString());
-		    	
-		    	//System.out.println(v.toJSON());
-		    	
-		    	v.setAnio(2004);
-		    	
-		    	v.update(conn);
+	    	u.update(conn);
+	    	
+	    	System.out.println(u.toString());
+	    	
+	    	Vehiculo v = new Vehiculo();
+	    	
+	    	v.setIdUsuario(u.getId());
+	    	v.setIdModelo(8057399L);
+	    	v.setIdTipoTransmision((byte) 2);
+	    	v.setIdCombustible((byte) 2);
+	    	v.setIdTraccion((byte) 3);
+	    	v.setAlias("Toco");
+	    	
+	    	v.insert(conn);
+	    	
+	    	System.out.println(v.toString());
+	    	
+	    	//System.out.println(v.toJSON());
+	    	
+	    	v.setAnio(2004);
+	    	v.setKm(156000);
+	    	
+	    	v.update(conn);
 
-		    	System.out.println(v.toString());
-		    	
-		    	//System.out.println(v.toJSON());
-		    	
-		    	Reparacion rep = new Reparacion();
-		    	
-		    	rep.setIdReparacion(1L);
-		    	rep.setIdUsuario(u.getId());
-		    	rep.setIdVehiculo(v.getIdVehiculo());
-		    	rep.setTitulo("titulo");
-		    	rep.setDescripcion("descripcion");
-		    	
-		    	rep.insert(conn);
-		    	
-		    	Recordatorio rec = new Recordatorio();
-		    	
-		    	rec.setIdRecordatorio(1L);
-		    	rec.setIdUsuario(u.getId());
-		    	rec.setIdVehiculo(v.getIdVehiculo());
-		    	rec.setKm(100000);
-		    	rec.setTitulo("titulo");
-		    	rec.setDescripcion("descripcion");
-		    	
-		    	rec.insert(conn);
-		    	
-		    	MantencionUsuario mu = new MantencionUsuario();
-		    	
-		    	mu.setIdMantencionUsuario(1L);
-		    	mu.setIdUsuario(u.getId());
-		    	mu.setIdVehiculo(v.getIdVehiculo());
-		    	mu.setNombre("nombre");
-		    	mu.setDescripcion("descripcion");
-		    	
-		    	mu.insert(conn);
-		    	
-		    	MantencionUsuarioHecha muh = new MantencionUsuarioHecha();
-		    	
-		    	muh.setIdMantencionUsuarioHecha(1L);
-		    	muh.setIdUsuario(u.getId());
-		    	muh.setIdMantencionUsuario(mu.getIdMantencionUsuario());
-		    	
-		    	muh.insert(conn);
-		    	
-		    	Rendimiento ren = new Rendimiento();
-		    	
-		    	ren.setIdRendimiento(1L);
-		    	ren.setIdUsuario(u.getId());
-		    	ren.setIdVehiculo(v.getIdVehiculo());
-		    	
-		    	ren.insert(conn);
-		    	
-		    	v.setBorrado((byte) 1); 
-		    	
-		    	conn.commit();
+	    	System.out.println(v.toString());
+	    	
+	    	//System.out.println(v.toJSON());
+	    	
+	    	Reparacion rep = new Reparacion();
+	    	
+	    	//rep.setIdReparacion(1L);
+	    	rep.setIdUsuario(u.getId());
+	    	rep.setIdVehiculo(v.getIdVehiculo());
+	    	rep.setTitulo("titulo");
+	    	rep.setDescripcion("descripcion");
+	    	
+	    	rep.insert(conn);
+	    	
+	    	Recordatorio rec = new Recordatorio();
+	    	
+	    	//rec.setIdRecordatorio(1L);
+	    	rec.setIdUsuario(u.getId());
+	    	rec.setIdVehiculo(v.getIdVehiculo());
+	    	rec.setKm(180000);
+	    	rec.setTitulo("titulo");
+	    	rec.setDescripcion("descripcion");
+	    	
+	    	rec.insert(conn);
+	    	
+	    	MantencionUsuario mu = new MantencionUsuario();
+	    	
+	    	//mu.setIdMantencionUsuario(1L);
+	    	mu.setIdUsuario(u.getId());
+	    	mu.setIdVehiculo(v.getIdVehiculo());
+	    	mu.setNombre("nombre");
+	    	mu.setDescripcion("descripcion");
+	    	
+	    	mu.insert(conn);
+	    	
+	    	MantencionUsuarioHecha muh = new MantencionUsuarioHecha();
+	    	
+	    	//muh.setIdMantencionUsuarioHecha(1L);
+	    	muh.setIdUsuario(u.getId());
+	    	muh.setIdMantencionUsuario(mu.getIdMantencionUsuario());
+	    	
+	    	muh.insert(conn);
+	    	
+	    	CargaCombustible cc = new CargaCombustible();
+	    	
+	    	//cc.setIdCargaCombustible(1L);
+	    	cc.setIdUsuario(u.getId());
+	    	cc.setIdVehiculo(v.getIdVehiculo());
+	    	
+	    	cc.insert(conn);
+	    	
+	    	list_mbh = v.getMantencionesPendientes(conn);
+	    	
+	    	for (MantencionBaseHecha mbh : list_mbh) {
+	    		mbh.insert(conn);
+	    	}
+	    	
+	    	//v.setBorrado(true); 
+	    	
+	    	conn.commit();
 
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		    	Log.e("CLAC", "Error. No existe id=1" + e.toString());
-		    	
-		    	conn.rollback();
-		    	
-		    	/*
-		    	try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    	return;
-		    	*/
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-		    	Log.e("CLAC", "Error. No existe id=1" + e.toString());
-		    	/*
-		    	try {
-					conn.close();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-		    	return;
-		    	*/
-			}
-		    finally {
-		    	conn.close();
-		    }
-			
 			
 			
 		} catch (SQLException e) {
@@ -190,6 +195,16 @@ public class MainActivity extends Activity {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}
+		finally {
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
