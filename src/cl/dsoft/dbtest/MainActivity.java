@@ -70,6 +70,7 @@ public class MainActivity extends Activity {
 		});
 
 		try {
+			int i;
 			ArrayList<MantencionBaseHecha> list_mbh;
 			
 			copiarBaseDatos();
@@ -179,8 +180,34 @@ public class MainActivity extends Activity {
 	    	
 	    	list_mbh = v.getMantencionesPendientes(conn);
 	    	
+	    	i = 1;
 	    	for (MantencionBaseHecha mbh : list_mbh) {
+	    		
+	    		switch(i) {
+	    		case 1:
+	    			mbh.setFecha("2014-01-22");
+	    			break;
+	    		case 2:
+	    			mbh.setFecha("2010-11-30");
+	    			break;
+	    		case 3:
+	    			mbh.setFecha("2011-07-10");
+	    			break;
+	    		case 4:
+	    			mbh.setFecha("1999-12-31");
+	    			break;
+	    		case 5:
+	    			mbh.setFecha("2014-05-05");
+	    			break;
+	    		}
+	    		
+	    		i++;
+	    		
+	    		System.out.println(mbh.toString());
+	    		
 	    		mbh.insert(conn);
+	    		
+	    		System.out.println(mbh.toString());
 	    	}
 	    	
 	    	//v.setBorrado(true); 
