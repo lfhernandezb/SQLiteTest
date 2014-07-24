@@ -57,6 +57,136 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 			  
+				try {
+					int i;
+					ArrayList<MantencionBaseHecha> list_mbh;
+					
+					//Class.forName("org.sqldroid.SQLDroidDriver");
+					//conn = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/databases/" + "car.db3");
+					String url = "jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/" + "car.db3";
+					
+					conn = new org.sqldroid.SQLDroidDriver().connect(url , new Properties());
+					
+			    	conn.setAutoCommit(false);
+			    	
+			    	//marca = Marca.getById(conn, "1");
+			    	
+			    	//Log.e("CLAC", "Nombre=" + marca.get_descripcion());
+			    	
+			    	//c = new Combustible();
+			    	
+			    	//c.set_id((byte) 101);
+			    	//c.set_descripcion("gas");
+			    	
+			    	//c.insert(conn);
+			    	
+			    	
+			    	Usuario u = new Usuario();
+			    	
+			    	u.setIdComuna(1L);
+			    	
+			    	u.insert(conn);
+			    	
+			    	u.setNombre("Violetta");
+
+			    	u.update(conn);
+			    	
+			    	System.out.println(u.toString());
+			    	
+			    	Vehiculo ve = new Vehiculo();
+			    	
+			    	ve.setIdUsuario(u.getId());
+			    	ve.setIdModelo(8057399L);
+			    	ve.setIdTipoTransmision((byte) 2);
+			    	ve.setIdCombustible((byte) 2);
+			    	ve.setIdTraccion((byte) 3);
+			    	ve.setAlias("Toco");
+			    	
+			    	ve.insert(conn);
+			    	
+			    	System.out.println(v.toString());
+			    	
+			    	//System.out.println(v.toJSON());
+			    	
+			    	ve.setAnio(2004);
+			    	ve.setKm(156000);
+			    	
+			    	ve.update(conn);
+
+			    	System.out.println(v.toString());
+			    	
+			    	//System.out.println(v.toJSON());
+			    	
+			    	Reparacion rep = new Reparacion();
+			    	
+			    	//rep.setIdReparacion(1L);
+			    	rep.setIdUsuario(u.getId());
+			    	rep.setIdVehiculo(ve.getIdVehiculo());
+			    	rep.setTitulo("titulo");
+			    	rep.setDescripcion("descripcion");
+			    	
+			    	rep.insert(conn);
+			    	
+			    	Recordatorio rec = new Recordatorio();
+			    	
+			    	//rec.setIdRecordatorio(1L);
+			    	rec.setIdUsuario(u.getId());
+			    	rec.setIdVehiculo(ve.getIdVehiculo());
+			    	rec.setKm(180000);
+			    	rec.setTitulo("titulo");
+			    	rec.setDescripcion("descripcion");
+			    	
+			    	rec.insert(conn);
+			    	
+			    	MantencionUsuario mu = new MantencionUsuario();
+			    	
+			    	//mu.setIdMantencionUsuario(1L);
+			    	mu.setIdUsuario(u.getId());
+			    	mu.setIdVehiculo(ve.getIdVehiculo());
+			    	mu.setNombre("nombre");
+			    	mu.setDescripcion("descripcion");
+			    	
+			    	mu.insert(conn);
+			    	
+			    	MantencionUsuarioHecha muh = new MantencionUsuarioHecha();
+			    	
+			    	//muh.setIdMantencionUsuarioHecha(1L);
+			    	muh.setIdUsuario(u.getId());
+			    	muh.setIdMantencionUsuario(mu.getIdMantencionUsuario());
+			    	
+			    	muh.insert(conn);
+			    	
+			    	CargaCombustible cc = new CargaCombustible();
+			    	
+			    	//cc.setIdCargaCombustible(1L);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	
+			    	cc.insert(conn);
+			    				    	
+			    	//v.setBorrado(true); 
+			    	
+			    	conn.commit();
+
+					
+					
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}
 			}
 		});
 		
@@ -66,173 +196,79 @@ public class MainActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-			}
-		});
-
-		try {
-			int i;
-			ArrayList<MantencionBaseHecha> list_mbh;
-			
-			copiarBaseDatos();
-			
-			//Class.forName("org.sqldroid.SQLDroidDriver");
-			//conn = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/databases/" + "car.db3");
-			String url = "jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/" + "car.db3";
-			
-			conn = new org.sqldroid.SQLDroidDriver().connect(url , new Properties());
-			
-	    	conn.setAutoCommit(false);
-	    	
-	    	//marca = Marca.getById(conn, "1");
-	    	
-	    	//Log.e("CLAC", "Nombre=" + marca.get_descripcion());
-	    	
-	    	//c = new Combustible();
-	    	
-	    	//c.set_id((byte) 101);
-	    	//c.set_descripcion("gas");
-	    	
-	    	//c.insert(conn);
-	    	
-	    	
-	    	Usuario u = new Usuario();
-	    	
-	    	u.setIdComuna(1L);
-	    	
-	    	u.insert(conn);
-	    	
-	    	u.setNombre("Violetta");
-
-	    	u.update(conn);
-	    	
-	    	System.out.println(u.toString());
-	    	
-	    	Vehiculo v = new Vehiculo();
-	    	
-	    	v.setIdUsuario(u.getId());
-	    	v.setIdModelo(8057399L);
-	    	v.setIdTipoTransmision((byte) 2);
-	    	v.setIdCombustible((byte) 2);
-	    	v.setIdTraccion((byte) 3);
-	    	v.setAlias("Toco");
-	    	
-	    	v.insert(conn);
-	    	
-	    	System.out.println(v.toString());
-	    	
-	    	//System.out.println(v.toJSON());
-	    	
-	    	v.setAnio(2004);
-	    	v.setKm(156000);
-	    	
-	    	v.update(conn);
-
-	    	System.out.println(v.toString());
-	    	
-	    	//System.out.println(v.toJSON());
-	    	
-	    	Reparacion rep = new Reparacion();
-	    	
-	    	//rep.setIdReparacion(1L);
-	    	rep.setIdUsuario(u.getId());
-	    	rep.setIdVehiculo(v.getIdVehiculo());
-	    	rep.setTitulo("titulo");
-	    	rep.setDescripcion("descripcion");
-	    	
-	    	rep.insert(conn);
-	    	
-	    	Recordatorio rec = new Recordatorio();
-	    	
-	    	//rec.setIdRecordatorio(1L);
-	    	rec.setIdUsuario(u.getId());
-	    	rec.setIdVehiculo(v.getIdVehiculo());
-	    	rec.setKm(180000);
-	    	rec.setTitulo("titulo");
-	    	rec.setDescripcion("descripcion");
-	    	
-	    	rec.insert(conn);
-	    	
-	    	MantencionUsuario mu = new MantencionUsuario();
-	    	
-	    	//mu.setIdMantencionUsuario(1L);
-	    	mu.setIdUsuario(u.getId());
-	    	mu.setIdVehiculo(v.getIdVehiculo());
-	    	mu.setNombre("nombre");
-	    	mu.setDescripcion("descripcion");
-	    	
-	    	mu.insert(conn);
-	    	
-	    	MantencionUsuarioHecha muh = new MantencionUsuarioHecha();
-	    	
-	    	//muh.setIdMantencionUsuarioHecha(1L);
-	    	muh.setIdUsuario(u.getId());
-	    	muh.setIdMantencionUsuario(mu.getIdMantencionUsuario());
-	    	
-	    	muh.insert(conn);
-	    	
-	    	CargaCombustible cc = new CargaCombustible();
-	    	
-	    	//cc.setIdCargaCombustible(1L);
-	    	cc.setIdUsuario(u.getId());
-	    	cc.setIdVehiculo(v.getIdVehiculo());
-	    	
-	    	cc.insert(conn);
-	    	
-	    	list_mbh = v.getMantencionesPendientes(conn);
-	    	
-	    	i = 1;
-	    	for (MantencionBaseHecha mbh : list_mbh) {
-	    		
-	    		switch(i) {
-	    		case 1:
-	    			mbh.setFecha("2014-01-22");
-	    			break;
-	    		case 2:
-	    			mbh.setFecha("2010-11-30");
-	    			break;
-	    		case 3:
-	    			mbh.setFecha("2011-07-10");
-	    			break;
-	    		case 4:
-	    			mbh.setFecha("1999-12-31");
-	    			break;
-	    		case 5:
-	    			mbh.setFecha("2014-05-05");
-	    			break;
-	    		}
-	    		
-	    		i++;
-	    		
-	    		System.out.println(mbh.toString());
-	    		
-	    		mbh.insert(conn);
-	    		
-	    		System.out.println(mbh.toString());
-	    	}
-	    	
-	    	//v.setBorrado(true); 
-	    	
-	    	conn.commit();
-
-			
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (Exception e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		finally {
-			if (conn != null) {
 				try {
-					conn.close();
+					int i;
+					ArrayList<MantencionBaseHecha> list_mbh;
+										
+					//Class.forName("org.sqldroid.SQLDroidDriver");
+					//conn = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/databases/" + "car.db3");
+					String url = "jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/" + "car.db3";
+					
+					conn = new org.sqldroid.SQLDroidDriver().connect(url , new Properties());
+					
+			    	conn.setAutoCommit(false);
+			    	
+			    	Vehiculo ve = Vehiculo.getByParameter(conn, "id_vehiculo", "1");
+			    				    	
+			    	list_mbh = ve.getMantencionesPendientes(conn);
+			    	
+			    	i = 1;
+			    	for (MantencionBaseHecha mbh : list_mbh) {
+			    		
+			    		switch(i) {
+			    		case 1:
+			    			mbh.setFecha("2014-01-22");
+			    			break;
+			    		case 2:
+			    			mbh.setFecha("2010-11-30");
+			    			mbh.insert(conn);
+			    			break;
+			    		case 3:
+			    			mbh.setFecha("2011-07-10");
+			    			break;
+			    		case 4:
+			    			mbh.setFecha("1999-12-31");
+			    			break;
+			    		case 5:
+			    			mbh.setFecha("2014-05-05");
+			    			break;
+			    		}
+			    		
+			    		i++;
+			    		
+			    		System.out.println(mbh.toString());
+			    		
+			    		//System.out.println(mbh.toString());
+			    	}
+			    	
+			    	//v.setBorrado(true); 
+			    	
+			    	conn.commit();
+
+					
+					
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				finally {
+					if (conn != null) {
+						try {
+							conn.close();
+						} catch (SQLException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
 				}
 			}
-		}
+		});
+		
+		copiarBaseDatos();
+
 	}
 
 	@Override
