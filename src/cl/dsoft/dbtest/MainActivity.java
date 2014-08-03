@@ -108,8 +108,8 @@ public class MainActivity extends Activity {
 			    	
 			    	//System.out.println(v.toJSON());
 			    	
-			    	ve.setAnio(2004);
-			    	ve.setKm(156000);
+			    	ve.setAnio(2012);
+			    	ve.setKm(1500);
 			    	
 			    	ve.update(conn);
 
@@ -145,17 +145,21 @@ public class MainActivity extends Activity {
 			    	mu.setIdVehiculo(ve.getIdVehiculo());
 			    	mu.setNombre("nombre");
 			    	mu.setDescripcion("descripcion");
+			    	mu.setDependeKm(true);
+			    	mu.setKmEntreMantenciones(1000);
+			    	//mu.setMesesEntreMantenciones();
 			    	
 			    	mu.insert(conn);
-			    	
+			    	/*
 			    	MantencionUsuarioHecha muh = new MantencionUsuarioHecha();
 			    	
 			    	//muh.setIdMantencionUsuarioHecha(1L);
 			    	muh.setIdUsuario(u.getId());
+			    	muh.setIdVehiculo(ve.getIdVehiculo());
 			    	muh.setIdMantencionUsuario(mu.getIdMantencionUsuario());
 			    	
 			    	muh.insert(conn);
-			    	
+			    	*/
 			    	CargaCombustible cc = new CargaCombustible();
 			    	
 			    	//cc.setIdCargaCombustible(1L);
@@ -199,6 +203,7 @@ public class MainActivity extends Activity {
 				try {
 					int i;
 					ArrayList<MantencionBaseHecha> list_mbh;
+					ArrayList<MantencionUsuarioHecha> list_muh;
 										
 					//Class.forName("org.sqldroid.SQLDroidDriver");
 					//conn = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/databases/" + "car.db3");
@@ -210,7 +215,7 @@ public class MainActivity extends Activity {
 			    	
 			    	Vehiculo ve = Vehiculo.getByParameter(conn, "id_vehiculo", "1");
 			    				    	
-			    	list_mbh = ve.getMantencionesPendientes(conn);
+			    	list_mbh = ve.getMantencionesBasePendientes(conn);
 			    	
 			    	i = 1;
 			    	for (MantencionBaseHecha mbh : list_mbh) {
@@ -220,7 +225,7 @@ public class MainActivity extends Activity {
 			    			mbh.setFecha("2014-01-22");
 			    			break;
 			    		case 2:
-			    			mbh.setFecha("2010-11-30");
+			    			mbh.setFecha("2010-01-30");
 			    			mbh.insert(conn);
 			    			break;
 			    		case 3:
@@ -241,6 +246,36 @@ public class MainActivity extends Activity {
 			    		//System.out.println(mbh.toString());
 			    	}
 			    	
+			    	list_muh = ve.getMantencionesUsuarioPendientes(conn);
+			    	
+			    	i = 1;
+			    	for (MantencionUsuarioHecha muh : list_muh) {
+			    		/*
+			    		switch(i) {
+			    		case 1:
+			    			mbh.setFecha("2014-01-22");
+			    			break;
+			    		case 2:
+			    			mbh.setFecha("2010-01-30");
+			    			mbh.insert(conn);
+			    			break;
+			    		case 3:
+			    			mbh.setFecha("2011-07-10");
+			    			break;
+			    		case 4:
+			    			mbh.setFecha("1999-12-31");
+			    			break;
+			    		case 5:
+			    			mbh.setFecha("2014-05-05");
+			    			break;
+			    		}
+			    		
+			    		i++;
+			    		*/
+			    		System.out.println(muh.toString());
+			    		
+			    		//System.out.println(mbh.toString());
+			    	}
 			    	//v.setBorrado(true); 
 			    	
 			    	conn.commit();
