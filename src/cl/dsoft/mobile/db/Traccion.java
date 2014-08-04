@@ -3,6 +3,7 @@
  */
 package cl.dsoft.mobile.db;
 
+import java.security.InvalidParameterException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
+
 
 /**
  * @author Luis Hernandez
@@ -147,11 +149,11 @@ public class Traccion {
         return ret;        
     }
 
-    public static Traccion getById(Connection p_conn, String p_id) throws Exception {
+    public static Traccion getById(Connection p_conn, String p_id) throws SQLException {
         return getByParameter(p_conn, "id_traccion", p_id);
     }
     
-    public static ArrayList<Traccion> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<Traccion> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -174,7 +176,7 @@ public class Traccion {
                     array_clauses.add("tr.fecha_modificacion > " + p.getValue());
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -222,7 +224,7 @@ public class Traccion {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {

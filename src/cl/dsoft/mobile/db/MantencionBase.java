@@ -231,7 +231,7 @@ public class MantencionBase {
         ret.setId(p_rs.getLong("id"));
         ret.setKmEntreMantenciones(p_rs.getInt("km_entre_mantenciones"));
         ret.setMesesEntreMantenciones(p_rs.getInt("meses_entre_mantenciones"));
-        ret.setDependeKm(p_rs.getBoolean("depende_km"));
+        ret.setDependeKm(p_rs.getString("depende_km") != null ? p_rs.getString("depende_km").equals("true") : null);
         ret.setAccion(p_rs.getString("accion"));
         ret.setUrl(p_rs.getString("url"));
         ret.setBeneficios(p_rs.getString("beneficios"));
@@ -300,11 +300,11 @@ public class MantencionBase {
         return ret;        
     }
 
-    public static MantencionBase getById(Connection p_conn, String p_id) throws Exception {
+    public static MantencionBase getById(Connection p_conn, String p_id) throws SQLException {
         return getByParameter(p_conn, "id_mantencion_base", p_id);
     }
     
-    public static ArrayList<MantencionBase> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<MantencionBase> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -333,7 +333,7 @@ public class MantencionBase {
                     array_clauses.add("ma.fecha_modificacion > " + p.getValue());
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -381,7 +381,7 @@ public class MantencionBase {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {

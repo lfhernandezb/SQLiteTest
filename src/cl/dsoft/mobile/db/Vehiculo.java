@@ -269,18 +269,18 @@ public class Vehiculo {
 
         ret.setAnio(p_rs.getInt("anio"));
         ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
-        ret.setAireAcondicionado(p_rs.getBoolean("aire_acondicionado"));
+        ret.setAireAcondicionado(p_rs.getString("aire_acondicionado") != null ? p_rs.getString("aire_acondicionado").equals("true") : null);
         ret.setAlias(p_rs.getString("alias"));
         ret.setIdUsuario(p_rs.getLong("id_usuario"));
         ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
-        ret.setBorrado(p_rs.getBoolean("borrado"));
+        ret.setBorrado(p_rs.getString("borrado") != null ? p_rs.getString("borrado").equals("true") : null);
         ret.setPatente(p_rs.getString("patente"));
         ret.setIdModelo(p_rs.getLong("id_modelo"));
         ret.setIdTraccion(p_rs.getByte("id_traccion"));
         ret.setKm(p_rs.getInt("km"));
         ret.setIdCombustible(p_rs.getByte("id_combustible"));
         ret.setIdTipoTransmision(p_rs.getByte("id_tipo_transmision"));
-        ret.setAlzaVidrios(p_rs.getBoolean("alza_vidrios"));
+        ret.setAlzaVidrios(p_rs.getString("alza_vidrios") != null ? p_rs.getString("alza_vidrios").equals("true") : null);
 
         return ret;
     }
@@ -347,7 +347,7 @@ public class Vehiculo {
     }
 
     
-    public static ArrayList<Vehiculo> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<Vehiculo> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -394,7 +394,7 @@ public class Vehiculo {
                     array_clauses.add("ve.borrado = 'true'");
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -442,7 +442,7 @@ public class Vehiculo {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {
@@ -889,7 +889,7 @@ public class Vehiculo {
 			   "]";
     }
 
-    public ArrayList<MantencionBaseHecha> getMantencionesBasePendientes(Connection p_conn) throws Exception {
+    public ArrayList<MantencionBaseHecha> getMantencionesBasePendientes(Connection p_conn) throws SQLException, UnsupportedParameter, ParseException {
     	
     	ArrayList<MantencionBaseHecha> ret;
     	ArrayList<MantencionBase> list_mb;
@@ -995,7 +995,7 @@ public class Vehiculo {
     	
     }
 
-    public ArrayList<MantencionUsuarioHecha> getMantencionesUsuarioPendientes(Connection p_conn) throws Exception {
+    public ArrayList<MantencionUsuarioHecha> getMantencionesUsuarioPendientes(Connection p_conn) throws UnsupportedParameter, SQLException, ParseException {
     	
     	ArrayList<MantencionUsuarioHecha> ret;
     	ArrayList<MantencionUsuario> list_mu;
@@ -1098,12 +1098,74 @@ public class Vehiculo {
     	
     }
 
-    public static final int getMonthsDifference(Date date1, Date date2) {
-        int m1 = date1.getYear() * 12 + date1.getMonth();
-        int m2 = date2.getYear() * 12 + date2.getMonth();
-        return m2 - m1 + 1;
+    /**
+     * @throws SQLException 
+     * @throws UnsupportedParameter 
+     * @throws ParseException 
+     * 
+     */
+    public ArrayList<Rendimiento> getRendimiento(Connection p_conn) throws UnsupportedParameter, SQLException, ParseException {
+    	ArrayList<Rendimiento> ret;
+    	ArrayList<CargaCombustible> list_cc;
+    	ArrayList<AbstractMap.SimpleEntry<String, String>> parametros;
+    	Integer kmInicial, kmFinal;
+    	Date dInicial, dFinal;
+    	//DateTime dtInicial, dtFinal;
+    	Boolean bFirstFound = false;
+    	
+    	dInicial = new Date(0);
+    	kmInicial = 0;
+    	
+    	parametros = new ArrayList<AbstractMap.SimpleEntry<String, String>>();
+    	
+    	ret = new ArrayList<Rendimiento>();
+    	
+    	parametros.add(new AbstractMap.SimpleEntry<String, String>("id_usuario", getIdUsuario().toString()));
+    	parametros.add(new AbstractMap.SimpleEntry<String, String>("id_vehiculo", getIdVehiculo().toString()));
+    	
+    	list_cc = CargaCombustible.seek(p_conn, parametros, "fecha", "ASC", 0, 10000);
+    	
+    	// busco 2 registros consecutivos con llenado de estanque
+    	
+    	for (CargaCombustible cc : list_cc) {
+    		if (!bFirstFound) {
+    			if (cc.getEstanqueLleno()) {
+    				bFirstFound = true;
+    				
+    				kmInicial = cc.getKm();
+    				dInicial = cc.getFechaAsDate();
+    			}
+    		}
+    		else {
+    			if (cc.getEstanqueLleno()) {
+    				// encontre el par, calculo rendimiento
+    				kmFinal = cc.getKm();
+    				dFinal = cc.getFechaAsDate();
+    				
+    				Rendimiento rendimiento = new Rendimiento();
+    				
+    				rendimiento.setInitialDate(dInicial);
+    				rendimiento.setFinalDate(dFinal);
+    				rendimiento.setRendimiento((float) (kmFinal - kmInicial) / cc.getLitros());
+    				
+    				ret.add(rendimiento);
+    				
+    				//System.out.println(rendimiento);
+    				
+    				// no vuelvo a false bFirstfound, ya que este registro me sirve como primero para la proxima
+    				kmInicial = kmFinal;
+    				dInicial = dFinal;
+    			}
+    			else {
+    				// comienzo la busqueda nuevamente
+    				bFirstFound = false;
+    			}
+    		}
+    	}
+    	
+    	return ret;
+    	
     }
-
 /*
     public static Vehiculo fromXMLNode(Node xmlNode) {
         Vehiculo ret = new Vehiculo();

@@ -180,7 +180,7 @@ public class Reparacion {
         ret.setFecha(p_rs.getString("fecha"));
         ret.setIdUsuario(p_rs.getLong("id_usuario"));
         ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
-        ret.setBorrado(p_rs.getBoolean("borrado"));
+        ret.setBorrado(p_rs.getString("borrado") != null ? p_rs.getString("borrado").equals("true") : null);
         ret.setDescripcion(p_rs.getString("descripcion"));
         ret.setIdReparacion(p_rs.getLong("id_reparacion"));
         ret.setCosto(p_rs.getInt("costo"));
@@ -250,7 +250,7 @@ public class Reparacion {
     }
 
     
-    public static ArrayList<Reparacion> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<Reparacion> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -288,7 +288,7 @@ public class Reparacion {
                     array_clauses.add("re.borrado = 'true'");
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -336,7 +336,7 @@ public class Reparacion {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {

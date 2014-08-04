@@ -225,7 +225,7 @@ public class MantencionBaseHecha {
         ret.setIdUsuario(p_rs.getLong("id_usuario"));
         ret.setIdMantencionBase(p_rs.getLong("id_mantencion_base"));
         ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
-        ret.setBorrado(p_rs.getBoolean("borrado"));
+        ret.setBorrado(p_rs.getString("borrado") != null ? p_rs.getString("borrado").equals("true") : null);
         ret.setCosto(p_rs.getInt("costo"));
         ret.setKm(p_rs.getInt("km"));
         ret.setIdMantencionBaseHecha(p_rs.getInt("id_mantencion_base_hecha"));
@@ -295,7 +295,7 @@ public class MantencionBaseHecha {
     }
 
     
-    public static ArrayList<MantencionBaseHecha> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<MantencionBaseHecha> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -336,7 +336,7 @@ public class MantencionBaseHecha {
                     array_clauses.add("ma.borrado = 'true'");
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -384,7 +384,7 @@ public class MantencionBaseHecha {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {

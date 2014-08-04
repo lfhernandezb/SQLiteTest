@@ -7,8 +7,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
@@ -92,6 +95,17 @@ public class CargaCombustible {
      */
     public String getFecha() {
         return _fecha;
+    }
+    /**
+     * @return the _fecha as Date
+     */
+    public Date getFechaAsDate() throws ParseException {
+        Date d;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
+        d = formatter.parse(_fecha);
+
+        return d;
     }
     /**
      * @return the _idUsuario
@@ -224,11 +238,11 @@ public class CargaCombustible {
         CargaCombustible ret = new CargaCombustible();
 
         ret.setFechaModificacion(p_rs.getString("fecha_modificacion"));
-        ret.setEstanqueLleno(p_rs.getBoolean("estanque_lleno"));
+        ret.setEstanqueLleno(p_rs.getString("estanque_lleno") != null ? p_rs.getString("estanque_lleno").equals("true") : null);
         ret.setFecha(p_rs.getString("fecha"));
         ret.setIdUsuario(p_rs.getLong("id_usuario"));
         ret.setIdVehiculo(p_rs.getLong("id_vehiculo"));
-        ret.setBorrado(p_rs.getBoolean("borrado"));
+        ret.setBorrado(p_rs.getString("borrado") != null ? p_rs.getString("borrado").equals("true") : null);
         ret.setLatitud(p_rs.getInt("latitud"));
         ret.setCosto(p_rs.getInt("costo"));
         ret.setLongitud(p_rs.getInt("longitud"));
@@ -301,7 +315,7 @@ public class CargaCombustible {
     }
 
     
-    public static ArrayList<CargaCombustible> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws Exception {
+    public static ArrayList<CargaCombustible> seek(Connection p_conn, ArrayList<AbstractMap.SimpleEntry<String, String>> p_parameters, String p_order, String p_direction, int p_offset, int p_limit) throws UnsupportedParameter, SQLException {
         Statement stmt = null;
         ResultSet rs = null;
         String str_sql;
@@ -339,7 +353,7 @@ public class CargaCombustible {
                     array_clauses.add("ca.borrado = 'true'");
                 }
                 else {
-                    throw new Exception("Parametro no soportado: " + p.getKey());
+                    throw new UnsupportedParameter("Parametro no soportado: " + p.getKey());
                 }
             }
                                 
@@ -387,7 +401,7 @@ public class CargaCombustible {
             
             throw ex;
         }
-        catch (Exception ex) {
+        catch (UnsupportedParameter ex) {
             throw ex;
         }
         finally {

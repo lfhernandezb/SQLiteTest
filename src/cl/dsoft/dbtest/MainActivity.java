@@ -6,8 +6,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -16,7 +18,9 @@ import cl.dsoft.mobile.db.MantencionBaseHecha;
 import cl.dsoft.mobile.db.MantencionUsuario;
 import cl.dsoft.mobile.db.MantencionUsuarioHecha;
 import cl.dsoft.mobile.db.Recordatorio;
+import cl.dsoft.mobile.db.Rendimiento;
 import cl.dsoft.mobile.db.Reparacion;
+import cl.dsoft.mobile.db.UnsupportedParameter;
 import cl.dsoft.mobile.db.Usuario;
 import cl.dsoft.mobile.db.Vehiculo;
 
@@ -68,6 +72,8 @@ public class MainActivity extends Activity {
 					conn = new org.sqldroid.SQLDroidDriver().connect(url , new Properties());
 					
 			    	conn.setAutoCommit(false);
+			    	
+			    	conn.setTransactionIsolation(Connection.TRANSACTION_READ_UNCOMMITTED);
 			    	
 			    	//marca = Marca.getById(conn, "1");
 			    	
@@ -165,9 +171,93 @@ public class MainActivity extends Activity {
 			    	//cc.setIdCargaCombustible(1L);
 			    	cc.setIdUsuario(u.getId());
 			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-01-01");
+			    	cc.setKm(100000);
+			    	cc.setLitros(70);
 			    	
 			    	cc.insert(conn);
-			    				    	
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(false);
+			    	cc.setFecha("2010-01-15");
+			    	cc.setKm(100600);
+			    	cc.setLitros(40);
+			    	
+			    	cc.insert(conn);
+			    	
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-01-31");
+			    	cc.setKm(101100);
+			    	cc.setLitros(70);
+			    	
+			    	cc.insert(conn);
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-02-15");
+			    	cc.setKm(101800);
+			    	cc.setLitros(70);
+			    	
+			    	cc.insert(conn);
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(false);
+			    	cc.setFecha("2010-03-01");
+			    	cc.setKm(102300);
+			    	cc.setLitros(20);
+			    	
+			    	cc.insert(conn);
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-04-01");
+			    	cc.setKm(102700);
+			    	cc.setLitros(70);
+			    	
+			    	cc.insert(conn);
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-05-01");
+			    	cc.setKm(103300);
+			    	cc.setLitros(60);
+			    	
+			    	cc.insert(conn);
+			    	
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(true);
+			    	cc.setFecha("2010-06-01");
+			    	cc.setKm(103800);
+			    	cc.setLitros(50);
+			    	
+			    	cc.insert(conn);
+
+			    	cc.setIdCargaCombustible(null);
+			    	cc.setIdUsuario(u.getId());
+			    	cc.setIdVehiculo(ve.getIdVehiculo());
+			    	cc.setEstanqueLleno(false);
+			    	cc.setFecha("2010-07-01");
+			    	cc.setKm(104500);
+			    	cc.setLitros(10);
+			    	
+			    	cc.insert(conn);
+			    	
 			    	//v.setBorrado(true); 
 			    	
 			    	conn.commit();
@@ -177,10 +267,7 @@ public class MainActivity extends Activity {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (Exception e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				} 
 				finally {
 					if (conn != null) {
 						try {
@@ -204,6 +291,7 @@ public class MainActivity extends Activity {
 					int i;
 					ArrayList<MantencionBaseHecha> list_mbh;
 					ArrayList<MantencionUsuarioHecha> list_muh;
+					ArrayList<Rendimiento> list_r;
 										
 					//Class.forName("org.sqldroid.SQLDroidDriver");
 					//conn = DriverManager.getConnection("jdbc:sqldroid:" + "/data/data/cl.dsoft.dbtest/databases/" + "car.db3");
@@ -276,6 +364,38 @@ public class MainActivity extends Activity {
 			    		
 			    		//System.out.println(mbh.toString());
 			    	}
+
+			    	list_r = ve.getRendimiento(conn);
+			    	
+			    	i = 1;
+			    	for (Rendimiento r : list_r) {
+			    		/*
+			    		switch(i) {
+			    		case 1:
+			    			mbh.setFecha("2014-01-22");
+			    			break;
+			    		case 2:
+			    			mbh.setFecha("2010-01-30");
+			    			mbh.insert(conn);
+			    			break;
+			    		case 3:
+			    			mbh.setFecha("2011-07-10");
+			    			break;
+			    		case 4:
+			    			mbh.setFecha("1999-12-31");
+			    			break;
+			    		case 5:
+			    			mbh.setFecha("2014-05-05");
+			    			break;
+			    		}
+			    		
+			    		i++;
+			    		*/
+			    		System.out.println(r.toString());
+			    		
+			    		//System.out.println(mbh.toString());
+			    	}
+			    	
 			    	//v.setBorrado(true); 
 			    	
 			    	conn.commit();
@@ -285,10 +405,13 @@ public class MainActivity extends Activity {
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (Exception e1) {
+				} catch (UnsupportedParameter e) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					e.printStackTrace();
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
 				finally {
 					if (conn != null) {
 						try {
